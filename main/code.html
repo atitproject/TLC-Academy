@@ -4,10 +4,10 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>TLC ACADEMY - TREND GLOBAL TRADING | أكاديمية الاستيراد والتجارة من الصين</title>
-<!-- Google Fonts: Tajawal -->
+<!-- Google Fonts: Cairo -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <!-- Material Symbols Outlined -->
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -86,18 +86,18 @@
             "space-xl": "2.5rem"
           },
           "fontFamily": {
-            "headline-sm": ["Tajawal", "sans-serif"],
-            "body-md": ["Tajawal", "sans-serif"],
-            "headline-lg-mobile": ["Tajawal", "sans-serif"],
-            "display-hero": ["Tajawal", "sans-serif"],
-            "label-sm": ["Tajawal", "sans-serif"],
-            "headline-lg": ["Tajawal", "sans-serif"],
-            "label-md": ["Tajawal", "sans-serif"],
-            "body-sm": ["Tajawal", "sans-serif"],
-            "body-lg": ["Tajawal", "sans-serif"],
-            "title-md": ["Tajawal", "sans-serif"],
-            "display-hero-mobile": ["Tajawal", "sans-serif"],
-            "headline-md": ["Tajawal", "sans-serif"]
+            "headline-sm": ["Cairo", "sans-serif"],
+            "body-md": ["Cairo", "sans-serif"],
+            "headline-lg-mobile": ["Cairo", "sans-serif"],
+            "display-hero": ["Cairo", "sans-serif"],
+            "label-sm": ["Cairo", "sans-serif"],
+            "headline-lg": ["Cairo", "sans-serif"],
+            "label-md": ["Cairo", "sans-serif"],
+            "body-sm": ["Cairo", "sans-serif"],
+            "body-lg": ["Cairo", "sans-serif"],
+            "title-md": ["Cairo", "sans-serif"],
+            "display-hero-mobile": ["Cairo", "sans-serif"],
+            "headline-md": ["Cairo", "sans-serif"]
           },
           "fontSize": {
             "headline-sm": ["20px", { "lineHeight": "30px", "letterSpacing": "0em", "fontWeight": "600" }],
@@ -119,7 +119,7 @@
   </script>
 <style>
     body {
-      font-family: 'Tajawal', sans-serif;
+      font-family: 'Cairo', sans-serif;
     }
     .material-symbols-outlined {
       font-family: 'Material Symbols Outlined';
@@ -150,11 +150,73 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #75777d;
     }
+
+    /* ===== Animations & motion ===== */
+    @media (prefers-reduced-motion: no-preference) {
+      /* Scroll reveal base */
+      [data-reveal] {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity .7s cubic-bezier(.16, 1, .3, 1), transform .7s cubic-bezier(.16, 1, .3, 1);
+        will-change: opacity, transform;
+      }
+      [data-reveal].is-visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* Keyframes */
+      @keyframes tlcFadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+      @keyframes tlcFadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: none; } }
+      @keyframes tlcZoom { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: none; } }
+      @keyframes tlcFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+      @keyframes tlcPulseRing { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, .5); } 70% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+
+      .anim-fade-up { animation: tlcFadeUp .8s cubic-bezier(.16, 1, .3, 1) both; }
+      .anim-fade-down { animation: tlcFadeDown .7s cubic-bezier(.16, 1, .3, 1) both; }
+      .anim-zoom { animation: tlcZoom .9s cubic-bezier(.16, 1, .3, 1) both; }
+      .anim-float { animation: tlcFloat 5s ease-in-out infinite; }
+      .anim-float-slow { animation: tlcFloat 7s ease-in-out infinite; }
+      .anim-pulse-ring { animation: tlcPulseRing 2.2s ease-out infinite; }
+
+      .delay-1 { animation-delay: .12s; }
+      .delay-2 { animation-delay: .24s; }
+      .delay-3 { animation-delay: .36s; }
+      .delay-4 { animation-delay: .48s; }
+
+      /* Animated nav underline */
+      header nav a { position: relative; }
+      header nav a::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        bottom: -5px;
+        height: 2px;
+        width: 0;
+        background: #006972;
+        border-radius: 2px;
+        transition: width .3s ease;
+      }
+      header nav a:hover::after { width: 100%; }
+
+      /* Card hover lift (does not fight reveal: only active after reveal clears transform) */
+      .lift { transition: transform .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s ease, border-color .2s ease; }
+      .lift:hover { transform: translateY(-6px); }
+
+      /* Scroll progress bar */
+      #scrollProgress {
+        position: fixed; top: 0; right: 0; height: 3px; width: 0%;
+        background: linear-gradient(90deg, #006972, #4cd6fb);
+        z-index: 60; transition: width .1s linear;
+      }
+    }
   </style>
 </head>
 <body class="bg-background text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-fixed">
+<!-- Scroll progress indicator -->
+<div id="scrollProgress"></div>
 <!-- 1. TOP NAVBAR (Shared Components JSON Anchor) -->
-<header class="sticky top-0 w-full z-50 bg-surface-container-lowest/95 backdrop-blur-md border-b border-outline-variant/30 shadow-sm transition-all duration-150">
+<header class="anim-fade-down sticky top-0 w-full z-50 bg-surface-container-lowest/95 backdrop-blur-md border-b border-outline-variant/30 shadow-sm transition-all duration-150">
 <div class="w-full max-w-7xl mx-auto px-6 py-4 flex items-center justify-between flex-row-reverse">
 <!-- Logo Branding -->
 <a class="flex items-center gap-3 group text-right" href="#">
@@ -190,7 +252,7 @@
 <section class="relative overflow-hidden pt-8 pb-16 md:pt-14 md:pb-24 bg-gradient-to-b from-surface-container-low via-surface-bright to-background border-b border-outline-variant/30">
 <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
 <!-- Text Column (Desktop 6 / RTL Right) -->
-<div class="lg:col-span-6 flex flex-col items-start text-right space-y-6">
+<div class="anim-fade-up lg:col-span-6 flex flex-col items-start text-right space-y-6">
 <!-- Badge -->
 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary-fixed/30 border border-secondary/20 text-secondary font-label-md text-label-md">
 <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
@@ -232,17 +294,17 @@
 </div>
 </div>
 <!-- Visual Hero (Desktop 6 / RTL Left) -->
-<div class="lg:col-span-6 relative">
+<div class="anim-zoom delay-2 lg:col-span-6 relative">
 <div class="relative mx-auto rounded-2xl p-2 bg-gradient-to-tr from-surface-container-highest via-white to-secondary-fixed/20 shadow-xl border border-outline-variant/40 overflow-hidden">
 <!-- Hero Graphic Image -->
 <img alt="Guangzhou Maritime Port and E-learning Dashboard" class="w-full h-auto rounded-xl object-cover aspect-[4/3] shadow-inner" data-alt="A modern, high-tech Guangzhou maritime container port terminal with commercial shipping vessels and the iconic Canton Tower illuminated in soft twilight. In the foreground rests a sleek laptop showing an e-learning platform dashboard, alongside hardbound reference books stamped with Import, Sourcing, and Logistics. Professional corporate editorial styling, oceanic deep navy and teal color harmony." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVy68uwvfkCTYYWcD2pOXNKuEkJTe31BTcfAU4TsAV2YEiyEJUXPVa9ppC8IxdLeD9vyhESzLcVtrFGE2zD7ZbSUxq12iR92Cf-iFtOxLFPiadBI65VyVhisTOEx58IFVSaXoYVlSjmJXENfJh9In0RTfAf2W4rbNcHPsCZpZ-l1ykdIJSUgiI9Klpba1XHvvSwYm0nFeO52T0OeTlORKEmMnQrkiDIFaHy7tn8Im6Jn5O0e3U4-ms"/>
 <!-- Floating Pill Indicator Top Left (RTL context) -->
-<div class="absolute top-5 left-5 bg-primary-container/90 backdrop-blur-md text-white px-3.5 py-1.5 rounded-full border border-outline-variant/30 flex items-center gap-2 text-xs">
+<div class="anim-float absolute top-5 left-5 bg-primary-container/90 backdrop-blur-md text-white px-3.5 py-1.5 rounded-full border border-outline-variant/30 flex items-center gap-2 text-xs">
 <span class="material-symbols-outlined text-secondary-fixed text-sm">anchor</span>
 <span>GUANGZHOU, CHINA HUB</span>
 </div>
 <!-- Floating Mini Card Bottom Right -->
-<div class="absolute bottom-6 right-6 bg-surface-container-lowest/95 backdrop-blur-md p-3.5 rounded-xl border border-outline-variant/40 shadow-lg flex items-center gap-3">
+<div class="anim-float-slow absolute bottom-6 right-6 bg-surface-container-lowest/95 backdrop-blur-md p-3.5 rounded-xl border border-outline-variant/40 shadow-lg flex items-center gap-3">
 <div class="w-10 h-10 rounded-lg bg-secondary-fixed/30 text-secondary flex items-center justify-center">
 <span class="material-symbols-outlined">inventory_2</span>
 </div>
@@ -256,7 +318,7 @@
 </div>
 </section>
 <!-- 3. QUICK STEPS / PILLARS RIBBON -->
-<section class="py-8 bg-surface-container-lowest border-b border-outline-variant/30">
+<section class="py-8 bg-surface-container-lowest border-b border-outline-variant/30" id="pillars">
 <div class="max-w-7xl mx-auto px-6">
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
 <div class="flex items-center gap-3.5 p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 hover:border-secondary/40 transition-all">
@@ -543,7 +605,7 @@
 </div>
 </section>
 <!-- 6. HOW TO GET THE COURSE (3-STEP TIMELINE) -->
-<section class="py-16 md:py-20 bg-surface">
+<section class="py-16 md:py-20 bg-surface" id="steps">
 <div class="max-w-7xl mx-auto px-6">
 <div class="text-center max-w-xl mx-auto mb-12">
 <h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">اختر. سجّل. ابدأ.</h2>
@@ -909,7 +971,7 @@
 </main>
 <!-- 11. FLOATING WHATSAPP BUTTON (Persistent Widget) -->
 <div class="fixed bottom-6 left-6 z-40 flex items-center">
-<a class="inline-flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#25D366] text-white font-label-md text-label-md shadow-xl hover:bg-[#20ba5a] hover:shadow-2xl transition-all duration-200 active:scale-95 group" href="https://wa.me/" target="_blank">
+<a class="anim-pulse-ring inline-flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#25D366] text-white font-label-md text-label-md shadow-xl hover:bg-[#20ba5a] hover:shadow-2xl transition-all duration-200 active:scale-95 group" href="https://wa.me/" target="_blank">
 <span class="material-symbols-outlined text-2xl group-hover:rotate-12 transition-transform">chat</span>
 <span class="font-bold">تحدث مع فريقنا</span>
 </a>
@@ -1002,6 +1064,71 @@
     (function () {
       const y = document.getElementById('footerYear');
       if (y) y.textContent = new Date().getFullYear();
+    })();
+
+    // Scroll-reveal animations for all sections (respects reduced-motion)
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      // Groups of elements to reveal; each group staggers by index
+      const liftGroups = [
+        '#pillars .grid > div',
+        '#what-you-learn .grid > div',
+        '#courses .grid > div',
+        '#steps .grid > div',
+        '#faq .space-y-4 > div'
+      ];
+      const revealGroups = liftGroups.concat([
+        '#what-you-learn .text-center',
+        '#courses .md\\:flex-row',
+        '#steps .text-center',
+        '#register-section .text-center',
+        '#register-section form',
+        '#about .lg\\:col-span-5',
+        '#about .lg\\:col-span-7',
+        '#contact .lg\\:col-span-5',
+        '#contact .lg\\:col-span-7',
+        '#faq .text-center',
+        'footer > div'
+      ]);
+
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+      revealGroups.forEach(function (sel) {
+        document.querySelectorAll(sel).forEach(function (el, i) {
+          el.setAttribute('data-reveal', '');
+          el.style.transitionDelay = Math.min(i, 6) * 80 + 'ms';
+          io.observe(el);
+        });
+      });
+
+      // Hover lift on cards
+      liftGroups.forEach(function (sel) {
+        document.querySelectorAll(sel).forEach(function (el) {
+          el.classList.add('lift');
+        });
+      });
+    })();
+
+    // Slim scroll-progress bar
+    (function () {
+      const bar = document.getElementById('scrollProgress');
+      if (!bar) return;
+      function update() {
+        const h = document.documentElement;
+        const max = h.scrollHeight - h.clientHeight;
+        bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
     })();
   </script>
 </body></html>
