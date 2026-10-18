@@ -211,6 +211,78 @@
       }
     }
   </style>
+<style id="enhance">
+    /* ===== Visual enhancement — always-on styling ===== */
+    .text-gradient {
+      background: linear-gradient(120deg, #0e1c2f 0%, #006972 55%, #0090ad 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      padding-bottom: .08em;
+    }
+    .btn-grad { background-image: linear-gradient(120deg, #006972 0%, #0090ad 100%) !important; }
+    /* Gradient outline glow that appears on hover */
+    .card-glow { position: relative; isolation: isolate; }
+    .card-glow::after {
+      content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px;
+      background: linear-gradient(130deg, rgba(76,214,251,0), rgba(76,214,251,.7), rgba(0,105,114,0));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      opacity: 0; transition: opacity .35s ease; pointer-events: none; z-index: 1;
+    }
+    .card-glow:hover::after { opacity: 1; }
+
+    @media (prefers-reduced-motion: no-preference) {
+      /* Animated gradient background */
+      @keyframes gradShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+      .animated-gradient { background-size: 220% 220%; animation: gradShift 16s ease infinite; }
+
+      /* Sheen sweeping across gradient headings */
+      @keyframes textSheen { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+      .text-gradient-anim {
+        background: linear-gradient(120deg, #0e1c2f, #006972, #0090ad, #006972, #0e1c2f);
+        background-size: 200% auto;
+        -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent; color: transparent;
+        animation: textSheen 7s linear infinite; padding-bottom: .08em;
+      }
+
+      /* Floating light blobs */
+      @keyframes blobMove {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(22px, -26px) scale(1.08); }
+        66% { transform: translate(-18px, 18px) scale(.94); }
+      }
+      .blob { position: absolute; border-radius: 50%; filter: blur(44px); opacity: .5; will-change: transform; animation: blobMove 17s ease-in-out infinite; pointer-events: none; }
+
+      /* Button shine sweep */
+      .btn-shine { position: relative; overflow: hidden; }
+      .btn-shine::after {
+        content: ''; position: absolute; top: 0; left: -140%; width: 55%; height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255,255,255,.4), transparent);
+        transform: skewX(-20deg); transition: left .65s ease; pointer-events: none;
+      }
+      .btn-shine:hover::after { left: 150%; }
+
+      /* Icon pop on card/group hover */
+      .icon-pop { transition: transform .35s cubic-bezier(.34, 1.56, .64, 1); }
+      .lift:hover .icon-pop, .group:hover .icon-pop, .icon-host:hover .icon-pop { transform: translateY(-3px) scale(1.14) rotate(-5deg); }
+
+      /* Shimmer sweep for small badges */
+      @keyframes shimmerMove { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+      .badge-shimmer { position: relative; overflow: hidden; }
+      .badge-shimmer::after {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent);
+        background-size: 200% 100%; animation: shimmerMove 3.2s linear infinite;
+      }
+
+      /* Tilt smoothing */
+      .tilt { transition: transform .2s ease; transform-style: preserve-3d; }
+
+      /* Soft pulsing dot */
+      @keyframes softPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .45; transform: scale(1.3); } }
+    }
+  </style>
 </head>
 <body class="bg-background text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-fixed">
 <!-- Scroll progress indicator -->
@@ -250,7 +322,13 @@
 <main>
 <!-- 2. HERO SECTION -->
 <section class="relative overflow-hidden pt-8 pb-16 md:pt-14 md:pb-24 bg-gradient-to-b from-surface-container-low via-surface-bright to-background border-b border-outline-variant/30">
-<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+<!-- Decorative floating blobs -->
+<div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
+<span class="blob" style="width:340px;height:340px;background:#4cd6fb;top:-70px;left:-50px;"></span>
+<span class="blob" style="width:400px;height:400px;background:#92f1fe;bottom:-140px;right:-70px;animation-delay:-5s;"></span>
+<span class="blob" style="width:260px;height:260px;background:#006972;top:38%;left:46%;opacity:.22;animation-delay:-9s;"></span>
+</div>
+<div class="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
 <!-- Text Column (Desktop 6 / RTL Right) -->
 <div class="anim-fade-up lg:col-span-6 flex flex-col items-start text-right space-y-6">
 <!-- Badge -->
@@ -260,7 +338,7 @@
 </div>
 <!-- Main Title -->
 <h1 class="text-on-surface font-display-hero-mobile md:font-display-hero text-display-hero-mobile md:text-display-hero tracking-tight leading-tight">
-            حوّل اهتمامك بالتجارة مع الصين إلى <span class="text-secondary border-b-4 border-secondary-container">خطوات واضحة</span>
+            حوّل اهتمامك بالتجارة مع الصين إلى <span class="text-gradient text-gradient-anim border-b-4 border-secondary-container">خطوات واضحة</span>
 </h1>
 <!-- Body Description -->
 <p class="text-on-surface-variant font-body-lg text-body-lg max-w-xl leading-relaxed">
@@ -648,9 +726,13 @@
 </div>
 </section>
 <!-- 7. ENROLLMENT / REGISTRATION SECTION (Inline & Modal support) -->
-<section class="py-16 md:py-20 bg-primary-container text-white relative overflow-hidden" id="register-section">
+<section class="animated-gradient py-16 md:py-20 text-white relative overflow-hidden" id="register-section" style="background-image:linear-gradient(135deg,#0e1c2f 0%,#09283a 35%,#004e5f 70%,#0e1c2f 100%);">
 <!-- Ambient background decoration -->
 <div class="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#92f1fe_1px,transparent_1px)] [background-size:20px_20px]"></div>
+<div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
+<span class="blob" style="width:360px;height:360px;background:#0090ad;top:-120px;right:-80px;opacity:.35;"></span>
+<span class="blob" style="width:300px;height:300px;background:#4cd6fb;bottom:-140px;left:-60px;opacity:.25;animation-delay:-7s;"></span>
+</div>
 <div class="max-w-4xl mx-auto px-6 relative z-10">
 <div class="text-center mb-10">
 <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-secondary-container/20 text-secondary-fixed font-label-sm text-label-sm mb-3">
@@ -1129,6 +1211,43 @@
       window.addEventListener('scroll', update, { passive: true });
       window.addEventListener('resize', update);
       update();
+    })();
+
+    // ===== Style enhancements (gradients, shine, icon-pop, glow, tilt) =====
+    (function () {
+      // Gradient headings on light sections
+      document.querySelectorAll('#what-you-learn h2, #courses h2, #about h2, #contact h2, #faq h2, #steps h2')
+        .forEach(function (h) { h.classList.add('text-gradient'); });
+
+      // Hover glow outline on all revealed cards
+      const cards = document.querySelectorAll('.lift');
+      cards.forEach(function (c) { c.classList.add('card-glow'); });
+
+      // Icon pop on hover
+      document.querySelectorAll('.lift .material-symbols-outlined').forEach(function (i) { i.classList.add('icon-pop'); });
+      document.querySelectorAll('#what-you-learn .lift .w-12, #steps .lift .w-14, #pillars .lift .w-11')
+        .forEach(function (i) { i.classList.add('icon-pop'); });
+
+      // Shimmer on "مجاني" course badges
+      document.querySelectorAll('#courses span.bg-secondary').forEach(function (b) { b.classList.add('badge-shimmer'); });
+
+      // Shine sweep on primary buttons/links
+      document.querySelectorAll('a.bg-secondary, button.bg-secondary, a.bg-primary-container, #courseEnrollForm button[type="submit"], #contactTeamForm button[type="submit"]')
+        .forEach(function (b) { b.classList.add('btn-shine'); });
+
+      // Subtle 3D tilt on cards (pointer devices, motion allowed)
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (window.matchMedia('(hover: none)').matches) return;
+      cards.forEach(function (card) {
+        card.classList.add('tilt');
+        card.addEventListener('mousemove', function (e) {
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          card.style.transform = 'perspective(850px) rotateX(' + (-py * 5).toFixed(2) + 'deg) rotateY(' + (px * 5).toFixed(2) + 'deg) translateY(-6px)';
+        });
+        card.addEventListener('mouseleave', function () { card.style.transform = ''; });
+      });
     })();
   </script>
 </body></html>
