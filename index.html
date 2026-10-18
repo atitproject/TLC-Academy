@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TLC ACADEMY - TREND GLOBAL TRADING | أكاديمية الاستيراد والتجارة من الصين</title>
+<!-- Google Fonts: IBM Plex Sans Arabic -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed-dim": "#bac7e1",
+            "surface-container-high": "#e6e8ea",
+            "surface-variant": "#e0e3e5",
+            "on-background": "#191c1e",
+            "on-primary-container": "#77849c",
+            "surface-bright": "#f7f9fb",
+            "on-tertiary-container": "#0090ad",
+            "on-secondary-container": "#006d77",
+            "outline": "#75777d",
+            "inverse-primary": "#bac7e1",
+            "tertiary-container": "#001f27",
+            "error-container": "#ffdad6",
+            "inverse-surface": "#2d3133",
+            "on-tertiary-fixed-variant": "#004e5f",
+            "tertiary": "#000000",
+            "primary-fixed": "#d6e3fe",
+            "surface-container-lowest": "#ffffff",
+            "surface-container": "#eceef0",
+            "on-surface": "#191c1e",
+            "on-secondary-fixed": "#001f23",
+            "primary": "#000000",
+            "background": "#f7f9fb",
+            "outline-variant": "#c5c6cd",
+            "surface-container-highest": "#e0e3e5",
+            "inverse-on-surface": "#eff1f3",
+            "on-error": "#ffffff",
+            "secondary-container": "#8feefc",
+            "on-surface-variant": "#44474c",
+            "tertiary-fixed-dim": "#4cd6fb",
+            "surface-container-low": "#f2f4f6",
+            "secondary": "#006972",
+            "surface": "#f7f9fb",
+            "primary-container": "#0e1c2f",
+            "on-tertiary-fixed": "#001f27",
+            "on-error-container": "#93000a",
+            "on-secondary": "#ffffff",
+            "on-primary-fixed": "#0e1c2f",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed-variant": "#3a475c",
+            "surface-dim": "#d8dadc",
+            "error": "#ba1a1a",
+            "tertiary-fixed": "#b3ebff",
+            "surface-tint": "#525f75",
+            "on-primary": "#ffffff",
+            "on-secondary-fixed-variant": "#004f56",
+            "secondary-fixed": "#92f1fe",
+            "secondary-fixed-dim": "#75d5e2"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1.5rem",
+            "margin-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "margin": "2rem",
+            "space-sm": "0.5rem",
+            "gutter-sm": "1rem",
+            "gutter-lg": "2rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "space-xl": "2.5rem"
+          },
+          "fontFamily": {
+            "headline-sm": ["IBM Plex Sans Arabic", "sans-serif"],
+            "body-md": ["IBM Plex Sans Arabic", "sans-serif"],
+            "headline-lg-mobile": ["IBM Plex Sans Arabic", "sans-serif"],
+            "display-hero": ["IBM Plex Sans Arabic", "sans-serif"],
+            "label-sm": ["IBM Plex Sans Arabic", "sans-serif"],
+            "headline-lg": ["IBM Plex Sans Arabic", "sans-serif"],
+            "label-md": ["IBM Plex Sans Arabic", "sans-serif"],
+            "body-sm": ["IBM Plex Sans Arabic", "sans-serif"],
+            "body-lg": ["IBM Plex Sans Arabic", "sans-serif"],
+            "title-md": ["IBM Plex Sans Arabic", "sans-serif"],
+            "display-hero-mobile": ["IBM Plex Sans Arabic", "sans-serif"],
+            "headline-md": ["IBM Plex Sans Arabic", "sans-serif"]
+          },
+          "fontSize": {
+            "headline-sm": ["20px", { "lineHeight": "30px", "letterSpacing": "0em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "34px", "letterSpacing": "0em", "fontWeight": "700" }],
+            "display-hero": ["48px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.03em", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "title-md": ["18px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600" }],
+            "display-hero-mobile": ["32px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "34px", "letterSpacing": "0em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      font-family: 'IBM Plex Sans Arabic', sans-serif;
+    }
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+    }
+    /* Smooth custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f2f4f6;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c5c6cd;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #75777d;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-fixed">
+<!-- 1. TOP NAVBAR (Shared Components JSON Anchor) -->
+<header class="sticky top-0 w-full z-50 bg-surface-container-lowest/95 backdrop-blur-md border-b border-outline-variant/30 shadow-sm transition-all duration-150">
+<div class="w-full max-w-7xl mx-auto px-6 py-4 flex items-center justify-between flex-row-reverse">
+<!-- Logo Branding -->
+<a class="flex items-center gap-3 group text-right" href="#">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-white flex items-center justify-center font-bold tracking-tight shadow-sm border border-outline-variant/30">
+<span class="text-secondary-fixed font-headline-sm text-headline-sm">TLC</span>
+</div>
+<div class="flex flex-col">
+<span class="text-title-md font-title-md font-bold tracking-tight text-on-surface uppercase">TLC ACADEMY</span>
+<span class="text-[10px] tracking-wider text-on-surface-variant font-medium">TREND GLOBAL TRADING</span>
+</div>
+</a>
+<!-- Desktop Navigation Links -->
+<nav class="hidden md:flex items-center gap-8 text-right">
+<a class="text-secondary font-bold border-b-2 border-secondary pb-1 transition-colors duration-150 text-label-md font-label-md" href="#courses">الكورسات</a>
+<a class="text-on-surface-variant font-label-md hover:text-secondary transition-colors duration-150" href="#what-you-learn">ماذا ستتعلم؟</a>
+<a class="text-on-surface-variant font-label-md hover:text-secondary transition-colors duration-150" href="#about">عن الأكاديمية</a>
+<a class="text-on-surface-variant font-label-md hover:text-secondary transition-colors duration-150" href="#faq">أسئلة شائعة</a>
+</nav>
+<!-- Primary Action CTA -->
+<div class="flex items-center gap-3">
+<a class="hidden sm:inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-primary-container text-white text-label-md font-label-md hover:bg-secondary transition-all duration-150 shadow-sm active:scale-[0.98]" href="#contact">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+<span>تحدث مع فريقنا</span>
+</a>
+<a class="inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-secondary text-white text-label-md font-label-md hover:bg-secondary-fixed-dim hover:text-on-secondary-fixed transition-all duration-150 shadow-sm" href="#register-modal" onclick="openEnrollmentModal('كورس شامل: تجارة الصين للمبتدئين')">
+<span>ابدأ مجانًا</span>
+</a>
+</div>
+</div>
+</header>
+<main>
+<!-- 2. HERO SECTION -->
+<section class="relative overflow-hidden pt-8 pb-16 md:pt-14 md:pb-24 bg-gradient-to-b from-surface-container-low via-surface-bright to-background border-b border-outline-variant/30">
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+<!-- Text Column (Desktop 6 / RTL Right) -->
+<div class="lg:col-span-6 flex flex-col items-start text-right space-y-6">
+<!-- Badge -->
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary-fixed/30 border border-secondary/20 text-secondary font-label-md text-label-md">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span>معرفة عملية لتبدأ بثقة • وصول مجاني</span>
+</div>
+<!-- Main Title -->
+<h1 class="text-on-surface font-display-hero-mobile md:font-display-hero text-display-hero-mobile md:text-display-hero tracking-tight leading-tight">
+            حوّل اهتمامك بالتجارة مع الصين إلى <span class="text-secondary border-b-4 border-secondary-container">خطوات واضحة</span>
+</h1>
+<!-- Body Description -->
+<p class="text-on-surface-variant font-body-lg text-body-lg max-w-xl leading-relaxed">
+            من اختيار المنتج والبحث عن المورد، إلى مقارنة العروض وفهم تكلفة الاستيراد؛ اكتشف كورسات وأدلة مجانية تساعدك على تقييم الفرص، وطرح الأسئلة الصحيحة، واتخاذ قرارات شراء مدروسة. سواء كنت تستكشف فكرة مشروع أو تطور نشاطك التجاري، ابدأ بالموضوع الذي تحتاجه اليوم.
+          </p>
+<!-- CTAs -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto pt-2">
+<a class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-secondary text-white font-label-md text-label-md hover:bg-opacity-95 transition-all shadow-md hover:shadow-lg active:scale-95" href="#courses">
+<span>تصفح الكورسات المجانية</span>
+<span class="material-symbols-outlined text-lg">arrow_back</span>
+</a>
+<a class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-surface-container-lowest border border-outline-variant text-primary-container font-label-md text-label-md hover:border-secondary hover:text-secondary transition-all shadow-sm" href="#contact">
+<span>تواصل مع فريق TLC</span>
+<span class="material-symbols-outlined text-lg">forum</span>
+</a>
+</div>
+<!-- Micro Highlights -->
+<div class="pt-4 border-t border-outline-variant/40 w-full grid grid-cols-3 gap-3 text-center sm:text-right">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary-container font-bold">100%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">وصول مجاني فوري</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">عربي بالكامل</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">محتوى عملي وموثق</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary-container font-bold">+12 دليل</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">تحديثات دورية</span>
+</div>
+</div>
+</div>
+<!-- Visual Hero (Desktop 6 / RTL Left) -->
+<div class="lg:col-span-6 relative">
+<div class="relative mx-auto rounded-2xl p-2 bg-gradient-to-tr from-surface-container-highest via-white to-secondary-fixed/20 shadow-xl border border-outline-variant/40 overflow-hidden">
+<!-- Hero Graphic Image -->
+<img alt="Guangzhou Maritime Port and E-learning Dashboard" class="w-full h-auto rounded-xl object-cover aspect-[4/3] shadow-inner" data-alt="A modern, high-tech Guangzhou maritime container port terminal with commercial shipping vessels and the iconic Canton Tower illuminated in soft twilight. In the foreground rests a sleek laptop showing an e-learning platform dashboard, alongside hardbound reference books stamped with Import, Sourcing, and Logistics. Professional corporate editorial styling, oceanic deep navy and teal color harmony." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVy68uwvfkCTYYWcD2pOXNKuEkJTe31BTcfAU4TsAV2YEiyEJUXPVa9ppC8IxdLeD9vyhESzLcVtrFGE2zD7ZbSUxq12iR92Cf-iFtOxLFPiadBI65VyVhisTOEx58IFVSaXoYVlSjmJXENfJh9In0RTfAf2W4rbNcHPsCZpZ-l1ykdIJSUgiI9Klpba1XHvvSwYm0nFeO52T0OeTlORKEmMnQrkiDIFaHy7tn8Im6Jn5O0e3U4-ms"/>
+<!-- Floating Pill Indicator Top Left (RTL context) -->
+<div class="absolute top-5 left-5 bg-primary-container/90 backdrop-blur-md text-white px-3.5 py-1.5 rounded-full border border-outline-variant/30 flex items-center gap-2 text-xs">
+<span class="material-symbols-outlined text-secondary-fixed text-sm">anchor</span>
+<span>GUANGZHOU, CHINA HUB</span>
+</div>
+<!-- Floating Mini Card Bottom Right -->
+<div class="absolute bottom-6 right-6 bg-surface-container-lowest/95 backdrop-blur-md p-3.5 rounded-xl border border-outline-variant/40 shadow-lg flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-secondary-fixed/30 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<div class="text-right">
+<div class="text-xs font-bold text-on-surface">أدلة استيراد معتمدة</div>
+<div class="text-[11px] text-on-surface-variant">نماذج RFQ وعقود فحص جاهزة</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. QUICK STEPS / PILLARS RIBBON -->
+<section class="py-8 bg-surface-container-lowest border-b border-outline-variant/30">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="flex items-center gap-3.5 p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 hover:border-secondary/40 transition-all">
+<div class="w-11 h-11 rounded-lg bg-surface-container-lowest text-secondary shadow-sm flex items-center justify-center border border-outline-variant/20">
+<span class="material-symbols-outlined text-2xl">category</span>
+</div>
+<div class="text-right">
+<span class="block text-label-md font-label-md font-bold text-on-surface">اختيار المنتجات</span>
+<span class="text-[11px] text-on-surface-variant">دراسة الطلب والربحية</span>
+</div>
+</div>
+<div class="flex items-center gap-3.5 p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 hover:border-secondary/40 transition-all">
+<div class="w-11 h-11 rounded-lg bg-surface-container-lowest text-secondary shadow-sm flex items-center justify-center border border-outline-variant/20">
+<span class="material-symbols-outlined text-2xl">verified_user</span>
+</div>
+<div class="text-right">
+<span class="block text-label-md font-label-md font-bold text-on-surface">الموردون الموثوقون</span>
+<span class="text-[11px] text-on-surface-variant">فحص تراخيص 1688 وعلي بابا</span>
+</div>
+</div>
+<div class="flex items-center gap-3.5 p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 hover:border-secondary/40 transition-all">
+<div class="w-11 h-11 rounded-lg bg-surface-container-lowest text-secondary shadow-sm flex items-center justify-center border border-outline-variant/20">
+<span class="material-symbols-outlined text-2xl">calculate</span>
+</div>
+<div class="text-right">
+<span class="block text-label-md font-label-md font-bold text-on-surface">حساب التكلفة الحقيقية</span>
+<span class="text-[11px] text-on-surface-variant">Landed Cost والجمارك</span>
+</div>
+</div>
+<div class="flex items-center gap-3.5 p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 hover:border-secondary/40 transition-all">
+<div class="w-11 h-11 rounded-lg bg-surface-container-lowest text-secondary shadow-sm flex items-center justify-center border border-outline-variant/20">
+<span class="material-symbols-outlined text-2xl">directions_boat</span>
+</div>
+<div class="text-right">
+<span class="block text-label-md font-label-md font-bold text-on-surface">الشحن والاستيراد</span>
+<span class="text-[11px] text-on-surface-variant">إجراءات التخليص والمستندات</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. WHAT YOU WILL LEARN SECTION -->
+<section class="py-16 md:py-24 bg-surface" id="what-you-learn">
+<div class="max-w-7xl mx-auto px-6">
+<div class="text-center max-w-2xl mx-auto mb-14">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed/20 text-secondary text-label-sm font-label-sm mb-3">
+<span>منهج عملي منظم</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">افهم الخطوات التي تؤثر على نجاح تجارتك</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">معلومات وتكتيكات دقيقة تم إعدادها بالتعاون مع خبراء تجارة دولية ووكلاء شحن في الصين لتجنب أي خسارة غير محسوبة.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Pillar 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/40 shadow-sm hover:shadow-md hover:border-secondary/40 transition-all flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-lg bg-surface-container text-primary-container flex items-center justify-center mb-5 font-bold text-lg">01</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2 font-bold">اختيار منتج يستحق الدراسة</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-4">
+                قيم حجم الطلب التنافسي، وتكلفة الوزن الحجمي، ومعدل دوران المخزون، وتأكد من هوامش الربح الحقيقية قبل الالتزام بأي كمية طلب.
+              </p>
+</div>
+<div class="pt-4 border-t border-outline-variant/20 flex items-center text-xs font-semibold text-secondary gap-1">
+<span>تحديد الفرص الواعدة</span>
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</div>
+</div>
+<!-- Pillar 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/40 shadow-sm hover:shadow-md hover:border-secondary/40 transition-all flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-lg bg-surface-container text-primary-container flex items-center justify-center mb-5 font-bold text-lg">02</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2 font-bold">البحث عن المورد المناسب</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-4">
+                افهم الفرق بين المصنع الحقيقي وشركة الوساطة التجارية على Alibaba و1688، وكيفية التحقق من السجل التجاري ورأس مال المورد.
+              </p>
+</div>
+<div class="pt-4 border-t border-outline-variant/20 flex items-center text-xs font-semibold text-secondary gap-1">
+<span>تصفية الموردين المعتمدين</span>
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</div>
+</div>
+<!-- Pillar 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/40 shadow-sm hover:shadow-md hover:border-secondary/40 transition-all flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-lg bg-surface-container text-primary-container flex items-center justify-center mb-5 font-bold text-lg">03</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2 font-bold">فهم التكلفة الحقيقية (Landed Cost)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-4">
+                تعلّم معادلات حساب تكلفة الشحنة بالكامل: سعر المنتج في المصنع (EXW/FOB) + الشحن الدولي + التأمين + الرسوم الجمركية وضريبة القيمة المضافة.
+              </p>
+</div>
+<div class="pt-4 border-t border-outline-variant/20 flex items-center text-xs font-semibold text-secondary gap-1">
+<span>حساب الهامش الفعلي بدقة</span>
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</div>
+</div>
+<!-- Pillar 4 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/40 shadow-sm hover:shadow-md hover:border-secondary/40 transition-all flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-lg bg-surface-container text-primary-container flex items-center justify-center mb-5 font-bold text-lg">04</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2 font-bold">الاستعداد للاستيراد والفحص</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-4">
+                إجراءات طلب العينات التمهيدية، كتابة شروط المواصفات الفنية، عقود فحص ما قبل الشحن، واستخراج بوالص الشحن وشهادات المنشأ.
+              </p>
+</div>
+<div class="pt-4 border-t border-outline-variant/20 flex items-center text-xs font-semibold text-secondary gap-1">
+<span>ضمان مطابقة الجودة</span>
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. FREE COURSES LIBRARY -->
+<section class="py-16 md:py-24 bg-surface-container-lowest border-y border-outline-variant/30" id="courses">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+<div>
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed/20 text-secondary text-label-sm font-label-sm mb-3">
+<span>مكتبة الدروس المفتوحة</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-3">اختر ما تحتاجه لخطوتك التالية</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl">
+              لكل مرحلة أسئلتها الخاصة. استكشف الكورسات، وتعرّف على ما ستستفيده من كل واحد، ثم اختر نقطة البداية المناسبة لك الآن.
+            </p>
+</div>
+<div class="mt-4 md:mt-0">
+<span class="text-xs text-on-surface-variant font-medium">جميع الكورسات مجانية ومتاحة فور التسجيل السريع</span>
+</div>
+</div>
+<!-- 2-Column Responsive Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Course Card 1 -->
+<div class="bg-surface rounded-xl border border-outline-variant/40 overflow-hidden shadow-sm hover:shadow-lg hover:border-secondary/40 transition-all flex flex-col justify-between">
+<div>
+<div class="relative aspect-video w-full bg-surface-container">
+<img alt="Product Research Masterclass" class="w-full h-full object-cover" data-alt="Modern consumer product prototypes and retail packaging samples placed neatly on a minimalist designer desk with analytical review checklists. Natural ambient lighting, crisp professional photography highlighting e-commerce evaluation metrics with deep navy and cyan tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbiPfOoUPYJDWtdRKOXU1thZZafGlVdfB81c4UMlUob0mAKNEksBfXy85JMIfZWZPjLgGb7BEM1_JA44DmBQWR6u0mXxCcaaaDLtmE8VvcWwB0BrwaVktdCaO12MN9_umJVP63pn0W67jxaluWlbfwTMza1FJMU9d96NYtpY87G0in9oVGnVNE24OUglIr9NHr0LM7yCYwPttMO4Bk7jv0j1KRZLhN6BKfSRJTC9tSR8FSSox9_-TN"/>
+<div class="absolute top-3 right-3 flex gap-2">
+<span class="px-2.5 py-1 rounded-full bg-secondary text-white font-label-sm text-[11px] shadow-sm">مجاني</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-primary-container font-label-sm text-[11px] border border-outline-variant/30">مبتدئ</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2 font-bold">من فكرة إلى منتج قابل للتجارة</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 leading-relaxed">
+                  تعلم دراسة احتياج السوق، ومقارنة البدائل، وتقييم فرصة المنتج قبل إنفاق أي مبلغ على طلبات الإنتاج.
+                </p>
+<div class="space-y-2 mb-4 p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/20">
+<div class="flex items-center gap-2 text-xs text-on-surface">
+<span class="material-symbols-outlined text-secondary text-sm">checklist</span>
+<span class="font-semibold">الفائدة الرئيسية:</span>
+<span>قائمة معايير لتصفية الأفكار واختيار ما يستحق دراسة أعمق.</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">group</span>
+<span>الجمهور: للمبتدئين وأصحاب المتاجر الباحثين عن منتجات جديدة.</span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-6 pb-6 pt-2 border-t border-outline-variant/20 flex items-center justify-between">
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">schedule</span> 45 دقيقة • 4 أجزاء
+              </span>
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary text-white text-label-md font-label-md hover:bg-opacity-90 transition-all" onclick="openEnrollmentModal('من فكرة إلى منتج قابل للتجارة')">
+<span>احصل على الكورس مجاناً</span>
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+</button>
+</div>
+</div>
+<!-- Course Card 2 -->
+<div class="bg-surface rounded-xl border border-outline-variant/40 overflow-hidden shadow-sm hover:shadow-lg hover:border-secondary/40 transition-all flex flex-col justify-between">
+<div>
+<div class="relative aspect-video w-full bg-surface-container">
+<img alt="Sourcing on Alibaba and 1688" class="w-full h-full object-cover" data-alt="A clean laptop screen displaying the 1688 and Alibaba wholesale supplier search portals, with filter menus for verified factories and business licenses. Sleek corporate office environment in bright daylight with crisp cool slate backdrop and teal highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVa4M5zYlrMgAZx_vCuEulIiQheb3AEGss97D0j9cmchhJNNfowq6qfCuHKKHouKPhRdFNL2QrUJAVSYcyNOnzAQaE4S6Gcn-YA7eWs7ow6ideq43d75J5c9xCtnGXKJk2DsMmQ_iV4dJgFM3Pv-MO7pC3qQXRk5lZLO5DXDS4Nj9DSFXgzK3T0PZQNDnyfmYzyOx5oAGWjF8GClW2kznoKXRfJ2AWP3ISUVrEz7rqNa8_A17H3WlE"/>
+<div class="absolute top-3 right-3 flex gap-2">
+<span class="px-2.5 py-1 rounded-full bg-secondary text-white font-label-sm text-[11px] shadow-sm">مجاني</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-primary-container font-label-sm text-[11px] border border-outline-variant/30">مبتدئ</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2 font-bold">البحث عن الموردين عبر Alibaba و 1688</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 leading-relaxed">
+                  تعلم البحث الاحترافي، وقراءة ملف المورد التوثيقي، وفهم الفروق الحقيقية بين عروض أسعار المصانع والتجار.
+                </p>
+<div class="space-y-2 mb-4 p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/20">
+<div class="flex items-center gap-2 text-xs text-on-surface">
+<span class="material-symbols-outlined text-secondary text-sm">checklist</span>
+<span class="font-semibold">الفائدة الرئيسية:</span>
+<span>إعداد قائمة موردين واكتشاف البيانات المطلوبة للمقارنة والفلترة.</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">group</span>
+<span>الجمهور: لمن يبحث عن مصادر توريد صينية مباشرة أو يراجع خياراته.</span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-6 pb-6 pt-2 border-t border-outline-variant/20 flex items-center justify-between">
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">schedule</span> 60 دقيقة • 6 أجزاء
+              </span>
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary text-white text-label-md font-label-md hover:bg-opacity-90 transition-all" onclick="openEnrollmentModal('البحث عن الموردين عبر Alibaba و 1688')">
+<span>احصل على الكورس مجاناً</span>
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+</button>
+</div>
+</div>
+<!-- Course Card 3 -->
+<div class="bg-surface rounded-xl border border-outline-variant/40 overflow-hidden shadow-sm hover:shadow-lg hover:border-secondary/40 transition-all flex flex-col justify-between">
+<div>
+<div class="relative aspect-video w-full bg-surface-container">
+<img alt="Import Cost Calculation and Tariff Breakdown" class="w-full h-full object-cover" data-alt="An analytical financial spreadsheet for customs duty tariffs and ocean freight calculations placed next to a modern calculator and invoice receipts. Clear executive setup, neat arrangement of trade calculation data with high contrast cool-tone lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdRbu4ILSdsbLEdxPgkJvTCwqBImpZzb3QyTcUB_yDn1kmG3A4OIIy8-Rp7Q1GMFSj1a_l_O18S15i_fnRnvB4MTDMSU6YcIRtwq_Toy5taXoL0VdEpdLjBcxQedmoqR_BgiO4YIDyKkyn6NliXeKXZHO3inK7cFLT1kutDR5f7ZwE0f_fjelZrgKb5o35-Hoyrs3oiW-K9cS-p0t0xj83uv2oAJpP72IyEtzVYx6PrlbSTjCdiAfF"/>
+<div class="absolute top-3 right-3 flex gap-2">
+<span class="px-2.5 py-1 rounded-full bg-secondary text-white font-label-sm text-[11px] shadow-sm">مجاني</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-primary-container font-label-sm text-[11px] border border-outline-variant/30">متوسط</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2 font-bold">مقارنة الأسعار وحساب تكلفة الاستيراد</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 leading-relaxed">
+                  قارن عروضاً بمواصفات متكافئة بدقة، وأضف مصاريف الشحن البحري والجوي والرسوم الجمركية إلى التقدير النهائي.
+                </p>
+<div class="space-y-2 mb-4 p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/20">
+<div class="flex items-center gap-2 text-xs text-on-surface">
+<span class="material-symbols-outlined text-secondary text-sm">checklist</span>
+<span class="font-semibold">الفائدة الرئيسية:</span>
+<span>تقدير أولي لتكلفة الوصول (Landed Cost) ومعرفة أثرها على الربح.</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">group</span>
+<span>الجمهور: لمن لديه عروض أسعار أولية ويريد تسعير المنتج بدقة قبل الشراء.</span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-6 pb-6 pt-2 border-t border-outline-variant/20 flex items-center justify-between">
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">schedule</span> 50 دقيقة • حاسبة إكسل مرفقة
+              </span>
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary text-white text-label-md font-label-md hover:bg-opacity-90 transition-all" onclick="openEnrollmentModal('مقارنة الأسعار وحساب تكلفة الاستيراد')">
+<span>احصل على الكورس مجاناً</span>
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+</button>
+</div>
+</div>
+<!-- Course Card 4 -->
+<div class="bg-surface rounded-xl border border-outline-variant/40 overflow-hidden shadow-sm hover:shadow-lg hover:border-secondary/40 transition-all flex flex-col justify-between">
+<div>
+<div class="relative aspect-video w-full bg-surface-container">
+<img alt="Supplier Inquiries and Quality Audit" class="w-full h-full object-cover" data-alt="A trade inspection checklist document held by a quality control specialist in a modern manufacturing warehouse with shipping crates in the background. Clean architectural perspective, crisp industrial clarity, navy blue and cyan color accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3yPsCyXl28RBpQ-0K1iIIy6N1_OhRaVkUphQJvIuZnEhx7BBG_vF2hzBPs9Go5zwkezmlTzMIwJvQD4IGFpK9FfezgfM6k9pMEq1CiZqebv-Q3c5TuXVQqwSd7rqKlYveyrrArqVv-j9_YSz5klAmZpvGSZfPE5iMX5zAwh3QL9l_UjxiYpUy86MfEAtlOlAQDEsKS2R5emJ918lg1RifPPZkBFrAFP2FzcUH_ej1kW9q-kVtKbw7"/>
+<div class="absolute top-3 right-3 flex gap-2">
+<span class="px-2.5 py-1 rounded-full bg-secondary text-white font-label-sm text-[11px] shadow-sm">مجاني</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-primary-container font-label-sm text-[11px] border border-outline-variant/30">عملي</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2 font-bold">ماذا تسأل المورد قبل تأكيد الطلب؟</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 leading-relaxed">
+                  راجع بنود المواصفات، واعتماد العينات الذهبية، والتغليف، ومواعيد الإنتاج، وشروط الدفع وفحص الجودة قبل الشحن.
+                </p>
+<div class="space-y-2 mb-4 p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/20">
+<div class="flex items-center gap-2 text-xs text-on-surface">
+<span class="material-symbols-outlined text-secondary text-sm">checklist</span>
+<span class="font-semibold">الفائدة الرئيسية:</span>
+<span>قائمة أسئلة ونموذج RFQ لتوثيق الاتفاق وتقليل مخاطر سوء الفهم.</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">group</span>
+<span>الجمهور: لمن يتواصل حالياً مع موردين صينيين أو يستعد لأول طلبية فعلية.</span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-6 pb-6 pt-2 border-t border-outline-variant/20 flex items-center justify-between">
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">schedule</span> 40 دقيقة • نماذج مراسلات جاهزة
+              </span>
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary text-white text-label-md font-label-md hover:bg-opacity-90 transition-all" onclick="openEnrollmentModal('ماذا تسأل المورد قبل تأكيد الطلب؟')">
+<span>احصل على الكورس مجاناً</span>
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. HOW TO GET THE COURSE (3-STEP TIMELINE) -->
+<section class="py-16 md:py-20 bg-surface">
+<div class="max-w-7xl mx-auto px-6">
+<div class="text-center max-w-xl mx-auto mb-12">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">اختر. سجّل. ابدأ.</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">من اختيار المنتج إلى استلام أول شحنة بخطوات مبسطة دون أي تعقيد</p>
+</div>
+<div class="relative grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Connector line for desktop -->
+<div class="hidden md:block absolute top-1/2 left-1/6 right-1/6 h-0.5 bg-outline-variant/40 -translate-y-6 z-0"></div>
+<!-- Step 1 -->
+<div class="relative z-10 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 text-center flex flex-col items-center shadow-sm">
+<div class="w-14 h-14 rounded-full bg-secondary-fixed/40 text-secondary border-2 border-secondary flex items-center justify-center font-bold text-xl mb-4 shadow-sm">
+              1
+            </div>
+<h3 class="font-title-md text-title-md text-on-surface font-bold mb-2">اختر الكورس</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              اختر الكورس والموضوع المناسب لمرحلتك الحالية من المكتبة المجانية.
+            </p>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 text-center flex flex-col items-center shadow-sm">
+<div class="w-14 h-14 rounded-full bg-secondary text-white border-2 border-secondary flex items-center justify-center font-bold text-xl mb-4 shadow-sm">
+              2
+            </div>
+<h3 class="font-title-md text-title-md text-on-surface font-bold mb-2">سجّل بياناتك</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              أدخل اسمك ورقم الواتساب والبريد الإلكتروني للوصول إلى المحتوى.
+            </p>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 text-center flex flex-col items-center shadow-sm">
+<div class="w-14 h-14 rounded-full bg-primary-container text-secondary-fixed border-2 border-primary-container flex items-center justify-center font-bold text-xl mb-4 shadow-sm">
+              3
+            </div>
+<h3 class="font-title-md text-title-md text-on-surface font-bold mb-2">ابدأ التعلّم</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              شاهد الدروس فوراً، وحمّل قوائم الفحص وطبّق الخطوات على مشروعك.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. ENROLLMENT / REGISTRATION SECTION (Inline & Modal support) -->
+<section class="py-16 md:py-20 bg-primary-container text-white relative overflow-hidden" id="register-section">
+<!-- Ambient background decoration -->
+<div class="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#92f1fe_1px,transparent_1px)] [background-size:20px_20px]"></div>
+<div class="max-w-4xl mx-auto px-6 relative z-10">
+<div class="text-center mb-10">
+<div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-secondary-container/20 text-secondary-fixed font-label-sm text-label-sm mb-3">
+<span class="material-symbols-outlined text-sm">lock_open</span>
+<span>تسجيل فوري بدون بطاقة بنكية</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-white mb-2">خطوتك الأولى تبدأ هنا</h2>
+<p class="font-body-md text-body-md text-on-primary-container">
+            سجّل للحصول على الكورس المجاني وتحديثات أدلة الاستيراد من فريق TLC
+          </p>
+</div>
+<!-- Form Card -->
+<div class="bg-surface-container-lowest text-on-surface rounded-2xl p-6 md:p-10 shadow-2xl border border-outline-variant/30">
+<form class="space-y-5" id="courseEnrollForm" onsubmit="handleEnrollmentSubmit(event)">
+<!-- Selected Course Pill Display -->
+<div class="p-3 bg-surface-container-low rounded-lg border border-outline-variant/40 flex items-center justify-between">
+<span class="text-xs font-semibold text-on-surface-variant">الكورس المختار:</span>
+<span class="text-xs font-bold text-secondary bg-surface-container-lowest px-2.5 py-1 rounded border border-outline-variant/30" id="targetCourseBadge">
+                جميع الكورسات والأدلة المجانية
+              </span>
+</div>
+<!-- Full Name -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="fullName">الاسم الكامل *</label>
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant text-right focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all text-sm" id="fullName" placeholder="مثال: أحمد محمد" required="" type="text"/>
+</div>
+<!-- Email -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="emailAddr">البريد الإلكتروني *</label>
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant text-left focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all text-sm" dir="ltr" id="emailAddr" placeholder="example@domain.com" required="" type="email"/>
+</div>
+<!-- WhatsApp & Country Code -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<div class="sm:col-span-1">
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="countryCode">رمز الدولة *</label>
+<select class="w-full px-3 py-3 rounded-lg border border-outline-variant text-right focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all text-sm bg-white" id="countryCode">
+<option value="+966">السعودية (+966)</option>
+<option value="+971">الإمارات (+971)</option>
+<option value="+970">فلسطين (+970)</option>
+<option value="+962">الأردن (+962)</option>
+<option value="+965">الكويت (+965)</option>
+<option value="+974">قطر (+974)</option>
+<option value="+20">مصر (+20)</option>
+<option value="+968">عُمان (+968)</option>
+</select>
+</div>
+<div class="sm:col-span-2">
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="whatsAppNum">رقم الواتساب *</label>
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant text-left focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all text-sm" dir="ltr" id="whatsAppNum" placeholder="50 123 4567" required="" type="tel"/>
+</div>
+</div>
+<!-- Opt-in Checkbox -->
+<div class="flex items-start gap-3 pt-2">
+<input class="mt-1 h-4 w-4 rounded border-outline-variant text-secondary focus:ring-secondary" id="newsletterOpt" type="checkbox"/>
+<label class="text-xs text-on-surface-variant cursor-pointer text-right leading-relaxed" for="newsletterOpt">
+                أرغب أيضاً في استلام تحديثات الأكاديمية ونماذج التوريد الجديدة والكورسات القادمة (اختياري).
+              </label>
+</div>
+<!-- Privacy Note -->
+<p class="text-[11px] text-on-surface-variant text-right">
+              نستخدم بياناتك حصراً لتوفير الوصول إلى الكورس وإرسال رابط المشاهدة، وفق سياسة الخصوصية المعتمدة.
+            </p>
+<!-- Submit Button -->
+<button class="w-full py-4 rounded-lg bg-secondary text-white font-title-md text-title-md font-bold hover:bg-opacity-95 transition-all shadow-md hover:shadow-lg active:scale-[0.99] flex items-center justify-center gap-2" type="submit">
+<span>احصل على وصول مجاني الآن</span>
+<span class="material-symbols-outlined">key</span>
+</button>
+</form>
+<!-- Success Modal State (Hidden by default) -->
+<div class="hidden text-center py-8 space-y-4" id="enrollSuccessBox">
+<div class="w-16 h-16 rounded-full bg-secondary-fixed/50 text-secondary mx-auto flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-3xl font-bold">check_circle</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">محتواك جاهز!</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto">
+              أرسلنا رابط المحتوى وقائمة الفحص إلى بريدك الإلكتروني والواتساب بنجاح. يمكنك المتابعة الآن مباشرة.
+            </p>
+<div class="flex flex-col sm:flex-row justify-center gap-3 pt-4">
+<a class="px-6 py-2.5 rounded-lg bg-secondary text-white font-label-md text-label-md hover:bg-opacity-90" href="#courses">ابدأ المشاهدة الآن</a>
+<button class="px-6 py-2.5 rounded-lg bg-surface-container border border-outline-variant font-label-md text-label-md text-on-surface" onclick="resetEnrollForm()">تسجيل كورس آخر</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. ABOUT TLC ACADEMY -->
+<section class="py-16 md:py-24 bg-surface-container-lowest border-b border-outline-variant/30" id="about">
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-5 relative">
+<div class="p-6 rounded-2xl bg-surface-container-low border border-outline-variant/40 shadow-sm relative">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-xl bg-primary-container text-secondary-fixed flex items-center justify-center font-bold text-xl">
+                TLC
+              </div>
+<div class="text-right">
+<span class="block font-title-md text-title-md text-on-surface font-bold">Trend Global Trading</span>
+<span class="text-xs text-on-surface-variant">الريادة في خدمات التجارة وسلاسل الإمداد مع الصين</span>
+</div>
+</div>
+<div class="space-y-4 text-xs text-on-surface-variant leading-relaxed">
+<div class="p-3 bg-surface-container-lowest rounded-lg border border-outline-variant/20 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">verified</span>
+<span>خبرة ميدانية على أرض الواقع في مكاتب وموانئ كوانزو وإيوو.</span>
+</div>
+<div class="p-3 bg-surface-container-lowest rounded-lg border border-outline-variant/20 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">public</span>
+<span>شبكة لوجستية تدعم الاستيراد إلى مختلف الدول العربية.</span>
+</div>
+<div class="p-3 bg-surface-container-lowest rounded-lg border border-outline-variant/20 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">menu_book</span>
+<span>محتوى تعليمي حيادي هدفه بناء المعرفة قبل الاستثمار.</span>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-7 text-right space-y-6">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed/20 text-secondary text-label-sm font-label-sm">
+<span>عن الأكاديمية</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold leading-tight">
+            معرفة تساعدك على الانتقال من <span class="text-secondary">الاستكشاف إلى التطبيق</span>
+</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+            أكاديمية TLC من Trading Global Trend هي مساحة تعليمية متخصصة باللغة العربية، أُنشئت لتوجيه رواد الأعمال وأصحاب المتاجر والمستوردين الجدد. نهدف إلى تبسيط إجراءات البحث والتوريد والشحن من الصين، وتقديم رؤية واضحة للمخاطر والتكاليف قبل اتخاذ أي قرار شراء أو توقيع عقود.
+          </p>
+<div class="p-4 rounded-xl bg-surface-container-low border-r-4 border-secondary text-xs text-on-surface leading-relaxed">
+<strong class="font-bold text-on-surface block mb-1">ملاحظة موثوقية وتنظيم:</strong>
+            المحتوى موجه للمهتمين من مختلف الدول. يرجى مراعاة أن متطلبات الاستيراد، ورسوم التعرفة الجمركية، والشهادات الإلزامية تختلف بحسب بلد الوصول ونوع الصنف المستورد.
+          </div>
+</div>
+</div>
+</section>
+<!-- 9. CONTACT TLC TEAM & CONSULTATION -->
+<section class="py-16 md:py-24 bg-surface" id="contact">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Contact Info and Quick Messaging -->
+<div class="lg:col-span-5 text-right space-y-6">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed/20 text-secondary text-label-sm font-label-sm">
+<span>تواصل مباشر</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">
+              تحدث مع فريق TLC عن خطوتك القادمة
+            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              هل تبحث عن كورس مناسب لمستواك؟ هل لديك سؤال تقني حول مورد أو فحص عينة أو عرض سعر؟ أم ترغب في معرفة كيف يمكن لشركة Trend Global Trading مساعدتك في حلول التوريد والشحن الميداني؟
+            </p>
+<div class="space-y-4 pt-2">
+<a class="flex items-center gap-4 p-4 rounded-xl bg-surface-container-lowest border border-outline-variant/30 hover:border-secondary transition-all shadow-sm group" href="https://wa.me/" target="_blank">
+<div class="w-12 h-12 rounded-lg bg-[#25D366]/10 text-[#25D366] flex items-center justify-center font-bold text-2xl group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">chat</span>
+</div>
+<div>
+<div class="font-title-md text-title-md font-bold text-on-surface">محادثة واتساب سريعة</div>
+<div class="text-xs text-on-surface-variant">فريق الاستشارات متواجد للرد على استفساراتكم</div>
+</div>
+</a>
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface-container-lowest border border-outline-variant/30 shadow-sm">
+<div class="w-12 h-12 rounded-lg bg-primary-container text-white flex items-center justify-center">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div>
+<div class="font-title-md text-title-md font-bold text-on-surface">البريد الإلكتروني المباشر</div>
+<div class="text-xs text-on-surface-variant">info@tlc-trading.com</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Comprehensive Contact Form -->
+<div class="lg:col-span-7">
+<div class="bg-surface-container-lowest p-8 md:p-10 rounded-2xl border border-outline-variant/40 shadow-sm">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold mb-6 text-right">أرسل استفسارك لفريق العمل</h3>
+<form class="space-y-5" id="contactTeamForm" onsubmit="handleContactSubmit(event)">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="cFullName">الاسم الكامل *</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-outline-variant text-right text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20" id="cFullName" placeholder="أدخل اسمك الكريم" required="" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="cCountry">الدولة *</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-outline-variant text-right text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20" id="cCountry" placeholder="السعودية، الإمارات، مصر..." required="" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="cEmail">البريد الإلكتروني *</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-outline-variant text-left text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20" dir="ltr" id="cEmail" placeholder="name@domain.com" required="" type="email"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="cPhone">رقم الواتساب *</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-outline-variant text-left text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20" dir="ltr" id="cPhone" placeholder="+966 50 000 0000" required="" type="tel"/>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="cSubject">بخصوص ماذا تتواصل معنا؟ *</label>
+<select class="w-full px-4 py-2.5 rounded-lg border border-outline-variant text-right text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 bg-white" id="cSubject">
+<option value="course_inquiry">استفسار عن محتوى الكورسات والأدلة</option>
+<option value="supplier_check">سؤال حول فحص مورد أو مصنع في الصين</option>
+<option value="shipping_quote">استفسار عن تكاليف الشحن والتخليص الجمركي</option>
+<option value="commercial_partnership">طلب استشارة تجارية خاصة</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="cMessage">نص الرسالة أو الاستفسار *</label>
+<textarea class="w-full px-4 py-2.5 rounded-lg border border-outline-variant text-right text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20" id="cMessage" placeholder="اشرح لنا استفسارك أو المرحلة التي وصلت إليها في مشروعك..." required="" rows="4"></textarea>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-2 text-right">طريقة التواصل المفضلة لديك:</label>
+<div class="flex items-center gap-6 text-xs text-on-surface">
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="text-secondary focus:ring-secondary" name="preferredContact" type="radio" value="whatsapp"/>
+<span>واتساب</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="text-secondary focus:ring-secondary" name="preferredContact" type="radio" value="email"/>
+<span>البريد الإلكتروني</span>
+</label>
+</div>
+</div>
+<button class="w-full py-3.5 rounded-lg bg-primary-container text-white font-title-md text-title-md font-bold hover:bg-secondary transition-all shadow-sm flex items-center justify-center gap-2" type="submit">
+<span>إرسال الاستفسار الآن</span>
+<span class="material-symbols-outlined">send</span>
+</button>
+</form>
+<div class="hidden text-center py-6" id="contactSuccessMsg">
+<span class="material-symbols-outlined text-secondary text-4xl mb-2">check_circle</span>
+<h4 class="font-bold text-on-surface mb-1">تم إرسال رسالتك بنجاح!</h4>
+<p class="text-xs text-on-surface-variant">سيتواصل معك أحد أعضاء فريق TLC خلال 24 ساعة عبر وسيلة الاتصال المفضلة.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 10. FAQ ACCORDION -->
+<section class="py-16 md:py-24 bg-surface-container-lowest border-t border-outline-variant/30" id="faq">
+<div class="max-w-4xl mx-auto px-6">
+<div class="text-center mb-12">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed/20 text-secondary text-label-sm font-label-sm mb-3">
+<span>إجابات واضحة</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">الأسئلة الشائعة</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">كل ما تود معرفته عن الكورسات، الشهادات، وخدمات الأكاديمية</p>
+</div>
+<div class="space-y-4">
+<!-- Q1 -->
+<div class="border border-outline-variant/40 rounded-xl overflow-hidden bg-surface transition-all">
+<button class="w-full px-6 py-4 flex items-center justify-between text-right font-title-md text-title-md font-bold text-on-surface hover:text-secondary" onclick="toggleFaq(this)">
+<span>هل الكورسات مجانية تماماً أم توجد رسوم خفية؟</span>
+<span class="material-symbols-outlined text-secondary transition-transform duration-200">expand_more</span>
+</button>
+<div class="faq-content hidden px-6 pb-5 text-sm text-on-surface-variant leading-relaxed border-t border-outline-variant/20 pt-3">
+              نعم، الكورسات التمهيدية وقوائم الفحص ونماذج المراسلات المتوفرة على هذه الصفحة مجانية 100%. هدفنا تمكينك بالمعرفة الأولية لفهم آليات العمل مع الموردين ومقارنة العروض وتفادي الأخطاء المكلفة.
+            </div>
+</div>
+<!-- Q2 -->
+<div class="border border-outline-variant/40 rounded-xl overflow-hidden bg-surface transition-all">
+<button class="w-full px-6 py-4 flex items-center justify-between text-right font-title-md text-title-md font-bold text-on-surface hover:text-secondary" onclick="toggleFaq(this)">
+<span>ما الفرق بين الشراء من 1688 والشراء من Alibaba؟</span>
+<span class="material-symbols-outlined text-secondary transition-transform duration-200">expand_more</span>
+</button>
+<div class="faq-content hidden px-6 pb-5 text-sm text-on-surface-variant leading-relaxed border-t border-outline-variant/20 pt-3">
+              منصة Alibaba موجهة للتجارة الدولية باللغة الإنجليزية وتوفر آليات دفع مثل Trade Assurance، بينما 1688 هي المنصة المحلية الصينية ذات الأسعار الحقيقية لمصانع الداخل الصيني وتتطلب وسيطاً أو وكيلاً محلياً للشراء والفحص والتجميع، وهو ما نوضحه بالتفصيل في كورس الموردين.
+            </div>
+</div>
+<!-- Q3 -->
+<div class="border border-outline-variant/40 rounded-xl overflow-hidden bg-surface transition-all">
+<button class="w-full px-6 py-4 flex items-center justify-between text-right font-title-md text-title-md font-bold text-on-surface hover:text-secondary" onclick="toggleFaq(this)">
+<span>هل أحتاج إلى سجل تجاري أو ترخيص استيراد للبدء؟</span>
+<span class="material-symbols-outlined text-secondary transition-transform duration-200">expand_more</span>
+</button>
+<div class="faq-content hidden px-6 pb-5 text-sm text-on-surface-variant leading-relaxed border-t border-outline-variant/20 pt-3">
+              يعتمد ذلك على حجم الشحنة والبلد المستورد إليه. الشحنات التجريبية الصغيرة والعينات يمكن شحنها أحياناً بأسماء شخصية أو عبر خدمات الشحن السريع، أما الحاويات والشحنات التجارية فتشترط سجلاً تجارياً ووثائق مطابقة، وهو محور درس "الاستعداد للاستيراد".
+            </div>
+</div>
+<!-- Q4 -->
+<div class="border border-outline-variant/40 rounded-xl overflow-hidden bg-surface transition-all">
+<button class="w-full px-6 py-4 flex items-center justify-between text-right font-title-md text-title-md font-bold text-on-surface hover:text-secondary" onclick="toggleFaq(this)">
+<span>كيف أضمن جودة البضاعة قبل أن يتم شحنها من الصين؟</span>
+<span class="material-symbols-outlined text-secondary transition-transform duration-200">expand_more</span>
+</button>
+<div class="faq-content hidden px-6 pb-5 text-sm text-on-surface-variant leading-relaxed border-t border-outline-variant/20 pt-3">
+              القاعدة الذهبية هي فحص العينة واعتماد "العينة الذهبية"، ثم ربط الدفعة الأخيرة للطلب بتقرير فحص طرف ثالث (Pre-shipment Inspection) داخل المصنع الصيني للتحقق من المواصفات والتغليف قبل الشحن.
+            </div>
+</div>
+<!-- Q5 -->
+<div class="border border-outline-variant/40 rounded-xl overflow-hidden bg-surface transition-all">
+<button class="w-full px-6 py-4 flex items-center justify-between text-right font-title-md text-title-md font-bold text-on-surface hover:text-secondary" onclick="toggleFaq(this)">
+<span>هل تقدم TLC خدمات وساطة تجارية وشحن فعلي؟</span>
+<span class="material-symbols-outlined text-secondary transition-transform duration-200">expand_more</span>
+</button>
+<div class="faq-content hidden px-6 pb-5 text-sm text-on-surface-variant leading-relaxed border-t border-outline-variant/20 pt-3">
+              نعم، شركة Trend Global Trading تمتلك فرق عمل ومستودعات في الصين لتقديم خدمات التحقق من الموردين، وإدارة العينات، وفحص الجودة، وحجز الحاويات والشحن البحري والجوي المتكامل.
+            </div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- 11. FLOATING WHATSAPP BUTTON (Persistent Widget) -->
+<div class="fixed bottom-6 left-6 z-40 flex items-center">
+<a class="inline-flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#25D366] text-white font-label-md text-label-md shadow-xl hover:bg-[#20ba5a] hover:shadow-2xl transition-all duration-200 active:scale-95 group" href="https://wa.me/" target="_blank">
+<span class="material-symbols-outlined text-2xl group-hover:rotate-12 transition-transform">chat</span>
+<span class="font-bold">تحدث مع فريقنا</span>
+</a>
+</div>
+<!-- 12. FOOTER (Shared Components JSON Anchor) -->
+<footer class="w-full bg-surface-container-lowest border-t border-outline-variant/30">
+<div class="w-full max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row-reverse items-center justify-between gap-4">
+<!-- Logo Branding in Footer -->
+<div class="flex items-center gap-3">
+<span class="text-title-md font-title-md font-bold tracking-tight text-on-surface uppercase">TLC ACADEMY</span>
+<span class="text-xs text-on-surface-variant font-label-sm">| TREND GLOBAL TRADING</span>
+</div>
+<!-- Footer Navigation Links -->
+<nav class="flex items-center gap-6">
+<a class="text-secondary font-semibold hover:text-secondary transition-colors duration-150 text-label-sm font-label-sm" href="#courses">الكورسات</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-150 text-label-sm font-label-sm" href="#about">عن الأكاديمية</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-150 text-label-sm font-label-sm" href="#faq">أسئلة شائعة</a>
+</nav>
+<!-- Copyright Notice -->
+<div class="text-body-sm font-body-sm text-on-surface-variant">
+        جميع الحقوق محفوظة © 2024 TLC ACADEMY
+      </div>
+</div>
+</footer>
+<!-- Quick Vanilla JS for micro-interactions -->
+<script>
+    function toggleFaq(btn) {
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector('.material-symbols-outlined');
+      const isHidden = content.classList.contains('hidden');
+      
+      // Close all FAQs first
+      document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+      document.querySelectorAll('#faq .material-symbols-outlined').forEach(i => i.style.transform = 'rotate(0deg)');
+
+      if (isHidden) {
+        content.classList.remove('hidden');
+        if (icon) icon.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    function openEnrollmentModal(courseName) {
+      const badge = document.getElementById('targetCourseBadge');
+      if (badge) badge.innerText = courseName;
+      
+      const regSection = document.getElementById('register-section');
+      if (regSection) {
+        regSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function handleEnrollmentSubmit(e) {
+      e.preventDefault();
+      document.getElementById('courseEnrollForm').classList.add('hidden');
+      document.getElementById('enrollSuccessBox').classList.remove('hidden');
+    }
+
+    function resetEnrollForm() {
+      document.getElementById('courseEnrollForm').reset();
+      document.getElementById('courseEnrollForm').classList.remove('hidden');
+      document.getElementById('enrollSuccessBox').classList.add('hidden');
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      document.getElementById('contactTeamForm').classList.add('hidden');
+      document.getElementById('contactSuccessMsg').classList.remove('hidden');
+    }
+  </script>
+</body></html>
