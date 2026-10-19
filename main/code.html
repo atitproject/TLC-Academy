@@ -335,6 +335,14 @@
     }
   </style>
 <style id="enhance2">
+    /* Gold sheen accent for headings on dark/image backgrounds */
+    .hero-accent {
+      background: linear-gradient(120deg, #f7edcb, #e3c04a, #c9a227, #e3c04a, #f7edcb);
+      background-size: 200% auto;
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      animation: textSheen 7s linear infinite; padding-bottom: .08em;
+    }
     /* 3D effect for social media icons */
     .social-3d {
       transform-style: preserve-3d;
@@ -399,76 +407,58 @@
 </div>
 </header>
 <main>
-<!-- 2. HERO SECTION -->
-<section class="relative overflow-hidden pt-8 pb-16 md:pt-14 md:pb-24 bg-gradient-to-b from-surface-container-low via-surface-bright to-background border-b border-outline-variant/30">
-<!-- Decorative floating blobs -->
+<!-- 2. HERO SECTION (full-width image background) -->
+<section class="relative overflow-hidden border-b border-outline-variant/30 bg-primary-container">
+<!-- Full-width background image -->
+<img alt="أكاديمية TLC — التجارة والاستيراد من الصين" class="ken-burns absolute inset-0 w-full h-full object-cover" src="assets/heroimg.png"/>
+<!-- Readability overlays (keep the image visible, darken behind text on the right) -->
+<div aria-hidden="true" class="absolute inset-0 bg-gradient-to-r from-primary-container/20 via-primary-container/40 to-primary-container/80"></div>
+<div aria-hidden="true" class="absolute inset-0 bg-gradient-to-t from-primary-container/65 via-transparent to-transparent"></div>
+<!-- Decorative blobs / sparkles layer -->
 <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
-<span class="blob" style="width:340px;height:340px;background:#e3c04a;top:-70px;left:-50px;"></span>
-<span class="blob" style="width:400px;height:400px;background:#f5e6b8;bottom:-140px;right:-70px;animation-delay:-5s;"></span>
-<span class="blob" style="width:260px;height:260px;background:#b8860b;top:38%;left:46%;opacity:.22;animation-delay:-9s;"></span>
+<span class="blob" style="width:360px;height:360px;background:#e3c04a;top:-90px;right:-60px;opacity:.28;"></span>
+<span class="blob" style="width:300px;height:300px;background:#c9a227;bottom:-120px;left:-50px;opacity:.2;animation-delay:-6s;"></span>
 </div>
-<div class="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-<!-- Text Column (Desktop 6 / RTL Right) -->
-<div class="anim-fade-up lg:col-span-6 flex flex-col items-start text-right space-y-6">
+<!-- Content overlay -->
+<div class="relative z-10 max-w-7xl mx-auto px-6 py-24 md:py-36 lg:py-44">
+<div class="anim-fade-up max-w-2xl flex flex-col items-start text-right space-y-6">
 <!-- Badge -->
-<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary-fixed/30 border border-secondary/20 text-secondary font-label-md text-label-md">
-<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/25 text-white font-label-md text-label-md">
+<span class="w-2 h-2 rounded-full bg-[#e3c04a] animate-pulse"></span>
 <span>معرفة عملية لتبدأ بثقة • وصول مجاني</span>
 </div>
 <!-- Main Title -->
-<h1 class="text-on-surface font-display-hero-mobile md:font-display-hero text-display-hero-mobile md:text-display-hero tracking-tight leading-tight">
-            حوّل اهتمامك بالتجارة مع الصين إلى <span class="text-gradient text-gradient-anim border-b-4 border-secondary-container">خطوات واضحة</span>
+<h1 class="text-white font-display-hero-mobile md:font-display-hero text-display-hero-mobile md:text-display-hero tracking-tight leading-tight drop-shadow-lg">
+            حوّل اهتمامك بالتجارة مع الصين إلى <span class="hero-accent">خطوات واضحة</span>
 </h1>
 <!-- Body Description -->
-<p class="text-on-surface-variant font-body-lg text-body-lg max-w-xl leading-relaxed">
-            من اختيار المنتج والبحث عن المورد، إلى مقارنة العروض وفهم تكلفة الاستيراد؛ اكتشف كورسات وأدلة مجانية تساعدك على تقييم الفرص، وطرح الأسئلة الصحيحة، واتخاذ قرارات شراء مدروسة. سواء كنت تستكشف فكرة مشروع أو تطور نشاطك التجاري، ابدأ بالموضوع الذي تحتاجه اليوم.
+<p class="text-white/90 font-body-lg text-body-lg max-w-xl leading-relaxed drop-shadow-md">
+            من اختيار المنتج والبحث عن المورد، إلى مقارنة العروض وفهم تكلفة الاستيراد؛ اكتشف كورسات وأدلة مجانية تساعدك على تقييم الفرص، وطرح الأسئلة الصحيحة، واتخاذ قرارات شراء مدروسة.
           </p>
 <!-- CTAs -->
 <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto pt-2">
-<a class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-secondary text-white font-label-md text-label-md hover:bg-opacity-95 transition-all shadow-md hover:shadow-lg active:scale-95" href="#courses">
+<a class="glow-pulse inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-secondary text-white font-label-md text-label-md hover:bg-opacity-95 transition-all shadow-lg hover:shadow-xl active:scale-95" href="#courses">
 <span>تصفح الكورسات المجانية</span>
 <span class="material-symbols-outlined text-lg">arrow_back</span>
 </a>
-<a class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-surface-container-lowest border border-outline-variant text-primary-container font-label-md text-label-md hover:border-secondary hover:text-secondary transition-all shadow-sm" href="#contact">
+<a class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-white/10 backdrop-blur-sm border border-white/40 text-white font-label-md text-label-md hover:bg-white/20 transition-all" href="#contact">
 <span>تواصل مع فريق TLC</span>
 <span class="material-symbols-outlined text-lg">forum</span>
 </a>
 </div>
 <!-- Micro Highlights -->
-<div class="pt-4 border-t border-outline-variant/40 w-full grid grid-cols-3 gap-3 text-center sm:text-right">
+<div class="pt-5 border-t border-white/20 w-full max-w-xl grid grid-cols-3 gap-3 text-center sm:text-right">
 <div class="flex flex-col">
-<span class="font-headline-sm text-headline-sm text-primary-container font-bold">وصول مجاني</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">بعد تسجيل سريع</span>
-</div>
-<div class="flex flex-col">
-<span class="font-headline-sm text-headline-sm text-secondary font-bold">محتوى عملي</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">باللغة العربية</span>
+<span class="font-headline-sm text-headline-sm text-white font-bold">وصول مجاني</span>
+<span class="font-label-sm text-label-sm text-white/70">بعد تسجيل سريع</span>
 </div>
 <div class="flex flex-col">
-<span class="font-headline-sm text-headline-sm text-primary-container font-bold">موضوعات جديدة</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">تُضاف باستمرار</span>
+<span class="font-headline-sm text-headline-sm text-[#e3c04a] font-bold">محتوى عملي</span>
+<span class="font-label-sm text-label-sm text-white/70">باللغة العربية</span>
 </div>
-</div>
-</div>
-<!-- Visual Hero (Desktop 6 / RTL Left) -->
-<div class="anim-zoom delay-2 lg:col-span-6 relative">
-<div class="relative mx-auto rounded-2xl p-2 bg-gradient-to-tr from-surface-container-highest via-white to-secondary-fixed/20 shadow-xl border border-outline-variant/40 overflow-hidden">
-<!-- Hero Graphic Image -->
-<img alt="Guangzhou Maritime Port and E-learning Dashboard" class="w-full h-auto rounded-xl object-cover aspect-[4/3] shadow-inner" data-alt="A modern, high-tech Guangzhou maritime container port terminal with commercial shipping vessels and the iconic Canton Tower illuminated in soft twilight. In the foreground rests a sleek laptop showing an e-learning platform dashboard, alongside hardbound reference books stamped with Import, Sourcing, and Logistics. Professional corporate editorial styling, oceanic deep navy and teal color harmony." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVy68uwvfkCTYYWcD2pOXNKuEkJTe31BTcfAU4TsAV2YEiyEJUXPVa9ppC8IxdLeD9vyhESzLcVtrFGE2zD7ZbSUxq12iR92Cf-iFtOxLFPiadBI65VyVhisTOEx58IFVSaXoYVlSjmJXENfJh9In0RTfAf2W4rbNcHPsCZpZ-l1ykdIJSUgiI9Klpba1XHvvSwYm0nFeO52T0OeTlORKEmMnQrkiDIFaHy7tn8Im6Jn5O0e3U4-ms"/>
-<!-- Floating Pill Indicator Top Left (RTL context) -->
-<div class="anim-float absolute top-5 left-5 bg-primary-container/90 backdrop-blur-md text-white px-3.5 py-1.5 rounded-full border border-outline-variant/30 flex items-center gap-2 text-xs">
-<span class="material-symbols-outlined text-secondary-fixed text-sm">anchor</span>
-<span>GUANGZHOU, CHINA HUB</span>
-</div>
-<!-- Floating Mini Card Bottom Right -->
-<div class="anim-float-slow absolute bottom-6 right-6 bg-surface-container-lowest/95 backdrop-blur-md p-3.5 rounded-xl border border-outline-variant/40 shadow-lg flex items-center gap-3">
-<div class="w-10 h-10 rounded-lg bg-secondary-fixed/30 text-secondary flex items-center justify-center">
-<span class="material-symbols-outlined">inventory_2</span>
-</div>
-<div class="text-right">
-<div class="text-xs font-bold text-on-surface">أدلة وقوائم عملية</div>
-<div class="text-[11px] text-on-surface-variant">محتوى عربي مجاني بعد التسجيل</div>
-</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-white font-bold">موضوعات جديدة</span>
+<span class="font-label-sm text-label-sm text-white/70">تُضاف باستمرار</span>
 </div>
 </div>
 </div>
