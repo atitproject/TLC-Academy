@@ -354,6 +354,9 @@
       background: linear-gradient(120deg, transparent, rgba(255,255,255,.55), transparent);
       transform: skewX(-20deg); animation: autoShine 5s ease-in-out infinite; pointer-events: none;
     }
+    /* Parallax (scroll) background */
+    .parallax-bg { background-position: center; background-size: cover; background-repeat: no-repeat; background-attachment: fixed; }
+    @media (max-width: 768px) { .parallax-bg { background-attachment: scroll; } }
     /* 3D effect for social media icons */
     .social-3d {
       transform-style: preserve-3d;
@@ -814,9 +817,9 @@
 </div>
 </section>
 <!-- 7. ENROLLMENT / REGISTRATION SECTION (Inline & Modal support) -->
-<section class="animated-gradient py-16 md:py-20 text-white relative overflow-hidden" id="register-section" style="background-image:linear-gradient(135deg,#0e2c5c 0%,#09283a 35%,#5c4708 70%,#0e2c5c 100%);">
-<!-- Ambient background decoration -->
-<div class="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#f5e6b8_1px,transparent_1px)] [background-size:20px_20px]"></div>
+<section class="parallax-bg py-16 md:py-28 text-white relative overflow-hidden" id="register-section" style="background-image:url('assets/heroimg2.png');">
+<!-- Dark overlay for readability over the parallax image -->
+<div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-primary-container/90 via-primary-container/74 to-primary-container/92"></div>
 <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
 <span class="blob" style="width:360px;height:360px;background:#c9a227;top:-120px;right:-80px;opacity:.35;"></span>
 <span class="blob" style="width:300px;height:300px;background:#e3c04a;bottom:-140px;left:-60px;opacity:.25;animation-delay:-7s;"></span>
