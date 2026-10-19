@@ -343,6 +343,17 @@
       -webkit-text-fill-color: transparent; color: transparent;
       animation: textSheen 7s linear infinite; padding-bottom: .08em;
     }
+    /* Extra stagger delays for hero cascade */
+    .delay-5 { animation-delay: .6s; }
+    .delay-6 { animation-delay: .72s; }
+    /* Auto gleam sweep for the primary hero button */
+    @keyframes autoShine { 0% { left: -140%; } 22% { left: 150%; } 100% { left: 150%; } }
+    .auto-shine { position: relative; overflow: hidden; }
+    .auto-shine::after {
+      content: ''; position: absolute; top: 0; left: -140%; width: 55%; height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,.55), transparent);
+      transform: skewX(-20deg); animation: autoShine 5s ease-in-out infinite; pointer-events: none;
+    }
     /* 3D effect for social media icons */
     .social-3d {
       transform-style: preserve-3d;
@@ -421,48 +432,56 @@
 </div>
 <!-- Content overlay -->
 <div class="relative z-10 max-w-7xl mx-auto px-6 py-24 md:py-36 lg:py-44">
-<div class="anim-fade-up max-w-2xl flex flex-col items-start text-right space-y-6">
+<div class="max-w-2xl flex flex-col items-start text-right space-y-6">
 <!-- Badge -->
-<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/25 text-white font-label-md text-label-md">
+<div class="anim-fade-up delay-1 badge-shimmer inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/25 text-white font-label-md text-label-md shadow-lg">
 <span class="w-2 h-2 rounded-full bg-[#e3c04a] animate-pulse"></span>
 <span>معرفة عملية لتبدأ بثقة • وصول مجاني</span>
 </div>
 <!-- Main Title -->
-<h1 class="text-white font-display-hero-mobile md:font-display-hero text-display-hero-mobile md:text-display-hero tracking-tight leading-tight drop-shadow-lg">
+<h1 class="anim-fade-up delay-2 text-white font-display-hero-mobile md:font-display-hero text-display-hero-mobile md:text-display-hero tracking-tight leading-tight drop-shadow-lg">
             حوّل اهتمامك بالتجارة مع الصين إلى <span class="hero-accent">خطوات واضحة</span>
 </h1>
 <!-- Body Description -->
-<p class="text-white/90 font-body-lg text-body-lg max-w-xl leading-relaxed drop-shadow-md">
+<p class="anim-fade-up delay-3 text-white/90 font-body-lg text-body-lg max-w-xl leading-relaxed drop-shadow-md">
             من اختيار المنتج والبحث عن المورد، إلى مقارنة العروض وفهم تكلفة الاستيراد؛ اكتشف كورسات وأدلة مجانية تساعدك على تقييم الفرص، وطرح الأسئلة الصحيحة، واتخاذ قرارات شراء مدروسة.
           </p>
 <!-- CTAs -->
-<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto pt-2">
-<a class="glow-pulse inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-secondary text-white font-label-md text-label-md hover:bg-opacity-95 transition-all shadow-lg hover:shadow-xl active:scale-95" href="#courses">
+<div class="anim-fade-up delay-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto pt-2">
+<a class="group auto-shine relative inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-gradient-to-l from-[#c9a227] to-[#e3c04a] text-primary-container font-bold shadow-[0_10px_30px_-6px_rgba(201,162,39,.6)] hover:shadow-[0_16px_44px_-6px_rgba(227,192,74,.9)] hover:-translate-y-1 active:translate-y-0 transition-all duration-300" href="#courses">
 <span>تصفح الكورسات المجانية</span>
-<span class="material-symbols-outlined text-lg">arrow_back</span>
+<span class="material-symbols-outlined text-xl transition-transform duration-300 group-hover:-translate-x-1.5">arrow_back</span>
 </a>
-<a class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-white/10 backdrop-blur-sm border border-white/40 text-white font-label-md text-label-md hover:bg-white/20 transition-all" href="#contact">
+<a class="group inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/40 text-white font-bold hover:bg-white/20 hover:border-white/70 hover:-translate-y-1 transition-all duration-300" href="#contact">
+<span class="material-symbols-outlined text-xl transition-transform duration-300 group-hover:rotate-12">forum</span>
 <span>تواصل مع فريق TLC</span>
-<span class="material-symbols-outlined text-lg">forum</span>
 </a>
 </div>
 <!-- Micro Highlights -->
-<div class="pt-5 border-t border-white/20 w-full max-w-xl grid grid-cols-3 gap-3 text-center sm:text-right">
-<div class="flex flex-col">
+<div class="anim-fade-up delay-5 pt-6 border-t border-white/20 w-full max-w-xl grid grid-cols-3 gap-3 text-center sm:text-right">
+<div class="group flex flex-col items-center sm:items-end gap-1 transition-transform duration-300 hover:-translate-y-1">
+<span class="material-symbols-outlined text-[#e3c04a] text-2xl mb-0.5 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">bolt</span>
 <span class="font-headline-sm text-headline-sm text-white font-bold">وصول مجاني</span>
 <span class="font-label-sm text-label-sm text-white/70">بعد تسجيل سريع</span>
 </div>
-<div class="flex flex-col">
-<span class="font-headline-sm text-headline-sm text-[#e3c04a] font-bold">محتوى عملي</span>
+<div class="group flex flex-col items-center sm:items-end gap-1 transition-transform duration-300 hover:-translate-y-1">
+<span class="material-symbols-outlined text-[#e3c04a] text-2xl mb-0.5 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">menu_book</span>
+<span class="font-headline-sm text-headline-sm text-white font-bold">محتوى عملي</span>
 <span class="font-label-sm text-label-sm text-white/70">باللغة العربية</span>
 </div>
-<div class="flex flex-col">
+<div class="group flex flex-col items-center sm:items-end gap-1 transition-transform duration-300 hover:-translate-y-1">
+<span class="material-symbols-outlined text-[#e3c04a] text-2xl mb-0.5 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">auto_awesome</span>
 <span class="font-headline-sm text-headline-sm text-white font-bold">موضوعات جديدة</span>
 <span class="font-label-sm text-label-sm text-white/70">تُضاف باستمرار</span>
 </div>
 </div>
 </div>
 </div>
+<!-- Scroll cue -->
+<a aria-label="اكتشف المزيد" class="hidden md:flex absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex-col items-center gap-1 text-white/70 hover:text-white transition-colors" href="#pillars">
+<span class="text-[11px] font-label-sm">اكتشف المزيد</span>
+<span class="material-symbols-outlined animate-bounce">keyboard_arrow_down</span>
+</a>
 </section>
 <!-- 3. QUICK STEPS / PILLARS RIBBON -->
 <section class="py-8 bg-surface-container-lowest border-b border-outline-variant/30" id="pillars">
