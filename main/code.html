@@ -152,7 +152,7 @@
     }
 
     /* ===== Animations & motion ===== */
-    @media (prefers-reduced-motion: no-preference) {
+    @media screen {
       /* Scroll reveal base */
       [data-reveal] {
         opacity: 0;
@@ -231,7 +231,7 @@
     }
     .card-glow:hover::after { opacity: 1; }
 
-    @media (prefers-reduced-motion: no-preference) {
+    @media screen {
       /* Animated gradient background */
       @keyframes gradShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
       .animated-gradient { background-size: 220% 220%; animation: gradShift 16s ease infinite; }
@@ -283,6 +283,57 @@
       @keyframes softPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .45; transform: scale(1.3); } }
     }
   </style>
+<noscript><style>[data-reveal]{opacity:1 !important;transform:none !important;}</style></noscript>
+<style id="enhance3">
+    /* ===== Magical touches: pillars ribbon + "what you learn" ===== */
+    /* Growing top accent bar on cards */
+    #pillars .lift::before, #what-you-learn .lift::before {
+      content: ''; position: absolute; top: 0; left: 14px; right: 14px; height: 3px; border-radius: 3px;
+      background: linear-gradient(90deg, #c9a227, #e3c04a, #0e2c5c);
+      transform: scaleX(0); transform-origin: right; transition: transform .45s cubic-bezier(.16,1,.3,1); z-index: 3;
+    }
+    #pillars .lift:hover::before, #what-you-learn .lift:hover::before { transform: scaleX(1); }
+
+    /* Pillars ribbon: gold-gradient icon tiles with glow */
+    #pillars .w-11 {
+      background: linear-gradient(135deg, #0e2c5c 0%, #c9a227 100%) !important;
+      border: none !important; box-shadow: 0 8px 18px -7px rgba(201,162,39,.6);
+      transition: transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease;
+    }
+    #pillars .w-11 .material-symbols-outlined { color: #fff !important; }
+    #pillars .lift:hover .w-11 { transform: translateY(-3px) rotate(-6deg) scale(1.08); box-shadow: 0 12px 24px -6px rgba(201,162,39,.8); }
+
+    /* "What you learn": gold-gradient number badges with ring + glow */
+    #what-you-learn .w-12 {
+      background: linear-gradient(135deg, #0e2c5c 0%, #1b3f73 40%, #c9a227 100%) !important;
+      color: #fff !important; box-shadow: 0 10px 22px -7px rgba(201,162,39,.55);
+      position: relative; overflow: visible;
+    }
+    #what-you-learn .w-12::after {
+      content: ''; position: absolute; inset: -4px; border-radius: inherit;
+      border: 1.5px solid rgba(201,162,39,.45); opacity: 0; transition: opacity .4s ease, transform .4s ease; transform: scale(.9);
+    }
+    #what-you-learn .lift:hover .w-12 { transform: translateY(-2px) scale(1.06); }
+    #what-you-learn .lift:hover .w-12::after { opacity: 1; transform: scale(1); }
+
+    /* Soft decorative glows behind the "what you learn" section */
+    #what-you-learn { position: relative; overflow: hidden; }
+    #what-you-learn::before {
+      content: ''; position: absolute; width: 420px; height: 420px; border-radius: 50%; top: -120px; left: -100px;
+      background: radial-gradient(circle, rgba(201,162,39,.16), transparent 70%); pointer-events: none; z-index: 0;
+    }
+    #what-you-learn::after {
+      content: ''; position: absolute; width: 360px; height: 360px; border-radius: 50%; bottom: -120px; right: -90px;
+      background: radial-gradient(circle, rgba(14,44,92,.12), transparent 70%); pointer-events: none; z-index: 0;
+    }
+    #what-you-learn > div { position: relative; z-index: 1; }
+
+    @media screen {
+      /* Gentle breathing glow on pillar icon tiles */
+      @keyframes tilePulse { 0%, 100% { box-shadow: 0 8px 18px -7px rgba(201,162,39,.55); } 50% { box-shadow: 0 10px 22px -6px rgba(201,162,39,.85); } }
+      #pillars .w-11 { animation: tilePulse 3.4s ease-in-out infinite; }
+    }
+  </style>
 <style id="enhance2">
     /* Gold buttons: navy text for strong contrast + soft gold shadow */
     a.bg-secondary, button.bg-secondary { color: #0e2c5c !important; box-shadow: 0 5px 16px -5px rgba(184,134,11,.5); }
@@ -291,7 +342,7 @@
     /* Image zoom framing */
     .img-zoom { transition: transform .7s cubic-bezier(.2, .8, .2, 1); }
 
-    @media (prefers-reduced-motion: no-preference) {
+    @media screen {
       /* Hover zoom on card / hero images */
       .lift:hover .img-zoom, .img-zoom-host:hover .img-zoom { transform: scale(1.08); }
       /* Slow Ken Burns drift on hero image */
@@ -1166,7 +1217,7 @@
 
     // Scroll-reveal animations for all sections (respects reduced-motion)
     (function () {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      function revealAll() { document.querySelectorAll('[data-reveal]').forEach(function (el) { el.classList.add('is-visible'); }); }
 
       // Groups of elements to reveal; each group staggers by index
       const liftGroups = [
@@ -1190,29 +1241,41 @@
         'footer > div'
       ]);
 
-      const io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            e.target.classList.add('is-visible');
-            io.unobserve(e.target);
-          }
+      // Tag all targets up front (data-reveal + hover-lift)
+      try {
+        revealGroups.forEach(function (sel) {
+          document.querySelectorAll(sel).forEach(function (el, i) {
+            el.setAttribute('data-reveal', '');
+            el.style.transitionDelay = Math.min(i, 6) * 80 + 'ms';
+          });
         });
-      }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+        liftGroups.forEach(function (sel) {
+          document.querySelectorAll(sel).forEach(function (el) { el.classList.add('lift'); });
+        });
+      } catch (err) { revealAll(); return; }
 
-      revealGroups.forEach(function (sel) {
-        document.querySelectorAll(sel).forEach(function (el, i) {
-          el.setAttribute('data-reveal', '');
-          el.style.transitionDelay = Math.min(i, 6) * 80 + 'ms';
-          io.observe(el);
+      // Scroll-based reveal (robust across browsers, webviews and 0-height viewports)
+      function viewH() { return window.innerHeight || document.documentElement.clientHeight || 0; }
+      function inView(el) {
+        var h = viewH();
+        if (h === 0) return true; // abnormal viewport -> reveal so content is never stuck hidden
+        var r = el.getBoundingClientRect();
+        return r.top < h * 0.92 && r.bottom > 0;
+      }
+      function check() {
+        var any = false;
+        document.querySelectorAll('[data-reveal]:not(.is-visible)').forEach(function (el) {
+          if (inView(el)) el.classList.add('is-visible');
+          else any = true;
         });
-      });
-
-      // Hover lift on cards
-      liftGroups.forEach(function (sel) {
-        document.querySelectorAll(sel).forEach(function (el) {
-          el.classList.add('lift');
-        });
-      });
+        return any;
+      }
+      check();
+      window.addEventListener('scroll', check, { passive: true });
+      window.addEventListener('resize', check);
+      window.addEventListener('load', check);
+      setTimeout(check, 300);
+      setTimeout(check, 1200);
     })();
 
     // Slim scroll-progress bar
@@ -1252,7 +1315,7 @@
         .forEach(function (b) { b.classList.add('btn-shine'); });
 
       // Subtle 3D tilt on cards (pointer devices, motion allowed)
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (false) return;
       if (window.matchMedia('(hover: none)').matches) return;
       cards.forEach(function (card) {
         card.classList.add('tilt');
@@ -1268,7 +1331,7 @@
 
     // ===== Magical touches: image zoom, Ken Burns, CTA glow, sparkles =====
     (function () {
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const reduce = false;
 
       // Zoom on course images
       document.querySelectorAll('#courses .grid > div img').forEach(function (img) { img.classList.add('img-zoom'); });
