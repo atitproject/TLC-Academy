@@ -984,98 +984,14 @@
 </div>
 </div>
 </div>
-<!-- Comprehensive Contact Form -->
-<div class="md:col-span-7">
-<div class="bg-surface-container-lowest p-8 md:p-10 rounded-2xl border border-outline-variant/40 shadow-sm">
-<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold mb-2 text-right">أخبرنا بما تحتاجه</h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant mb-6 text-right leading-relaxed">املأ البيانات التالية، وسيراجع فريقنا رسالتك ويتواصل معك عبر الوسيلة التي تفضلها.</p>
-<form class="space-y-5" id="contactTeamForm" onsubmit="handleContactSubmit(event)">
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-<div>
-<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="cFullName">الاسم الكامل *</label>
-<input class="w-full px-4 py-2.5 rounded-lg border border-outline-variant text-right text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20" id="cFullName" placeholder="أدخل اسمك الكريم" required="" type="text"/>
-</div>
-<div>
-<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="cCountry">الدولة *</label>
-<input class="w-full px-4 py-2.5 rounded-lg border border-outline-variant text-right text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20" id="cCountry" placeholder="السعودية، الإمارات، مصر..." required="" type="text"/>
-</div>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-<div>
-<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="cEmail">البريد الإلكتروني *</label>
-<input class="w-full px-4 py-2.5 rounded-lg border border-outline-variant text-left text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20" dir="ltr" id="cEmail" placeholder="name@domain.com" required="" type="email"/>
-</div>
-<div>
-<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="cPhone">رقم الواتساب *</label>
-<input class="w-full px-4 py-2.5 rounded-lg border border-outline-variant text-left text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20" dir="ltr" id="cPhone" placeholder="+966 50 000 0000" required="" type="tel"/>
-</div>
-</div>
-<div>
-<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="cSubject">بخصوص ماذا تتواصل معنا؟ *</label>
-<select class="w-full px-4 py-2.5 rounded-lg border border-outline-variant text-right text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 bg-white" id="cSubject">
-<option value="courses">الكورسات</option>
-<option value="product_sourcing">اختيار منتج أو البحث عن مورد</option>
-<option value="supply_shipping">توريد أو شحن</option>
-<option value="partnership">تعاون أو شراكة</option>
-<option value="other">استفسار آخر</option>
-</select>
-</div>
-<div>
-<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="cMessage">نص الرسالة أو الاستفسار *</label>
-<textarea class="w-full px-4 py-2.5 rounded-lg border border-outline-variant text-right text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20" id="cMessage" placeholder="اشرح لنا استفسارك أو المرحلة التي وصلت إليها في مشروعك..." required="" rows="4"></textarea>
-</div>
-<div>
-<label class="block font-label-md text-label-md text-on-surface font-semibold mb-2 text-right">طريقة التواصل المفضلة لديك:</label>
-<div class="flex items-center gap-6 text-xs text-on-surface">
-<label class="flex items-center gap-2 cursor-pointer">
-<input checked="" class="text-secondary focus:ring-secondary" name="preferredContact" type="radio" value="whatsapp"/>
-<span>واتساب</span>
-</label>
-<label class="flex items-center gap-2 cursor-pointer">
-<input class="text-secondary focus:ring-secondary" name="preferredContact" type="radio" value="email"/>
-<span>البريد الإلكتروني</span>
-</label>
-</div>
-</div>
-<!-- Opt-in Checkbox -->
-<div class="flex items-start gap-3">
-<input class="mt-1 h-4 w-4 rounded border-outline-variant text-secondary focus:ring-secondary" id="contactNewsletterOpt" type="checkbox"/>
-<label class="text-xs text-on-surface-variant cursor-pointer text-right leading-relaxed" for="contactNewsletterOpt">
-                أرغب في تلقي أخبار الكورسات والمحتوى الجديد (اختياري).
-              </label>
-</div>
-<!-- Consent Note -->
-<p class="text-[11px] text-on-surface-variant text-right leading-relaxed">
-              بالضغط على «إرسال الاستفسار»، توافق على استخدام بياناتك للرد على طلبك وفق سياسة الخصوصية.
-            </p>
-<button class="w-full py-3.5 rounded-lg bg-primary-container text-white font-title-md text-title-md font-bold hover:bg-secondary transition-all shadow-sm flex items-center justify-center gap-2" type="submit">
-<span>إرسال الاستفسار</span>
-<span class="material-symbols-outlined">send</span>
-</button>
-</form>
-<div class="hidden text-center py-6" id="contactSuccessMsg">
-<span class="material-symbols-outlined text-secondary text-4xl mb-2">check_circle</span>
-<h4 class="font-bold text-on-surface mb-1">وصلتنا رسالتك!</h4>
-<p class="text-xs text-on-surface-variant">سيراجع فريق TLC استفسارك ويتواصل معك عبر الوسيلة التي اخترتها.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- 10. FAQ ACCORDION -->
-<section class="py-16 md:py-24 bg-surface-container-lowest border-t border-outline-variant/30" id="faq">
-<div class="max-w-4xl mx-auto px-6">
-<div class="text-center mb-12">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed/20 text-secondary text-label-sm font-label-sm mb-3">
-<span>إجابات واضحة</span>
-</div>
-<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">الأسئلة الشائعة</h2>
-<p class="font-body-md text-body-md text-on-surface-variant">كل ما تود معرفته عن الكورسات والتسجيل والتواصل مع الفريق</p>
+<!-- FAQ (moved here in place of the contact form) -->
+<div class="md:col-span-7" id="faq">
+<div class="flex items-center gap-3 mb-5">
+<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed/20 text-secondary text-label-sm font-label-sm">إجابات واضحة</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">الأسئلة الشائعة</h3>
 </div>
 <div class="space-y-4">
-<!-- Q1 -->
-<div class="border border-outline-variant/40 rounded-xl overflow-hidden bg-surface transition-all">
+<div class="border border-outline-variant/40 rounded-xl overflow-hidden bg-surface-container-lowest transition-all shadow-sm">
 <button class="w-full px-6 py-4 flex items-center justify-between text-right font-title-md text-title-md font-bold text-on-surface hover:text-secondary" onclick="toggleFaq(this)">
 <span>هل الكورسات مجانية؟</span>
 <span class="material-symbols-outlined text-secondary transition-transform duration-200">expand_more</span>
@@ -1084,8 +1000,7 @@
               نعم، الكورسات ضمن القسم المجاني متاحة بعد تسجيل بياناتك.
             </div>
 </div>
-<!-- Q2 -->
-<div class="border border-outline-variant/40 rounded-xl overflow-hidden bg-surface transition-all">
+<div class="border border-outline-variant/40 rounded-xl overflow-hidden bg-surface-container-lowest transition-all shadow-sm">
 <button class="w-full px-6 py-4 flex items-center justify-between text-right font-title-md text-title-md font-bold text-on-surface hover:text-secondary" onclick="toggleFaq(this)">
 <span>هل أحتاج إلى خبرة سابقة؟</span>
 <span class="material-symbols-outlined text-secondary transition-transform duration-200">expand_more</span>
@@ -1094,8 +1009,7 @@
               ابدأ بالكورسات المخصصة للمبتدئين؛ توضّح كل بطاقة الفئة المناسبة والفائدة التي ستحصل عليها.
             </div>
 </div>
-<!-- Q3 -->
-<div class="border border-outline-variant/40 rounded-xl overflow-hidden bg-surface transition-all">
+<div class="border border-outline-variant/40 rounded-xl overflow-hidden bg-surface-container-lowest transition-all shadow-sm">
 <button class="w-full px-6 py-4 flex items-center justify-between text-right font-title-md text-title-md font-bold text-on-surface hover:text-secondary" onclick="toggleFaq(this)">
 <span>هل المحتوى مناسب لبلدي؟</span>
 <span class="material-symbols-outlined text-secondary transition-transform duration-200">expand_more</span>
@@ -1104,18 +1018,16 @@
               المبادئ عامة وتفيد في مختلف الدول، أما الرسوم ومتطلبات الاستيراد فتحتاج تحققاً حسب الدولة ونوع المنتج.
             </div>
 </div>
-<!-- Q4 -->
-<div class="border border-outline-variant/40 rounded-xl overflow-hidden bg-surface transition-all">
+<div class="border border-outline-variant/40 rounded-xl overflow-hidden bg-surface-container-lowest transition-all shadow-sm">
 <button class="w-full px-6 py-4 flex items-center justify-between text-right font-title-md text-title-md font-bold text-on-surface hover:text-secondary" onclick="toggleFaq(this)">
 <span>هل يمكن التواصل قبل التسجيل؟</span>
 <span class="material-symbols-outlined text-secondary transition-transform duration-200">expand_more</span>
 </button>
 <div class="faq-content hidden px-6 pb-5 text-sm text-on-surface-variant leading-relaxed border-t border-outline-variant/20 pt-3">
-              نعم، يمكنك التواصل معنا قبل التسجيل عبر واتساب أو فورم التواصل العام.
+              نعم، يمكنك التواصل معنا قبل التسجيل عبر واتساب أو البريد الإلكتروني أو حسابات التواصل الاجتماعي.
             </div>
 </div>
-<!-- Q5 -->
-<div class="border border-outline-variant/40 rounded-xl overflow-hidden bg-surface transition-all">
+<div class="border border-outline-variant/40 rounded-xl overflow-hidden bg-surface-container-lowest transition-all shadow-sm">
 <button class="w-full px-6 py-4 flex items-center justify-between text-right font-title-md text-title-md font-bold text-on-surface hover:text-secondary" onclick="toggleFaq(this)">
 <span>كيف أعرف عن الكورسات الجديدة؟</span>
 <span class="material-symbols-outlined text-secondary transition-transform duration-200">expand_more</span>
@@ -1126,7 +1038,10 @@
 </div>
 </div>
 </div>
+</div>
+</div>
 </section>
+
 </main>
 <!-- 11. FLOATING WHATSAPP BUTTON (Persistent Widget) -->
 <div class="fixed bottom-6 left-6 z-40 flex items-center">
