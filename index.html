@@ -336,13 +336,27 @@
       -webkit-text-fill-color: transparent; color: transparent;
       animation: textSheen 7s linear infinite; padding-bottom: .08em;
     }
-    /* 3D extruded text for the hero heading */
+    /* 3D extruded text for the hero heading + floating 3D motion */
     .hero-3d {
       text-shadow:
-        0 1px 0 #0b2b50, 0 2px 0 #0a2748, 0 3px 0 #082340,
-        0 4px 0 #071e38, 0 5px 0 #06182e, 0 10px 22px rgba(0,0,0,.6);
+        0 1px 0 #1b3f73, 0 2px 0 #123154, 0 3px 0 #0b2b50, 0 4px 0 #0a2748,
+        0 5px 0 #082340, 0 6px 0 #071e38, 0 7px 0 #06182e,
+        0 8px 2px rgba(0,0,0,.35), 0 14px 30px rgba(0,0,0,.65);
+      transform-style: preserve-3d;
+      animation: hero3dFloat 6s ease-in-out infinite;
+      transition: transform .18s ease-out;
+      will-change: transform;
     }
-    .hero-3d .hero-accent { text-shadow: 0 2px 0 #5c4708, 0 4px 0 #3f3105, 0 10px 20px rgba(0,0,0,.55); }
+    @keyframes hero3dFloat {
+      0%, 100% { transform: perspective(800px) rotateX(7deg) rotateY(-4deg); }
+      50% { transform: perspective(800px) rotateX(2deg) rotateY(4deg); }
+    }
+    .hero-3d .hero-accent {
+      text-shadow:
+        0 1px 0 #8a6a10, 0 2px 0 #7a5e0a, 0 3px 0 #6b520a, 0 4px 0 #5c4708,
+        0 5px 0 #4a3906, 0 11px 22px rgba(0,0,0,.6);
+    }
+    .hero-3d.tilting { animation: none; }
     /* Extra stagger delays for hero cascade */
     .delay-5 { animation-delay: .6s; }
     .delay-6 { animation-delay: .72s; }
@@ -402,8 +416,12 @@
       }
       @keyframes divGlow { 0%, 100% { box-shadow: 0 0 10px rgba(201,162,39,.5); } 50% { box-shadow: 0 0 20px rgba(201,162,39,.85); } }
     }
-    /* Gold buttons: navy text for strong contrast + soft gold shadow */
-    a.bg-secondary, button.bg-secondary { color: #0e2c5c !important; box-shadow: 0 5px 16px -5px rgba(184,134,11,.5); }
+    /* Gold buttons: bright gold gradient + bold navy text for crisp readability */
+    a.bg-secondary, button.bg-secondary {
+      background-image: linear-gradient(120deg, #e9c860, #d4af37 55%, #c9a227) !important;
+      color: #0e2c5c !important; font-weight: 800 !important;
+      box-shadow: 0 6px 18px -6px rgba(201,162,39,.55);
+    }
     a.bg-secondary .material-symbols-outlined, button.bg-secondary .material-symbols-outlined { color: #0e2c5c !important; }
     span.bg-secondary.text-white { color: #0e2c5c !important; }
     /* Image zoom framing */
@@ -864,8 +882,8 @@
 </section>
 <!-- 7. ENROLLMENT / REGISTRATION SECTION (Inline & Modal support) -->
 <section class="parallax-bg py-16 md:py-28 text-white relative overflow-hidden" id="register-section" style="background-image:url('assets/heroimg2.png');">
-<!-- Near-black overlay over the parallax image -->
-<div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/92 via-black/86 to-black/94"></div>
+<!-- ~80% black overlay over the parallax image -->
+<div class="absolute inset-0 pointer-events-none bg-black/80"></div>
 <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
 <span class="blob" style="width:360px;height:360px;background:#c9a227;top:-120px;right:-80px;opacity:.35;"></span>
 <span class="blob" style="width:300px;height:300px;background:#e3c04a;bottom:-140px;left:-60px;opacity:.25;animation-delay:-7s;"></span>
@@ -1435,6 +1453,25 @@
     (function () {
       document.querySelectorAll('a[aria-label="إنستغرام"], a[aria-label="فيسبوك"], a[aria-label="واتساب"]')
         .forEach(function (ic) { ic.classList.add('social-fx'); });
+    })();
+
+    // ===== Interactive 3D tilt on the hero heading (follows the cursor) =====
+    (function () {
+      const h = document.querySelector('.hero-3d');
+      const zone = h ? h.closest('section') : null;
+      if (!h || !zone) return;
+      zone.addEventListener('mousemove', function (e) {
+        const r = zone.getBoundingClientRect();
+        if (!r.width || !r.height) return;
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        h.classList.add('tilting');
+        h.style.transform = 'perspective(800px) rotateX(' + (-py * 14).toFixed(2) + 'deg) rotateY(' + (px * 16).toFixed(2) + 'deg) scale(1.02)';
+      });
+      zone.addEventListener('mouseleave', function () {
+        h.style.transform = '';
+        h.classList.remove('tilting');
+      });
     })();
   </script>
 </body></html>
