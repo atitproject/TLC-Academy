@@ -357,18 +357,11 @@
     /* Parallax (scroll) background */
     .parallax-bg { background-position: center; background-size: cover; background-repeat: no-repeat; background-attachment: fixed; }
     @media (max-width: 768px) { .parallax-bg { background-attachment: scroll; } }
-    /* 3D effect for social media icons */
-    .social-3d {
-      transform-style: preserve-3d;
-      transition: transform .2s cubic-bezier(.2, .8, .2, 1), box-shadow .25s ease;
-      box-shadow: 0 5px 12px -3px rgba(0,0,0,.3), inset 0 1.5px 1px rgba(255,255,255,.45), inset 0 -2px 4px rgba(0,0,0,.22);
-      will-change: transform;
-    }
-    .social-3d:hover {
-      box-shadow: 0 16px 26px -6px rgba(0,0,0,.42), inset 0 1.5px 2px rgba(255,255,255,.55), inset 0 -3px 6px rgba(0,0,0,.28);
-    }
-    .social-3d svg { transition: transform .2s ease; }
-    .social-3d:hover svg { transform: translateZ(14px) scale(1.06); }
+    /* Simple, elegant hover effect for social media icons */
+    .social-fx { transition: transform .25s cubic-bezier(.34, 1.56, .64, 1), box-shadow .25s ease; }
+    .social-fx:hover { transform: translateY(-4px) scale(1.1); box-shadow: 0 10px 20px -6px rgba(0,0,0,.35); }
+    .social-fx svg { transition: transform .25s ease; }
+    .social-fx:hover svg { transform: scale(1.08); }
     /* Gold buttons: navy text for strong contrast + soft gold shadow */
     a.bg-secondary, button.bg-secondary { color: #0e2c5c !important; box-shadow: 0 5px 16px -5px rgba(184,134,11,.5); }
     a.bg-secondary .material-symbols-outlined, button.bg-secondary .material-symbols-outlined { color: #0e2c5c !important; }
@@ -875,10 +868,16 @@
 <input class="w-full px-4 py-3 rounded-lg border border-outline-variant text-left focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all text-sm" dir="ltr" id="whatsAppNum" placeholder="50 123 4567" required="" type="tel"/>
 </div>
 </div>
-<!-- Country -->
+<!-- Country + City -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 <div>
 <label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="enrollCountry">الدولة *</label>
 <input class="w-full px-4 py-3 rounded-lg border border-outline-variant text-right focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all text-sm" id="enrollCountry" placeholder="السعودية، الإمارات، مصر..." required="" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="enrollCity">المدينة *</label>
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant text-right focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all text-sm" id="enrollCity" placeholder="الرياض، دبي، القاهرة..." required="" type="text"/>
+</div>
 </div>
 <!-- Opt-in Checkbox -->
 <div class="flex items-start gap-3 pt-2">
@@ -1325,21 +1324,10 @@
       }
     })();
 
-    // ===== 3D interactive tilt on social media icons =====
+    // ===== Simple hover effect on social media icons =====
     (function () {
-      const icons = document.querySelectorAll('a[aria-label="إنستغرام"], a[aria-label="فيسبوك"], a[aria-label="واتساب"]');
-      const noHover = window.matchMedia('(hover: none)').matches;
-      icons.forEach(function (ic) {
-        ic.classList.add('social-3d');
-        if (noHover) return;
-        ic.addEventListener('mousemove', function (e) {
-          const r = ic.getBoundingClientRect();
-          const px = (e.clientX - r.left) / r.width - 0.5;
-          const py = (e.clientY - r.top) / r.height - 0.5;
-          ic.style.transform = 'perspective(400px) rotateX(' + (-py * 26).toFixed(1) + 'deg) rotateY(' + (px * 26).toFixed(1) + 'deg) translateZ(6px) scale(1.14)';
-        });
-        ic.addEventListener('mouseleave', function () { ic.style.transform = ''; });
-      });
+      document.querySelectorAll('a[aria-label="إنستغرام"], a[aria-label="فيسبوك"], a[aria-label="واتساب"]')
+        .forEach(function (ic) { ic.classList.add('social-fx'); });
     })();
   </script>
 </body></html>
