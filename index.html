@@ -361,6 +361,24 @@
     #faq .space-y-4 > div.faq-open button .material-symbols-outlined { color: #c9a227; }
     #faq .faq-content { animation: faqSlide .38s cubic-bezier(.16,1,.3,1); }
     @keyframes faqSlide { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
+    /* Magical animated gradient border for the form card */
+    @property --mb-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+    .magic-border { position: relative; isolation: isolate; animation: mbGlow 4s ease-in-out infinite; }
+    .magic-border::before {
+      content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 2.5px;
+      background: conic-gradient(from var(--mb-angle), #e3c04a, #c9a227, #0e2c5c, #c9a227, #f7edcb, #c9a227, #0e2c5c, #e3c04a);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      animation: mbSpin 6s linear infinite; pointer-events: none; z-index: 1;
+    }
+    @keyframes mbSpin { to { --mb-angle: 360deg; } }
+    @keyframes mbGlow {
+      0%, 100% { box-shadow: 0 18px 44px -20px rgba(201,162,39,.35), 0 0 30px -12px rgba(201,162,39,.25); }
+      50% { box-shadow: 0 24px 56px -18px rgba(201,162,39,.55), 0 0 46px -10px rgba(201,162,39,.42); }
+    }
+    @supports not (background: conic-gradient(from 0deg, red, blue)) {
+      .magic-border::before { background: linear-gradient(135deg, #e3c04a, #c9a227, #0e2c5c, #c9a227, #e3c04a); animation: none; }
+    }
     /* Gold buttons: navy text for strong contrast + soft gold shadow */
     a.bg-secondary, button.bg-secondary { color: #0e2c5c !important; box-shadow: 0 5px 16px -5px rgba(184,134,11,.5); }
     a.bg-secondary .material-symbols-outlined, button.bg-secondary .material-symbols-outlined { color: #0e2c5c !important; }
@@ -823,8 +841,8 @@
 </section>
 <!-- 7. ENROLLMENT / REGISTRATION SECTION (Inline & Modal support) -->
 <section class="parallax-bg py-16 md:py-28 text-white relative overflow-hidden" id="register-section" style="background-image:url('assets/heroimg2.png');">
-<!-- Dark overlay for readability over the parallax image -->
-<div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-primary-container/90 via-primary-container/74 to-primary-container/92"></div>
+<!-- Dark overlay: keep the parallax image subtle (less visible) -->
+<div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-primary-container/96 via-primary-container/92 to-primary-container/97"></div>
 <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
 <span class="blob" style="width:360px;height:360px;background:#c9a227;top:-120px;right:-80px;opacity:.35;"></span>
 <span class="blob" style="width:300px;height:300px;background:#e3c04a;bottom:-140px;left:-60px;opacity:.25;animation-delay:-7s;"></span>
@@ -841,7 +859,7 @@
           </p>
 </div>
 <!-- Form Card -->
-<div class="bg-surface-container-lowest text-on-surface rounded-2xl p-6 md:p-10 shadow-2xl border border-outline-variant/30">
+<div class="magic-border bg-surface-container-lowest text-on-surface rounded-2xl p-6 md:p-10">
 <form class="space-y-5" id="courseEnrollForm" onsubmit="handleEnrollmentSubmit(event)">
 <!-- Selected Course Pill Display -->
 <div class="p-3 bg-surface-container-low rounded-lg border border-outline-variant/40 flex items-center justify-between">
