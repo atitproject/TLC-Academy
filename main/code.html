@@ -336,6 +336,13 @@
       -webkit-text-fill-color: transparent; color: transparent;
       animation: textSheen 7s linear infinite; padding-bottom: .08em;
     }
+    /* 3D extruded text for the hero heading */
+    .hero-3d {
+      text-shadow:
+        0 1px 0 #0b2b50, 0 2px 0 #0a2748, 0 3px 0 #082340,
+        0 4px 0 #071e38, 0 5px 0 #06182e, 0 10px 22px rgba(0,0,0,.6);
+    }
+    .hero-3d .hero-accent { text-shadow: 0 2px 0 #5c4708, 0 4px 0 #3f3105, 0 10px 20px rgba(0,0,0,.55); }
     /* Extra stagger delays for hero cascade */
     .delay-5 { animation-delay: .6s; }
     .delay-6 { animation-delay: .72s; }
@@ -378,6 +385,22 @@
     }
     @supports not (background: conic-gradient(from 0deg, red, blue)) {
       .magic-border::before { background: linear-gradient(135deg, #e3c04a, #c9a227, #0e2c5c, #c9a227, #e3c04a); animation: none; }
+    }
+    /* Beautiful vertical divider between the FAQ and contact columns */
+    @media (min-width: 768px) {
+      #contact #faq { position: relative; }
+      #contact #faq::before {
+        content: ''; position: absolute; top: 6%; bottom: 6%; right: -1.5rem; width: 2px; border-radius: 2px;
+        background: linear-gradient(to bottom, transparent, rgba(201,162,39,.18) 8%, #c9a227 44%, #e3c04a 50%, #c9a227 56%, rgba(201,162,39,.18) 92%, transparent);
+        box-shadow: 0 0 12px rgba(201,162,39,.4);
+      }
+      #contact #faq::after {
+        content: ''; position: absolute; top: 50%; right: calc(-1.5rem - 3.5px); width: 9px; height: 9px;
+        transform: translateY(-50%) rotate(45deg); border-radius: 2px;
+        background: linear-gradient(135deg, #f7edcb, #c9a227);
+        animation: divGlow 3s ease-in-out infinite;
+      }
+      @keyframes divGlow { 0%, 100% { box-shadow: 0 0 10px rgba(201,162,39,.5); } 50% { box-shadow: 0 0 20px rgba(201,162,39,.85); } }
     }
     /* Gold buttons: navy text for strong contrast + soft gold shadow */
     a.bg-secondary, button.bg-secondary { color: #0e2c5c !important; box-shadow: 0 5px 16px -5px rgba(184,134,11,.5); }
@@ -465,7 +488,7 @@
 <span>معرفة عملية لتبدأ بثقة • وصول مجاني</span>
 </div>
 <!-- Main Title -->
-<h1 class="anim-fade-up delay-2 text-white font-display-hero-mobile md:font-display-hero text-display-hero-mobile md:text-display-hero tracking-tight leading-tight drop-shadow-lg">
+<h1 class="hero-3d anim-fade-up delay-2 text-white font-display-hero-mobile md:font-display-hero text-display-hero-mobile md:text-display-hero tracking-tight leading-tight">
             حوّل اهتمامك بالتجارة مع الصين إلى <span class="hero-accent">خطوات واضحة</span>
 </h1>
 <!-- Body Description -->
@@ -841,8 +864,8 @@
 </section>
 <!-- 7. ENROLLMENT / REGISTRATION SECTION (Inline & Modal support) -->
 <section class="parallax-bg py-16 md:py-28 text-white relative overflow-hidden" id="register-section" style="background-image:url('assets/heroimg2.png');">
-<!-- Dark overlay: keep the parallax image subtle (less visible) -->
-<div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-primary-container/96 via-primary-container/92 to-primary-container/97"></div>
+<!-- Near-black overlay over the parallax image -->
+<div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/92 via-black/86 to-black/94"></div>
 <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
 <span class="blob" style="width:360px;height:360px;background:#c9a227;top:-120px;right:-80px;opacity:.35;"></span>
 <span class="blob" style="width:300px;height:300px;background:#e3c04a;bottom:-140px;left:-60px;opacity:.25;animation-delay:-7s;"></span>
@@ -885,12 +908,26 @@
 <select class="w-full px-3 py-3 rounded-lg border border-outline-variant text-right focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all text-sm bg-white" id="countryCode">
 <option value="+966">السعودية (+966)</option>
 <option value="+971">الإمارات (+971)</option>
-<option value="+970">فلسطين (+970)</option>
-<option value="+962">الأردن (+962)</option>
-<option value="+965">الكويت (+965)</option>
 <option value="+974">قطر (+974)</option>
-<option value="+20">مصر (+20)</option>
+<option value="+965">الكويت (+965)</option>
+<option value="+973">البحرين (+973)</option>
 <option value="+968">عُمان (+968)</option>
+<option value="+967">اليمن (+967)</option>
+<option value="+964">العراق (+964)</option>
+<option value="+963">سوريا (+963)</option>
+<option value="+961">لبنان (+961)</option>
+<option value="+962">الأردن (+962)</option>
+<option value="+970">فلسطين (+970)</option>
+<option value="+20">مصر (+20)</option>
+<option value="+249">السودان (+249)</option>
+<option value="+218">ليبيا (+218)</option>
+<option value="+216">تونس (+216)</option>
+<option value="+213">الجزائر (+213)</option>
+<option value="+212">المغرب (+212)</option>
+<option value="+222">موريتانيا (+222)</option>
+<option value="+252">الصومال (+252)</option>
+<option value="+253">جيبوتي (+253)</option>
+<option value="+269">جزر القمر (+269)</option>
 </select>
 </div>
 <div class="sm:col-span-2">
@@ -902,7 +939,31 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 <div>
 <label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="enrollCountry">الدولة *</label>
-<input class="w-full px-4 py-3 rounded-lg border border-outline-variant text-right focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all text-sm" id="enrollCountry" placeholder="السعودية، الإمارات، مصر..." required="" type="text"/>
+<select class="w-full px-4 py-3 rounded-lg border border-outline-variant text-right focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all text-sm bg-white" id="enrollCountry" required="">
+<option disabled="" selected="" value="">اختر الدولة</option>
+<option value="السعودية">السعودية</option>
+<option value="الإمارات">الإمارات</option>
+<option value="قطر">قطر</option>
+<option value="الكويت">الكويت</option>
+<option value="البحرين">البحرين</option>
+<option value="عُمان">عُمان</option>
+<option value="اليمن">اليمن</option>
+<option value="العراق">العراق</option>
+<option value="سوريا">سوريا</option>
+<option value="لبنان">لبنان</option>
+<option value="الأردن">الأردن</option>
+<option value="فلسطين">فلسطين</option>
+<option value="مصر">مصر</option>
+<option value="السودان">السودان</option>
+<option value="ليبيا">ليبيا</option>
+<option value="تونس">تونس</option>
+<option value="الجزائر">الجزائر</option>
+<option value="المغرب">المغرب</option>
+<option value="موريتانيا">موريتانيا</option>
+<option value="الصومال">الصومال</option>
+<option value="جيبوتي">جيبوتي</option>
+<option value="جزر القمر">جزر القمر</option>
+</select>
 </div>
 <div>
 <label class="block font-label-md text-label-md text-on-surface font-semibold mb-1 text-right" for="enrollCity">المدينة *</label>
@@ -994,7 +1055,7 @@
 <!-- 9. CONTACT TLC TEAM & CONSULTATION -->
 <section class="py-16 md:py-24 bg-surface" id="contact">
 <div class="max-w-7xl mx-auto px-6">
-<div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
 <!-- Contact Info and Quick Messaging -->
 <div class="md:col-span-5 text-right space-y-6">
 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed/20 text-secondary text-label-sm font-label-sm">
