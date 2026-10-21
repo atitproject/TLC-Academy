@@ -330,33 +330,29 @@
 <style id="enhance2">
     /* Gold sheen accent for headings on dark/image backgrounds */
     .hero-accent {
+      position: relative;
       background: linear-gradient(120deg, #f7edcb, #e3c04a, #c9a227, #e3c04a, #f7edcb);
       background-size: 200% auto;
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent; color: transparent;
-      animation: textSheen 7s linear infinite; padding-bottom: .08em;
+      padding-bottom: .14em;
+      animation: textSheen 7s linear infinite, accentGlow 3.6s ease-in-out infinite;
     }
-    /* 3D extruded text for the hero heading + floating 3D motion */
-    .hero-3d {
-      text-shadow:
-        0 1px 0 #1b3f73, 0 2px 0 #123154, 0 3px 0 #0b2b50, 0 4px 0 #0a2748,
-        0 5px 0 #082340, 0 6px 0 #071e38, 0 7px 0 #06182e,
-        0 8px 2px rgba(0,0,0,.35), 0 14px 30px rgba(0,0,0,.65);
-      transform-style: preserve-3d;
-      animation: hero3dFloat 6s ease-in-out infinite;
-      transition: transform .18s ease-out;
-      will-change: transform;
+    /* Soft breathing gold glow around the accent word */
+    @keyframes accentGlow {
+      0%, 100% { filter: drop-shadow(0 2px 9px rgba(201,162,39,.35)); }
+      50% { filter: drop-shadow(0 3px 18px rgba(227,192,74,.7)); }
     }
-    @keyframes hero3dFloat {
-      0%, 100% { transform: perspective(800px) rotateX(7deg) rotateY(-4deg); }
-      50% { transform: perspective(800px) rotateX(2deg) rotateY(4deg); }
+    /* Elegant gold underline that draws in, then shimmers */
+    .hero-accent::after {
+      content: ''; position: absolute; right: 0; bottom: 0; height: 3px; width: 100%;
+      border-radius: 3px; transform: scaleX(0); transform-origin: right;
+      background: linear-gradient(90deg, transparent, #e3c04a 25%, #f7edcb 50%, #e3c04a 75%, transparent);
+      background-size: 200% 100%;
+      animation: accentUnderline 1.1s cubic-bezier(.16, 1, .3, 1) .8s forwards, underlineShimmer 3.5s linear 2s infinite;
     }
-    .hero-3d .hero-accent {
-      text-shadow:
-        0 1px 0 #8a6a10, 0 2px 0 #7a5e0a, 0 3px 0 #6b520a, 0 4px 0 #5c4708,
-        0 5px 0 #4a3906, 0 11px 22px rgba(0,0,0,.6);
-    }
-    .hero-3d.tilting { animation: none; }
+    @keyframes accentUnderline { to { transform: scaleX(1); } }
+    @keyframes underlineShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     /* Extra stagger delays for hero cascade */
     .delay-5 { animation-delay: .6s; }
     .delay-6 { animation-delay: .72s; }
@@ -519,7 +515,7 @@
 <span>معرفة عملية لتبدأ بثقة • وصول مجاني</span>
 </div>
 <!-- Main Title -->
-<h1 class="hero-3d anim-fade-up delay-2 text-white font-display-hero-mobile md:font-display-hero text-display-hero-mobile md:text-display-hero tracking-tight leading-tight">
+<h1 class="anim-fade-up delay-2 text-white font-display-hero-mobile md:font-display-hero text-display-hero-mobile md:text-display-hero tracking-tight leading-tight drop-shadow-lg">
             حوّل اهتمامك بالتجارة مع الصين إلى <span class="hero-accent">خطوات واضحة</span>
 </h1>
 <!-- Body Description -->
@@ -1468,25 +1464,6 @@
     (function () {
       document.querySelectorAll('a[aria-label="إنستغرام"], a[aria-label="فيسبوك"], a[aria-label="واتساب"], a[aria-label="تلغرام"]')
         .forEach(function (ic) { ic.classList.add('social-fx'); });
-    })();
-
-    // ===== Interactive 3D tilt on the hero heading (follows the cursor) =====
-    (function () {
-      const h = document.querySelector('.hero-3d');
-      const zone = h ? h.closest('section') : null;
-      if (!h || !zone) return;
-      zone.addEventListener('mousemove', function (e) {
-        const r = zone.getBoundingClientRect();
-        if (!r.width || !r.height) return;
-        const px = (e.clientX - r.left) / r.width - 0.5;
-        const py = (e.clientY - r.top) / r.height - 0.5;
-        h.classList.add('tilting');
-        h.style.transform = 'perspective(800px) rotateX(' + (-py * 14).toFixed(2) + 'deg) rotateY(' + (px * 16).toFixed(2) + 'deg) scale(1.02)';
-      });
-      zone.addEventListener('mouseleave', function () {
-        h.style.transform = '';
-        h.classList.remove('tilting');
-      });
     })();
   </script>
 </body></html>
