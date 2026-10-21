@@ -385,20 +385,33 @@
     /* Magical animated gradient border for the form card */
     @property --mb-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
     .magic-border { position: relative; isolation: isolate; animation: mbGlow 4s ease-in-out infinite; }
+    /* Border ring with two bright lights racing around it */
     .magic-border::before {
-      content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 2.5px;
-      background: conic-gradient(from var(--mb-angle), #e3c04a, #c9a227, #0e2c5c, #c9a227, #f7edcb, #c9a227, #0e2c5c, #e3c04a);
+      content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 3px;
+      background: conic-gradient(from var(--mb-angle),
+        #c9a227 0%, #e3c04a 8%, #ffffff 13%, #f7edcb 16%, #c9a227 24%, #0e2c5c 44%,
+        #c9a227 60%, #e3c04a 70%, #ffffff 75%, #f7edcb 78%, #c9a227 86%, #0e2c5c 100%);
       -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       -webkit-mask-composite: xor; mask-composite: exclude;
-      animation: mbSpin 6s linear infinite; pointer-events: none; z-index: 1;
+      animation: mbSpin 5s linear infinite; pointer-events: none; z-index: 1;
+    }
+    /* Soft rotating glow aura behind the card */
+    .magic-border::after {
+      content: ''; position: absolute; inset: -7px; border-radius: calc(1rem + 7px); z-index: -1;
+      background: conic-gradient(from var(--mb-angle),
+        transparent 0%, rgba(227,192,74,.55) 12%, transparent 26%, transparent 50%,
+        rgba(201,162,39,.45) 62%, transparent 76%, transparent 100%);
+      filter: blur(12px); opacity: .85;
+      animation: mbSpin 5s linear infinite; pointer-events: none;
     }
     @keyframes mbSpin { to { --mb-angle: 360deg; } }
     @keyframes mbGlow {
-      0%, 100% { box-shadow: 0 18px 44px -20px rgba(201,162,39,.35), 0 0 30px -12px rgba(201,162,39,.25); }
-      50% { box-shadow: 0 24px 56px -18px rgba(201,162,39,.55), 0 0 46px -10px rgba(201,162,39,.42); }
+      0%, 100% { box-shadow: 0 18px 44px -20px rgba(201,162,39,.4), 0 0 34px -12px rgba(201,162,39,.3); }
+      50% { box-shadow: 0 26px 60px -18px rgba(201,162,39,.6), 0 0 52px -8px rgba(227,192,74,.5); }
     }
     @supports not (background: conic-gradient(from 0deg, red, blue)) {
       .magic-border::before { background: linear-gradient(135deg, #e3c04a, #c9a227, #0e2c5c, #c9a227, #e3c04a); animation: none; }
+      .magic-border::after { display: none; }
     }
     /* Beautiful vertical divider between the FAQ and contact columns */
     @media (min-width: 768px) {
