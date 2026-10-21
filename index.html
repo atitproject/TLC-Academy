@@ -355,6 +355,12 @@
     .social-fx:hover { transform: translateY(-4px) scale(1.1); box-shadow: 0 10px 20px -6px rgba(0,0,0,.35); }
     .social-fx svg { transition: transform .25s ease; }
     .social-fx:hover svg { transform: scale(1.08); }
+    /* FAQ polish: gold accent when open + smooth slide-open */
+    #faq .space-y-4 > div.faq-open { border-color: #c9a227; box-shadow: 0 12px 30px -10px rgba(201,162,39,.42); }
+    #faq .space-y-4 > div.faq-open button { color: #b8860b; }
+    #faq .space-y-4 > div.faq-open button .material-symbols-outlined { color: #c9a227; }
+    #faq .faq-content { animation: faqSlide .38s cubic-bezier(.16,1,.3,1); }
+    @keyframes faqSlide { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
     /* Gold buttons: navy text for strong contrast + soft gold shadow */
     a.bg-secondary, button.bg-secondary { color: #0e2c5c !important; box-shadow: 0 5px 16px -5px rgba(184,134,11,.5); }
     a.bg-secondary .material-symbols-outlined, button.bg-secondary .material-symbols-outlined { color: #0e2c5c !important; }
@@ -1121,16 +1127,19 @@
     }
 
     function toggleFaq(btn) {
+      const item = btn.parentElement;
       const content = btn.nextElementSibling;
       const icon = btn.querySelector('.material-symbols-outlined');
       const isHidden = content.classList.contains('hidden');
-      
+
       // Close all FAQs first
       document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
       document.querySelectorAll('#faq .material-symbols-outlined').forEach(i => i.style.transform = 'rotate(0deg)');
+      document.querySelectorAll('#faq .space-y-4 > div').forEach(d => d.classList.remove('faq-open'));
 
       if (isHidden) {
         content.classList.remove('hidden');
+        if (item) item.classList.add('faq-open');
         if (icon) icon.style.transform = 'rotate(180deg)';
       }
     }
@@ -1207,8 +1216,8 @@
         '#register-section form',
         '#about .lg\\:col-span-5',
         '#about .lg\\:col-span-7',
-        '#contact .lg\\:col-span-5',
-        '#contact .lg\\:col-span-7',
+        '#contact .md\\:col-span-5',
+        '#contact .md\\:col-span-7',
         '#faq .text-center',
         'footer > div'
       ]);
