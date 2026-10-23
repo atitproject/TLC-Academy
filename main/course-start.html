@@ -85,6 +85,8 @@
     .free-badge{display:inline-flex;align-items:center;gap:3px;padding:4px 11px 4px 8px;border-radius:9999px;background:linear-gradient(120deg,#f2dc82,#e3c04a 50%,#c9a227);color:#0e2c5c;font-weight:800;font-size:11px;line-height:1;box-shadow:0 3px 11px -2px rgba(201,162,39,.65);border:1px solid rgba(255,255,255,.5);}
     .free-badge .material-symbols-outlined{font-size:14px;}
     .btn-gold{background:linear-gradient(120deg,#e9c860,#d4af37 55%,#c9a227)!important;color:#0e2c5c!important;font-weight:800!important;box-shadow:0 8px 22px -6px rgba(201,162,39,.6);}
+    .parallax-bg{background-position:center;background-size:cover;background-repeat:no-repeat;background-attachment:fixed;}
+    @media (max-width:768px){.parallax-bg{background-attachment:scroll;}}
   </style>
 </head>
 <body class="bg-background text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-fixed">
@@ -145,11 +147,14 @@
 </div>
 </div>
 </section>
-<!-- Final CTA -->
-<section class="max-w-3xl mx-auto px-6 py-14 md:py-20 text-center">
-<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold mb-3">ابدأ رحلتك الآن — مجاناً</h2>
-<p class="text-body-md text-on-surface-variant mb-7">سجّل بياناتك وتابع المحتوى فوراً، دون أي بطاقة بنكية.</p>
-<a class="btn-gold inline-flex items-center justify-center gap-2 px-9 py-4 rounded-xl hover:-translate-y-1 transition-all" href="index.html?course=%D9%83%D9%8A%D9%81%20%D8%AA%D8%A8%D8%AF%D8%A3%20%D9%85%D8%B4%D8%B1%D9%88%D8%B9%D9%83%20%D9%85%D9%86%20%D8%A7%D9%84%D8%B5%D9%8A%D9%86%D8%9F#register-section"><span class="material-symbols-outlined">key</span> سجّل في الكورس مجاناً</a>
+<!-- Final CTA with parallax background -->
+<section class="parallax-bg relative overflow-hidden py-16 md:py-24 text-center" style="background-image:url('assets/heroimg2.png');">
+<div class="absolute inset-0 pointer-events-none" style="background-color: rgba(0,0,0,0.6);"></div>
+<div class="relative z-10 max-w-3xl mx-auto px-6">
+<h2 class="font-headline-lg text-headline-lg text-white font-bold mb-3 drop-shadow-lg">ابدأ رحلتك الآن — مجاناً</h2>
+<p class="text-body-md text-white/85 mb-7 drop-shadow">سجّل بياناتك وتابع المحتوى فوراً، دون أي بطاقة بنكية.</p>
+<a class="btn-gold inline-flex items-center justify-center gap-2 px-9 py-4 rounded-xl hover:-translate-y-1 transition-all shadow-xl" href="index.html?course=%D9%83%D9%8A%D9%81%20%D8%AA%D8%A8%D8%AF%D8%A3%20%D9%85%D8%B4%D8%B1%D9%88%D8%B9%D9%83%20%D9%85%D9%86%20%D8%A7%D9%84%D8%B5%D9%8A%D9%86%D8%9F#register-section"><span class="material-symbols-outlined">key</span> سجّل في الكورس مجاناً</a>
+</div>
 </section>
 </main>
 <!-- FOOTER -->
