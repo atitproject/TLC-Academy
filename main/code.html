@@ -435,6 +435,15 @@
     }
     .step-card:hover { border-color: rgba(201,162,39,.5); box-shadow: 0 18px 40px -16px rgba(14,44,92,.28); }
     .step-card:hover::before { transform: scaleX(1); }
+    /* Attractive "free" badge */
+    .free-badge {
+      display: inline-flex; align-items: center; gap: 3px;
+      padding: 4px 11px 4px 8px; border-radius: 9999px;
+      background: linear-gradient(120deg, #f2dc82, #e3c04a 50%, #c9a227);
+      color: #0e2c5c; font-weight: 800; font-size: 11px; line-height: 1; letter-spacing: .01em;
+      box-shadow: 0 3px 11px -2px rgba(201,162,39,.65); border: 1px solid rgba(255,255,255,.5);
+    }
+    .free-badge .material-symbols-outlined { font-size: 14px; }
     /* RTL select: custom chevron on the left with space from the text */
     .form-select-rtl {
       -webkit-appearance: none !important; -moz-appearance: none !important; appearance: none !important;
@@ -712,7 +721,7 @@
 <div class="relative md:w-2/5 aspect-video md:aspect-auto bg-surface-container">
 <img alt="الكورس الشامل للتجارة مع الصين" class="w-full h-full object-cover absolute inset-0" src="assets/tlc4.png"/>
 <div class="absolute top-3 right-3 flex gap-2">
-<span class="px-2.5 py-1 rounded-full bg-secondary text-white font-label-sm text-[11px] shadow-sm">مجاني</span>
+<span class="free-badge"><span class="material-symbols-outlined">redeem</span>مجاني</span>
 <span class="px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-primary-container font-label-sm text-[11px] border border-outline-variant/30">شامل</span>
 </div>
 </div>
@@ -744,7 +753,7 @@
 <div class="relative aspect-video w-full bg-surface-container">
 <img alt="كيف تبدأ مشروعك من الصين؟" class="w-full h-full object-cover" src="assets/tlc3.jpeg"/>
 <div class="absolute top-3 right-3 flex gap-2">
-<span class="px-2.5 py-1 rounded-full bg-secondary text-white font-label-sm text-[11px] shadow-sm">مجاني</span>
+<span class="free-badge"><span class="material-symbols-outlined">redeem</span>مجاني</span>
 <span class="px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-primary-container font-label-sm text-[11px] border border-outline-variant/30">مبتدئ</span>
 </div>
 </div>
@@ -774,7 +783,7 @@
 <div class="relative aspect-video w-full bg-surface-container">
 <img alt="كيف تشتري من المواقع الصينية؟" class="w-full h-full object-cover" src="assets/tlc1.jpeg"/>
 <div class="absolute top-3 right-3 flex gap-2">
-<span class="px-2.5 py-1 rounded-full bg-secondary text-white font-label-sm text-[11px] shadow-sm">مجاني</span>
+<span class="free-badge"><span class="material-symbols-outlined">redeem</span>مجاني</span>
 <span class="px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-primary-container font-label-sm text-[11px] border border-outline-variant/30">عملي</span>
 </div>
 </div>
