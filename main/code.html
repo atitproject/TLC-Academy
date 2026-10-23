@@ -437,13 +437,20 @@
     .step-card:hover::before { transform: scaleX(1); }
     /* Attractive "free" badge */
     .free-badge {
-      display: inline-flex; align-items: center; gap: 3px;
-      padding: 4px 11px 4px 8px; border-radius: 9999px;
-      background: linear-gradient(120deg, #f2dc82, #e3c04a 50%, #c9a227);
-      color: #0e2c5c; font-weight: 800; font-size: 11px; line-height: 1; letter-spacing: .01em;
-      box-shadow: 0 3px 11px -2px rgba(201,162,39,.65); border: 1px solid rgba(255,255,255,.5);
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 5px 13px; border-radius: 9999px; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #ffdf6b, #e9c552 42%, #c9a227);
+      color: #0e2c5c; font-weight: 800; font-size: 11.5px; line-height: 1; letter-spacing: .01em;
+      box-shadow: 0 4px 13px -2px rgba(201,162,39,.75), inset 0 1px 0 rgba(255,255,255,.65);
+      border: 1px solid rgba(255,255,255,.55);
     }
     .free-badge .material-symbols-outlined { font-size: 14px; }
+    .free-badge::after {
+      content: ''; position: absolute; top: 0; left: -120%; width: 48%; height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,.8), transparent);
+      transform: skewX(-20deg); animation: freeShine 3.6s ease-in-out infinite; pointer-events: none;
+    }
+    @keyframes freeShine { 0% { left: -120%; } 32% { left: 150%; } 100% { left: 150%; } }
     /* RTL select: custom chevron on the left with space from the text */
     .form-select-rtl {
       -webkit-appearance: none !important; -moz-appearance: none !important; appearance: none !important;
