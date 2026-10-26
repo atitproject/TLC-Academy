@@ -27,8 +27,13 @@
   .field { width:100%; padding:.6rem .8rem; border:1px solid #d7deec; border-radius:.6rem; font-size:.9rem; background:#fff; }
   .field:focus { outline:none; border-color:#c9a227; box-shadow:0 0 0 3px rgba(201,162,39,.15); }
   table { border-collapse: collapse; }
-  .tab-active { background:#0e2c5c; color:#fff; }
+  .tab-active { background:#0e2c5c; color:#fff; box-shadow:0 4px 12px -4px rgba(14,44,92,.5); }
   .lbl { display:block; font-size:.75rem; font-weight:700; margin-bottom:.25rem; }
+  .stat { background:#fff; border:1px solid #e3e8f2; border-radius:1rem; box-shadow:0 1px 3px rgba(14,44,92,.05); }
+  #regTbody tr:nth-child(even) { background:#fafbfe; }
+  #regTbody tr:hover { background:#f1f5ff; }
+  thead th:first-child { border-top-right-radius:.75rem; }
+  thead th:last-child { border-top-left-radius:.75rem; }
 </style>
 </head>
 <body class="min-h-screen">
@@ -37,7 +42,7 @@
 <div id="loginView" class="min-h-screen flex items-center justify-center px-4">
   <div class="w-full max-w-sm bg-white rounded-2xl shadow-lg border border-[#e3e8f2] p-8">
     <div class="text-center mb-6">
-      <img src="assets/logo.png" alt="TLC" class="h-14 w-auto mx-auto mb-4"/>
+      <img src="assets/logo.png" alt="TLC" class="h-20 w-auto mx-auto mb-4"/>
       <h1 class="text-xl font-extrabold">لوحة تحكم TLC</h1>
       <p class="text-sm text-slate-500 mt-1">سجّل الدخول للمتابعة</p>
     </div>
@@ -59,16 +64,16 @@
 <!-- ============ DASHBOARD ============ -->
 <div id="dashView" class="hidden">
   <!-- Top bar with centered logo -->
-  <header class="bg-white border-b border-[#e3e8f2] sticky top-0 z-20">
-    <div class="max-w-6xl mx-auto px-4 relative flex items-center justify-between py-3">
-      <span id="userEmail" class="text-xs text-slate-500 hidden sm:inline"></span>
-      <img src="assets/logo.png" alt="TLC" class="absolute left-1/2 -translate-x-1/2 h-11 w-auto"/>
-      <button id="logoutBtn" class="btn btn-ghost px-3 py-2 text-sm"><span class="material-icons-outlined text-base">logout</span>خروج</button>
+  <header class="bg-white border-b border-[#e3e8f2] shadow-sm sticky top-0 z-20">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-3 items-center py-3">
+      <div class="flex justify-start"><span id="userEmail" class="text-xs text-slate-500 hidden sm:inline"></span></div>
+      <div class="flex justify-center"><img src="assets/logo.png" alt="TLC" class="h-20 w-auto"/></div>
+      <div class="flex justify-end"><button id="logoutBtn" class="btn btn-ghost px-3 py-2 text-sm"><span class="material-icons-outlined text-base">logout</span><span class="hidden sm:inline">خروج</span></button></div>
     </div>
     <!-- Tabs -->
-    <div class="max-w-6xl mx-auto px-4 pb-2 flex gap-2 justify-center">
-      <button data-tab="reg" class="tab btn px-4 py-2 text-sm tab-active">المسجّلون</button>
-      <button data-tab="courses" class="tab btn btn-ghost px-4 py-2 text-sm">الكورسات</button>
+    <div class="max-w-6xl mx-auto px-4 pb-3 flex gap-2 justify-center">
+      <button data-tab="reg" class="tab btn px-5 py-2.5 text-sm tab-active"><span class="material-icons-outlined text-base">group</span>المسجّلون</button>
+      <button data-tab="courses" class="tab btn btn-ghost px-5 py-2.5 text-sm"><span class="material-icons-outlined text-base">menu_book</span>الكورسات</button>
     </div>
   </header>
 
@@ -76,6 +81,21 @@
 
     <!-- ===== REGISTRATIONS ===== -->
     <section id="regSection">
+      <!-- Stat tiles -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+        <div class="stat p-4 flex items-center gap-3">
+          <div class="w-11 h-11 rounded-xl bg-[#eef2fb] text-[#0e2c5c] flex items-center justify-center"><span class="material-icons-outlined">group</span></div>
+          <div><div class="text-2xl font-extrabold leading-none" id="statTotal">0</div><div class="text-xs text-slate-500 mt-1">إجمالي المسجّلين</div></div>
+        </div>
+        <div class="stat p-4 flex items-center gap-3">
+          <div class="w-11 h-11 rounded-xl bg-[#fbf3d8] text-[#c9a227] flex items-center justify-center"><span class="material-icons-outlined">mark_email_read</span></div>
+          <div><div class="text-2xl font-extrabold leading-none" id="statNews">0</div><div class="text-xs text-slate-500 mt-1">مشتركو النشرة</div></div>
+        </div>
+        <div class="stat p-4 flex items-center gap-3 col-span-2 sm:col-span-1">
+          <div class="w-11 h-11 rounded-xl bg-[#e9f6ee] text-[#1f9254] flex items-center justify-center"><span class="material-icons-outlined">menu_book</span></div>
+          <div><div class="text-2xl font-extrabold leading-none" id="statCourses">0</div><div class="text-xs text-slate-500 mt-1">عدد الكورسات</div></div>
+        </div>
+      </div>
       <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
         <h2 class="text-lg font-extrabold">المسجّلون <span id="regCount" class="text-sm font-normal text-slate-500"></span></h2>
         <div class="flex items-center gap-2">
@@ -251,6 +271,8 @@
     renderRegs();
   }
   function renderRegs() {
+    $('statTotal').textContent = REGS.length;
+    $('statNews').textContent = REGS.filter(r => r.newsletter_opt).length;
     const q = $('regSearch').value.trim().toLowerCase();
     const rows = REGS.filter(r => !q || [r.full_name, r.email, r.phone].some(v => (v||'').toLowerCase().includes(q)));
     $('regCount').textContent = '(' + rows.length + ')';
@@ -334,6 +356,7 @@
     const { data, error } = await sb.from('courses').select('*').order('sort_order', { ascending: true });
     if (error) { alert('خطأ في جلب الكورسات: ' + error.message); return; }
     COURSES = data || [];
+    const sc = $('statCourses'); if (sc) sc.textContent = COURSES.length;
     renderCoursesList();
   }
   function renderCoursesList() {
