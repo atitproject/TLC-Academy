@@ -847,6 +847,8 @@
 <p class="text-[11px] text-on-surface-variant text-right">
               نستخدم بياناتك لتوفير الوصول إلى الكورس والتواصل بشأن طلبك، وفق سياسة الخصوصية.
             </p>
+<!-- Inline error message -->
+<p class="hidden text-sm text-red-700 font-semibold text-right bg-red-50 border border-red-200 rounded-lg px-3 py-2" id="enrollError"></p>
 <!-- Submit Button -->
 <button class="w-full py-4 rounded-lg bg-secondary text-white font-title-md text-title-md font-bold hover:bg-opacity-95 transition-all shadow-md hover:shadow-lg active:scale-[0.99] flex items-center justify-center gap-2" type="submit">
 <span>أرسل لي رابط الكورس</span>
@@ -897,6 +899,8 @@
       </div>
 </div>
 </footer>
+<!-- Supabase client (config + helpers) -->
+<script src="assets/supabase.js"></script>
 <!-- Quick Vanilla JS for micro-interactions -->
 <script>
     function toggleMobileMenu() {
@@ -930,9 +934,10 @@
       }
     }
 
-    function openEnrollmentModal(courseName) {
+    function openEnrollmentModal(courseName, courseSlug) {
       const badge = document.getElementById('targetCourseBadge');
       if (badge && courseName) badge.textContent = courseName;
+      if (badge) badge.dataset.slug = courseSlug || '';
       // reset to the form view in case a previous success is still showing
       const form = document.getElementById('courseEnrollForm');
       const box = document.getElementById('enrollSuccessBox');
@@ -950,20 +955,66 @@
       if (e.key === 'Escape') closeEnrollmentModal();
     });
 
-    // Prevent duplicate submission while a form is being processed,
-    // then reveal the success state only after the (simulated) save succeeds.
-    function handleEnrollmentSubmit(e) {
+    // Validation helpers
+    function tlcValidEmail(v) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+    }
+    function tlcValidPhone(national) {
+      const d = (national || '').replace(/\D/g, '');
+      return d.length >= 6 && d.length <= 12;
+    }
+
+    // Save the registration to Supabase, then reveal the success state.
+    async function handleEnrollmentSubmit(e) {
       e.preventDefault();
       const form = document.getElementById('courseEnrollForm');
       const btn = form.querySelector('button[type="submit"]');
+      const errBox = document.getElementById('enrollError');
+      const showErr = function (m) { if (errBox) { errBox.textContent = m; errBox.classList.remove('hidden'); } };
+      if (errBox) errBox.classList.add('hidden');
       if (btn.dataset.processing === '1') return;
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('emailAddr').value.trim();
+      const code = document.getElementById('countryCode').value;
+      const national = document.getElementById('whatsAppNum').value.trim();
+      const country = document.getElementById('enrollCountry').value;
+      const city = document.getElementById('enrollCity').value.trim();
+      const newsletter = document.getElementById('newsletterOpt').checked;
+      const courseTitle = (document.getElementById('targetCourseBadge').textContent || '').trim();
+
+      if (!fullName) return showErr('يرجى إدخال الاسم.');
+      if (!tlcValidEmail(email)) return showErr('يرجى إدخال بريد إلكتروني صحيح.');
+      if (!country) return showErr('يرجى اختيار الدولة.');
+      if (!tlcValidPhone(national)) return showErr('يرجى إدخال رقم واتساب صحيح (أرقام فقط).');
+
+      const phone = code + national.replace(/\D/g, '');
+
       btn.dataset.processing = '1';
       btn.disabled = true;
-      // Placeholder for backend save + team notification + email delivery.
-      form.classList.add('hidden');
-      document.getElementById('enrollSuccessBox').classList.remove('hidden');
-      btn.dataset.processing = '0';
-      btn.disabled = false;
+      const original = btn.innerHTML;
+      btn.innerHTML = '<span>جارٍ الإرسال…</span>';
+      try {
+        await window.TLC.insertRegistration({
+          course_slug: document.getElementById('targetCourseBadge').dataset.slug || null,
+          course_title: courseTitle,
+          full_name: fullName,
+          email: email,
+          phone: phone,
+          country: country,
+          city: city,
+          newsletter_opt: newsletter,
+          source: 'website'
+        });
+        form.classList.add('hidden');
+        document.getElementById('enrollSuccessBox').classList.remove('hidden');
+      } catch (err) {
+        showErr('تعذّر إرسال التسجيل، يرجى المحاولة مرة أخرى.');
+      } finally {
+        btn.dataset.processing = '0';
+        btn.disabled = false;
+        btn.innerHTML = original;
+      }
     }
 
     function resetEnrollForm() {
