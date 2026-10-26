@@ -250,8 +250,14 @@
           <textarea class="field c-desc" rows="2">${esc(c.description)}</textarea>
         </div>
         <div>
-          <label class="block text-xs font-bold mb-1">رابط الصورة</label>
-          <input class="field c-image" dir="ltr" value="${esc(c.image_url)}" placeholder="assets/tlc3.jpeg"/>
+          <label class="block text-xs font-bold mb-1">صورة الكورس</label>
+          <div class="flex items-center gap-3">
+            <img class="c-preview w-16 h-16 rounded-lg object-cover border border-[#d7deec] bg-[#f1f4fb]" src="${esc(c.image_url)}" onerror="this.style.visibility='hidden'"/>
+            <input type="hidden" class="c-image" value="${esc(c.image_url)}"/>
+            <input type="file" accept="image/*" class="c-file hidden"/>
+            <button type="button" class="btn btn-ghost px-3 py-2 text-sm" onclick="pickImage(this)"><span class="material-icons-outlined text-base">upload</span>اختر صورة</button>
+            <span class="c-upstatus text-xs text-slate-500"></span>
+          </div>
         </div>
         <div>
           <label class="block text-xs font-bold mb-1">رابط صفحة الكورس</label>
@@ -315,6 +321,29 @@
     if (error) { alert('تعذّرت الإضافة: ' + error.message); return; }
     loadCourses();
   };
+  // Image upload to Supabase Storage (bucket: course-images)
+  window.pickImage = function(btn) {
+    const card = btn.closest('[data-id]');
+    const file = card.querySelector('.c-file');
+    file.onchange = () => uploadImage(card, file.files[0]);
+    file.click();
+  };
+  async function uploadImage(card, f) {
+    if (!f) return;
+    const status = card.querySelector('.c-upstatus');
+    if (f.size > 5 * 1024 * 1024) { status.textContent = 'الحجم أكبر من 5MB'; return; }
+    status.textContent = 'جارٍ الرفع…';
+    const ext = (f.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const path = 'course-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.' + ext;
+    const { error } = await sb.storage.from('course-images').upload(path, f, { cacheControl: '3600', upsert: false, contentType: f.type });
+    if (error) { status.textContent = 'تعذّر الرفع'; alert('خطأ في الرفع: ' + error.message); return; }
+    const { data } = sb.storage.from('course-images').getPublicUrl(path);
+    card.querySelector('.c-image').value = data.publicUrl;
+    const prev = card.querySelector('.c-preview');
+    prev.src = data.publicUrl; prev.style.visibility = 'visible';
+    status.textContent = 'تم الرفع ✓ (لا تنسَ الحفظ)';
+  }
+
   window.deleteCourse = async function(id, btn) {
     if (!confirm('حذف هذا الكورس نهائياً؟')) return;
     const { error } = await sb.from('courses').delete().eq('id', id);
