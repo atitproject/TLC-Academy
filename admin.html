@@ -28,6 +28,7 @@
   .field:focus { outline:none; border-color:#c9a227; box-shadow:0 0 0 3px rgba(201,162,39,.15); }
   table { border-collapse: collapse; }
   .tab-active { background:#0e2c5c; color:#fff; }
+  .lbl { display:block; font-size:.75rem; font-weight:700; margin-bottom:.25rem; }
 </style>
 </head>
 <body class="min-h-screen">
@@ -36,17 +37,18 @@
 <div id="loginView" class="min-h-screen flex items-center justify-center px-4">
   <div class="w-full max-w-sm bg-white rounded-2xl shadow-lg border border-[#e3e8f2] p-8">
     <div class="text-center mb-6">
-      <h1 class="text-2xl font-extrabold">لوحة تحكم TLC</h1>
+      <img src="assets/logo.png" alt="TLC" class="h-14 w-auto mx-auto mb-4"/>
+      <h1 class="text-xl font-extrabold">لوحة تحكم TLC</h1>
       <p class="text-sm text-slate-500 mt-1">سجّل الدخول للمتابعة</p>
     </div>
     <form id="loginForm" class="space-y-4">
       <div>
-        <label class="block text-sm font-bold mb-1">اسم المستخدم</label>
+        <label class="lbl">اسم المستخدم</label>
         <input id="loginEmail" type="text" dir="ltr" class="field text-left" required placeholder="admin" autocomplete="username"/>
       </div>
       <div>
-        <label class="block text-sm font-bold mb-1">كلمة المرور</label>
-        <input id="loginPassword" type="password" dir="ltr" class="field text-left" required placeholder="••••••••"/>
+        <label class="lbl">كلمة المرور</label>
+        <input id="loginPassword" type="password" dir="ltr" class="field text-left" required placeholder="••••••••" autocomplete="current-password"/>
       </div>
       <p id="loginError" class="hidden text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-2"></p>
       <button type="submit" class="btn btn-gold w-full justify-center py-3">دخول</button>
@@ -56,20 +58,15 @@
 
 <!-- ============ DASHBOARD ============ -->
 <div id="dashView" class="hidden">
-  <!-- Top bar -->
+  <!-- Top bar with centered logo -->
   <header class="bg-white border-b border-[#e3e8f2] sticky top-0 z-20">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
-      <div class="flex items-center gap-2">
-        <span class="material-icons-outlined text-[#c9a227]">dashboard</span>
-        <span class="font-extrabold">لوحة تحكم TLC</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <span id="userEmail" class="text-xs text-slate-500 hidden sm:inline"></span>
-        <button id="logoutBtn" class="btn btn-ghost px-3 py-2 text-sm"><span class="material-icons-outlined text-base">logout</span>خروج</button>
-      </div>
+    <div class="max-w-6xl mx-auto px-4 relative flex items-center justify-between py-3">
+      <span id="userEmail" class="text-xs text-slate-500 hidden sm:inline"></span>
+      <img src="assets/logo.png" alt="TLC" class="absolute left-1/2 -translate-x-1/2 h-11 w-auto"/>
+      <button id="logoutBtn" class="btn btn-ghost px-3 py-2 text-sm"><span class="material-icons-outlined text-base">logout</span>خروج</button>
     </div>
     <!-- Tabs -->
-    <div class="max-w-6xl mx-auto px-4 pb-2 flex gap-2">
+    <div class="max-w-6xl mx-auto px-4 pb-2 flex gap-2 justify-center">
       <button data-tab="reg" class="tab btn px-4 py-2 text-sm tab-active">المسجّلون</button>
       <button data-tab="courses" class="tab btn btn-ghost px-4 py-2 text-sm">الكورسات</button>
     </div>
@@ -110,15 +107,91 @@
 
     <!-- ===== COURSES ===== -->
     <section id="coursesSection" class="hidden">
-      <div class="flex items-center justify-between gap-3 mb-4">
-        <h2 class="text-lg font-extrabold">إدارة الكورسات</h2>
-        <button id="addCourseBtn" class="btn btn-gold px-4 py-2 text-sm"><span class="material-icons-outlined text-base">add</span>كورس جديد</button>
-      </div>
-      <p class="text-xs text-slate-500 mb-3">رقم الترتيب الأصغر يظهر أولاً في الصفحة الرئيسية. أزِل علامة "ظاهر" لإخفاء الكورس دون حذفه.</p>
-      <div id="coursesList" class="space-y-4"></div>
-    </section>
 
+      <!-- List view -->
+      <div id="coursesListView">
+        <div class="flex items-center justify-between gap-3 mb-4">
+          <h2 class="text-lg font-extrabold">إدارة الكورسات</h2>
+          <button id="addCourseBtn" class="btn btn-gold px-4 py-2 text-sm"><span class="material-icons-outlined text-base">add</span>كورس جديد</button>
+        </div>
+        <div id="coursesList" class="space-y-3"></div>
+      </div>
+
+      <!-- Edit view -->
+      <div id="courseEditView" class="hidden">
+        <button id="backToCourses" class="btn btn-ghost px-3 py-2 text-sm mb-4"><span class="material-icons-outlined text-base">arrow_forward</span>رجوع للقائمة</button>
+        <div class="bg-white rounded-xl border border-[#e3e8f2] shadow-sm p-5 max-w-2xl">
+          <h2 id="editTitle" class="text-lg font-extrabold mb-4">تعديل الكورس</h2>
+          <form id="courseForm" class="space-y-4" data-id="">
+            <div>
+              <label class="lbl">عنوان الكورس</label>
+              <input class="field c-title" required/>
+            </div>
+            <div id="slugRow" class="hidden">
+              <label class="lbl">المعرّف (slug بالإنجليزية، بدون مسافات)</label>
+              <input class="field c-slug" dir="ltr" placeholder="my-course"/>
+            </div>
+            <div>
+              <label class="lbl">المستوى (الشارة)</label>
+              <input class="field c-level" placeholder="مبتدئ / عملي / شامل"/>
+            </div>
+            <div>
+              <label class="lbl">الوصف</label>
+              <textarea class="field c-desc" rows="3"></textarea>
+            </div>
+            <div>
+              <label class="lbl">صورة الكورس</label>
+              <div class="flex items-center gap-3">
+                <img class="c-preview w-20 h-20 rounded-lg object-cover border border-[#d7deec] bg-[#f1f4fb]" src="" onerror="this.style.visibility='hidden'"/>
+                <input type="hidden" class="c-image"/>
+                <input type="file" accept="image/*" class="c-file hidden"/>
+                <button type="button" class="btn btn-ghost px-3 py-2 text-sm" onclick="pickImage(this)"><span class="material-icons-outlined text-base">upload</span>اختر صورة من جهازك</button>
+                <span class="c-upstatus text-xs text-slate-500"></span>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="lbl">الترتيب (الأصغر أولاً)</label>
+                <input type="number" class="field c-order" value="0"/>
+              </div>
+              <div class="flex items-end gap-4">
+                <label class="flex items-center gap-2 text-sm font-semibold"><input type="checkbox" class="c-visible w-4 h-4" checked/> ظاهر</label>
+                <label class="flex items-center gap-2 text-sm font-semibold"><input type="checkbox" class="c-featured w-4 h-4"/> مميّز</label>
+              </div>
+            </div>
+            <div class="flex justify-end gap-2 pt-2 border-t border-[#eef1f8]">
+              <button type="button" class="btn btn-ghost px-4 py-2 text-sm" onclick="backToCourses()">إلغاء</button>
+              <button type="submit" class="btn btn-navy px-5 py-2 text-sm">حفظ</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </section>
   </main>
+</div>
+
+<!-- ===== Registration edit modal ===== -->
+<div id="regModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+  <div class="absolute inset-0 bg-black/50" onclick="closeRegModal()"></div>
+  <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-md p-6 max-h-[90vh] overflow-y-auto">
+    <h3 class="text-lg font-extrabold mb-4">تعديل بيانات المسجّل</h3>
+    <form id="regForm" class="space-y-3" data-id="">
+      <div><label class="lbl">الاسم</label><input class="field r-name"/></div>
+      <div><label class="lbl">البريد</label><input class="field r-email" dir="ltr"/></div>
+      <div><label class="lbl">الهاتف</label><input class="field r-phone" dir="ltr"/></div>
+      <div class="grid grid-cols-2 gap-3">
+        <div><label class="lbl">الدولة</label><input class="field r-country"/></div>
+        <div><label class="lbl">المدينة</label><input class="field r-city"/></div>
+      </div>
+      <div><label class="lbl">الكورس</label><input class="field r-course"/></div>
+      <label class="flex items-center gap-2 text-sm font-semibold"><input type="checkbox" class="r-news w-4 h-4"/> مشترك بالنشرة</label>
+      <div class="flex justify-end gap-2 pt-2">
+        <button type="button" class="btn btn-ghost px-4 py-2 text-sm" onclick="closeRegModal()">إلغاء</button>
+        <button type="submit" class="btn btn-navy px-5 py-2 text-sm">حفظ</button>
+      </div>
+    </form>
+  </div>
 </div>
 
 <script>
@@ -129,7 +202,7 @@
 
   const $ = (id) => document.getElementById(id);
   const esc = (s) => (s == null ? '' : String(s)).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  let REGS = [];
+  let REGS = [], COURSES = [];
 
   // ---------- Auth ----------
   async function init() {
@@ -139,7 +212,6 @@
   $('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const err = $('loginError'); err.classList.add('hidden');
-    // Allow a plain username (e.g. "admin"): map it to a fixed email for Supabase Auth.
     const raw = $('loginEmail').value.trim();
     const email = raw.includes('@') ? raw : raw + '@tlc.local';
     const password = $('loginPassword').value;
@@ -168,6 +240,7 @@
     const tab = t.dataset.tab;
     $('regSection').classList.toggle('hidden', tab !== 'reg');
     $('coursesSection').classList.toggle('hidden', tab !== 'courses');
+    if (tab === 'courses') backToCourses();
   }));
 
   // ---------- Registrations ----------
@@ -192,145 +265,176 @@
         <td class="px-3 py-2">${esc(r.city)}</td>
         <td class="px-3 py-2">${esc(r.course_title)}</td>
         <td class="px-3 py-2">${r.newsletter_opt ? '✔' : '—'}</td>
-        <td class="px-3 py-2"><button class="btn btn-danger px-2 py-1 text-xs" onclick="deleteReg('${r.id}')"><span class="material-icons-outlined text-sm">delete</span></button></td>
+        <td class="px-3 py-2">
+          <div class="flex gap-1">
+            <button class="btn btn-ghost px-2 py-1 text-xs" onclick="editReg('${r.id}')"><span class="material-icons-outlined text-sm">edit</span></button>
+            <button class="btn btn-danger px-2 py-1 text-xs" onclick="deleteReg('${r.id}')"><span class="material-icons-outlined text-sm">delete</span></button>
+          </div>
+        </td>
       </tr>`).join('');
   }
   $('regSearch').addEventListener('input', renderRegs);
   $('refreshReg').addEventListener('click', loadRegistrations);
 
   window.deleteReg = async function(id) {
-    if (!confirm('حذف هذا التسجيل نهائياً؟')) return;
+    if (!confirm('هل أنت متأكد من حذف هذا التسجيل نهائياً؟')) return;
     const { error } = await sb.from('registrations').delete().eq('id', id);
     if (error) { alert('تعذّر الحذف: ' + error.message); return; }
     REGS = REGS.filter(r => r.id !== id);
     renderRegs();
   };
 
+  window.editReg = function(id) {
+    const r = REGS.find(x => x.id === id); if (!r) return;
+    const f = $('regForm'); f.dataset.id = id;
+    f.querySelector('.r-name').value = r.full_name || '';
+    f.querySelector('.r-email').value = r.email || '';
+    f.querySelector('.r-phone').value = r.phone || '';
+    f.querySelector('.r-country').value = r.country || '';
+    f.querySelector('.r-city').value = r.city || '';
+    f.querySelector('.r-course').value = r.course_title || '';
+    f.querySelector('.r-news').checked = !!r.newsletter_opt;
+    $('regModal').classList.remove('hidden');
+  };
+  window.closeRegModal = () => $('regModal').classList.add('hidden');
+  $('regForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const f = $('regForm'); const id = f.dataset.id;
+    const payload = {
+      full_name: f.querySelector('.r-name').value.trim(),
+      email: f.querySelector('.r-email').value.trim(),
+      phone: f.querySelector('.r-phone').value.trim(),
+      country: f.querySelector('.r-country').value.trim(),
+      city: f.querySelector('.r-city').value.trim(),
+      course_title: f.querySelector('.r-course').value.trim(),
+      newsletter_opt: f.querySelector('.r-news').checked
+    };
+    const { error } = await sb.from('registrations').update(payload).eq('id', id);
+    if (error) { alert('تعذّر الحفظ: ' + error.message); return; }
+    closeRegModal();
+    loadRegistrations();
+  });
+
   $('exportBtn').addEventListener('click', () => {
     if (!REGS.length) { alert('لا يوجد بيانات للتصدير.'); return; }
     const data = REGS.map(r => ({
       'التاريخ': new Date(r.created_at).toLocaleString('ar-EG'),
-      'الاسم': r.full_name,
-      'البريد': r.email,
-      'الهاتف': r.phone,
-      'الدولة': r.country,
-      'المدينة': r.city,
-      'الكورس': r.course_title,
-      'النشرة': r.newsletter_opt ? 'نعم' : 'لا',
-      'المصدر': r.source
+      'الاسم': r.full_name, 'البريد': r.email, 'الهاتف': r.phone,
+      'الدولة': r.country, 'المدينة': r.city, 'الكورس': r.course_title,
+      'النشرة': r.newsletter_opt ? 'نعم' : 'لا', 'المصدر': r.source
     }));
     const ws = XLSX.utils.json_to_sheet(data);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'المسجلون');
-    const d = new Date().toISOString().slice(0,10);
-    XLSX.writeFile(wb, 'tlc-registrations-' + d + '.xlsx');
+    XLSX.writeFile(wb, 'tlc-registrations-' + new Date().toISOString().slice(0,10) + '.xlsx');
   });
 
-  // ---------- Courses ----------
+  // ---------- Courses: list ----------
   async function loadCourses() {
     const { data, error } = await sb.from('courses').select('*').order('sort_order', { ascending: true });
     if (error) { alert('خطأ في جلب الكورسات: ' + error.message); return; }
-    renderCourses(data || []);
+    COURSES = data || [];
+    renderCoursesList();
   }
-  function courseCard(c) {
-    const isNew = !c.id;
-    return `
-    <div class="bg-white rounded-xl border border-[#e3e8f2] shadow-sm p-4" data-id="${c.id || ''}">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <div>
-          <label class="block text-xs font-bold mb-1">عنوان الكورس</label>
-          <input class="field c-title" value="${esc(c.title)}"/>
-        </div>
-        <div>
-          <label class="block text-xs font-bold mb-1">المستوى (الشارة)</label>
-          <input class="field c-level" value="${esc(c.level)}" placeholder="مبتدئ / عملي / شامل"/>
-        </div>
-        <div class="md:col-span-2">
-          <label class="block text-xs font-bold mb-1">الوصف</label>
-          <textarea class="field c-desc" rows="2">${esc(c.description)}</textarea>
-        </div>
-        <div>
-          <label class="block text-xs font-bold mb-1">صورة الكورس</label>
-          <div class="flex items-center gap-3">
-            <img class="c-preview w-16 h-16 rounded-lg object-cover border border-[#d7deec] bg-[#f1f4fb]" src="${esc(c.image_url)}" onerror="this.style.visibility='hidden'"/>
-            <input type="hidden" class="c-image" value="${esc(c.image_url)}"/>
-            <input type="file" accept="image/*" class="c-file hidden"/>
-            <button type="button" class="btn btn-ghost px-3 py-2 text-sm" onclick="pickImage(this)"><span class="material-icons-outlined text-base">upload</span>اختر صورة</button>
-            <span class="c-upstatus text-xs text-slate-500"></span>
+  function renderCoursesList() {
+    $('coursesList').innerHTML = COURSES.map(c => `
+      <div class="bg-white rounded-xl border border-[#e3e8f2] shadow-sm p-3 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3 min-w-0">
+          <img src="${esc(c.image_url)}" class="w-12 h-12 rounded-lg object-cover border border-[#d7deec] bg-[#f1f4fb] flex-shrink-0" onerror="this.style.visibility='hidden'"/>
+          <div class="min-w-0">
+            <div class="font-bold truncate">${esc(c.title)}</div>
+            <div class="text-xs text-slate-500">
+              ${c.level ? 'المستوى: ' + esc(c.level) + ' · ' : ''}ترتيب: ${c.sort_order ?? 0}
+              ${c.is_visible === false ? ' · <span class="text-amber-600 font-bold">مخفي</span>' : ''}
+              ${c.is_featured ? ' · <span class="text-[#c9a227] font-bold">مميّز</span>' : ''}
+            </div>
           </div>
         </div>
-        <div>
-          <label class="block text-xs font-bold mb-1">رابط صفحة الكورس</label>
-          <input class="field c-page" dir="ltr" value="${esc(c.page_url)}" placeholder="course-start.html"/>
+        <div class="flex gap-2 flex-shrink-0">
+          <button class="btn btn-ghost px-3 py-2 text-sm" onclick="editCourse('${c.id}')"><span class="material-icons-outlined text-base">edit</span>تعديل</button>
+          <button class="btn btn-danger px-3 py-2 text-sm" onclick="deleteCourse('${c.id}')"><span class="material-icons-outlined text-base">delete</span>حذف</button>
         </div>
-        <div>
-          <label class="block text-xs font-bold mb-1">الترتيب</label>
-          <input type="number" class="field c-order" value="${c.sort_order ?? 0}"/>
-        </div>
-        <div class="flex items-end gap-4">
-          <label class="flex items-center gap-2 text-sm font-semibold"><input type="checkbox" class="c-visible w-4 h-4" ${c.is_visible !== false ? 'checked' : ''}/> ظاهر بالرئيسية</label>
-          <label class="flex items-center gap-2 text-sm font-semibold"><input type="checkbox" class="c-featured w-4 h-4" ${c.is_featured ? 'checked' : ''}/> مميّز (كبير)</label>
-        </div>
-      </div>
-      <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#eef1f8]">
-        <div class="text-xs text-slate-400">${isNew ? 'كورس جديد' : 'slug: ' + esc(c.slug)}</div>
-        <div class="flex gap-2">
-          ${isNew
-            ? `<input class="field c-slug w-40" dir="ltr" placeholder="slug (إنجليزي)"/>
-               <button class="btn btn-gold px-4 py-2 text-sm" onclick="createCourse(this)">إضافة</button>`
-            : `<button class="btn btn-danger px-3 py-2 text-sm" onclick="deleteCourse('${c.id}', this)"><span class="material-icons-outlined text-base">delete</span></button>
-               <button class="btn btn-navy px-4 py-2 text-sm" onclick="saveCourse('${c.id}', this)">حفظ</button>`}
-        </div>
-      </div>
-    </div>`;
+      </div>`).join('') || '<div class="text-center text-slate-400 py-10">لا توجد كورسات بعد.</div>';
   }
-  function renderCourses(list) {
-    $('coursesList').innerHTML = list.map(courseCard).join('');
+
+  // ---------- Courses: edit view ----------
+  function openCourseForm(c) {
+    const f = $('courseForm');
+    const isNew = !c;
+    f.dataset.id = isNew ? '' : c.id;
+    $('editTitle').textContent = isNew ? 'إضافة كورس جديد' : 'تعديل الكورس';
+    $('slugRow').classList.toggle('hidden', !isNew);
+    f.querySelector('.c-title').value = isNew ? '' : (c.title || '');
+    f.querySelector('.c-slug').value = '';
+    f.querySelector('.c-level').value = isNew ? '' : (c.level || '');
+    f.querySelector('.c-desc').value = isNew ? '' : (c.description || '');
+    f.querySelector('.c-image').value = isNew ? '' : (c.image_url || '');
+    f.querySelector('.c-order').value = isNew ? 0 : (c.sort_order ?? 0);
+    f.querySelector('.c-visible').checked = isNew ? true : (c.is_visible !== false);
+    f.querySelector('.c-featured').checked = isNew ? false : !!c.is_featured;
+    const prev = f.querySelector('.c-preview');
+    prev.src = f.querySelector('.c-image').value; prev.style.visibility = prev.src ? 'visible' : 'hidden';
+    f.querySelector('.c-upstatus').textContent = '';
+    $('coursesListView').classList.add('hidden');
+    $('courseEditView').classList.remove('hidden');
+    window.scrollTo(0, 0);
   }
-  function readCard(el) {
-    const card = el.closest('[data-id]');
-    return {
-      card,
-      payload: {
-        title: card.querySelector('.c-title').value.trim(),
-        level: card.querySelector('.c-level').value.trim(),
-        description: card.querySelector('.c-desc').value.trim(),
-        image_url: card.querySelector('.c-image').value.trim(),
-        page_url: card.querySelector('.c-page').value.trim(),
-        sort_order: parseInt(card.querySelector('.c-order').value, 10) || 0,
-        is_visible: card.querySelector('.c-visible').checked,
-        is_featured: card.querySelector('.c-featured').checked
-      }
+  window.editCourse = function(id) {
+    const c = COURSES.find(x => x.id === id); if (!c) return;
+    openCourseForm(c);
+  };
+  window.backToCourses = function() {
+    $('courseEditView').classList.add('hidden');
+    $('coursesListView').classList.remove('hidden');
+  };
+  $('addCourseBtn').addEventListener('click', () => openCourseForm(null));
+  $('backToCourses').addEventListener('click', backToCourses);
+
+  $('courseForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const f = $('courseForm'); const id = f.dataset.id;
+    const payload = {
+      title: f.querySelector('.c-title').value.trim(),
+      level: f.querySelector('.c-level').value.trim(),
+      description: f.querySelector('.c-desc').value.trim(),
+      image_url: f.querySelector('.c-image').value.trim(),
+      sort_order: parseInt(f.querySelector('.c-order').value, 10) || 0,
+      is_visible: f.querySelector('.c-visible').checked,
+      is_featured: f.querySelector('.c-featured').checked
     };
-  }
-  window.saveCourse = async function(id, btn) {
-    const { payload } = readCard(btn);
-    btn.disabled = true; const t = btn.textContent; btn.textContent = 'جارٍ الحفظ…';
-    const { error } = await sb.from('courses').update(payload).eq('id', id);
-    btn.disabled = false; btn.textContent = t;
-    if (error) { alert('تعذّر الحفظ: ' + error.message); return; }
-    btn.textContent = 'تم ✓'; setTimeout(() => btn.textContent = 'حفظ', 1500);
-  };
-  window.createCourse = async function(btn) {
-    const { card, payload } = readCard(btn);
-    const slug = card.querySelector('.c-slug').value.trim();
-    if (!slug) { alert('أدخل slug (إنجليزي بدون مسافات).'); return; }
     if (!payload.title) { alert('أدخل عنوان الكورس.'); return; }
-    payload.slug = slug;
-    const { error } = await sb.from('courses').insert([payload]);
-    if (error) { alert('تعذّرت الإضافة: ' + error.message); return; }
-    loadCourses();
+    let error;
+    if (id) {
+      ({ error } = await sb.from('courses').update(payload).eq('id', id));
+    } else {
+      const slug = f.querySelector('.c-slug').value.trim();
+      if (!slug) { alert('أدخل المعرّف (slug).'); return; }
+      payload.slug = slug;
+      ({ error } = await sb.from('courses').insert([payload]));
+    }
+    if (error) { alert('تعذّر الحفظ: ' + error.message); return; }
+    await loadCourses();
+    backToCourses();
+  });
+
+  window.deleteCourse = async function(id) {
+    const c = COURSES.find(x => x.id === id);
+    if (!confirm('هل أنت متأكد من حذف الكورس "' + (c ? c.title : '') + '" نهائياً؟')) return;
+    const { error } = await sb.from('courses').delete().eq('id', id);
+    if (error) { alert('تعذّر الحذف: ' + error.message); return; }
+    await loadCourses();
   };
-  // Image upload to Supabase Storage (bucket: course-images)
+
+  // ---------- Image upload to Supabase Storage ----------
   window.pickImage = function(btn) {
-    const card = btn.closest('[data-id]');
-    const file = card.querySelector('.c-file');
-    file.onchange = () => uploadImage(card, file.files[0]);
+    const scope = btn.closest('#courseForm') || document;
+    const file = scope.querySelector('.c-file');
+    file.onchange = () => uploadImage(scope, file.files[0]);
     file.click();
   };
-  async function uploadImage(card, f) {
+  async function uploadImage(scope, f) {
     if (!f) return;
-    const status = card.querySelector('.c-upstatus');
+    const status = scope.querySelector('.c-upstatus');
     if (f.size > 5 * 1024 * 1024) { status.textContent = 'الحجم أكبر من 5MB'; return; }
     status.textContent = 'جارٍ الرفع…';
     const ext = (f.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -338,21 +442,11 @@
     const { error } = await sb.storage.from('course-images').upload(path, f, { cacheControl: '3600', upsert: false, contentType: f.type });
     if (error) { status.textContent = 'تعذّر الرفع'; alert('خطأ في الرفع: ' + error.message); return; }
     const { data } = sb.storage.from('course-images').getPublicUrl(path);
-    card.querySelector('.c-image').value = data.publicUrl;
-    const prev = card.querySelector('.c-preview');
+    scope.querySelector('.c-image').value = data.publicUrl;
+    const prev = scope.querySelector('.c-preview');
     prev.src = data.publicUrl; prev.style.visibility = 'visible';
-    status.textContent = 'تم الرفع ✓ (لا تنسَ الحفظ)';
+    status.textContent = 'تم الرفع ✓ (اضغط حفظ)';
   }
-
-  window.deleteCourse = async function(id, btn) {
-    if (!confirm('حذف هذا الكورس نهائياً؟')) return;
-    const { error } = await sb.from('courses').delete().eq('id', id);
-    if (error) { alert('تعذّر الحذف: ' + error.message); return; }
-    btn.closest('[data-id]').remove();
-  };
-  $('addCourseBtn').addEventListener('click', () => {
-    $('coursesList').insertAdjacentHTML('afterbegin', courseCard({ title:'', level:'', description:'', image_url:'', page_url:'', sort_order:0, is_visible:true, is_featured:false }));
-  });
 
   init();
 </script>
