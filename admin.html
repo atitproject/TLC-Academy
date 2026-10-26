@@ -41,8 +41,8 @@
     </div>
     <form id="loginForm" class="space-y-4">
       <div>
-        <label class="block text-sm font-bold mb-1">البريد الإلكتروني</label>
-        <input id="loginEmail" type="email" dir="ltr" class="field text-left" required placeholder="admin@example.com"/>
+        <label class="block text-sm font-bold mb-1">اسم المستخدم</label>
+        <input id="loginEmail" type="text" dir="ltr" class="field text-left" required placeholder="admin" autocomplete="username"/>
       </div>
       <div>
         <label class="block text-sm font-bold mb-1">كلمة المرور</label>
@@ -139,7 +139,9 @@
   $('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const err = $('loginError'); err.classList.add('hidden');
-    const email = $('loginEmail').value.trim();
+    // Allow a plain username (e.g. "admin"): map it to a fixed email for Supabase Auth.
+    const raw = $('loginEmail').value.trim();
+    const email = raw.includes('@') ? raw : raw + '@tlc.local';
     const password = $('loginPassword').value;
     const { data, error } = await sb.auth.signInWithPassword({ email, password });
     if (error) { err.textContent = 'تعذّر الدخول: ' + error.message; err.classList.remove('hidden'); return; }
