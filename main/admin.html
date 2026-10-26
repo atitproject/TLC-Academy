@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>لوحة تحكم TLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  html { overflow-x: hidden; }
+  body { font-family: 'Cairo', sans-serif; background: #f4f6fb; color: #0e2c5c; }
+  .btn { display:inline-flex; align-items:center; gap:.4rem; border-radius:.6rem; font-weight:700; transition:all .15s; cursor:pointer; }
+  .btn-gold { background: linear-gradient(135deg,#e3c04a,#c9a227); color:#0e2c5c; }
+  .btn-gold:hover { filter:brightness(1.05); }
+  .btn-navy { background:#0e2c5c; color:#fff; }
+  .btn-navy:hover { background:#163a73; }
+  .btn-ghost { background:#fff; color:#0e2c5c; border:1px solid #d7deec; }
+  .btn-ghost:hover { background:#eef2fb; }
+  .btn-danger { background:#fdecec; color:#b91c1c; border:1px solid #f6c9c9; }
+  .btn-danger:hover { background:#fbdada; }
+  .field { width:100%; padding:.6rem .8rem; border:1px solid #d7deec; border-radius:.6rem; font-size:.9rem; background:#fff; }
+  .field:focus { outline:none; border-color:#c9a227; box-shadow:0 0 0 3px rgba(201,162,39,.15); }
+  table { border-collapse: collapse; }
+  .tab-active { background:#0e2c5c; color:#fff; }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- ============ LOGIN ============ -->
+<div id="loginView" class="min-h-screen flex items-center justify-center px-4">
+  <div class="w-full max-w-sm bg-white rounded-2xl shadow-lg border border-[#e3e8f2] p-8">
+    <div class="text-center mb-6">
+      <h1 class="text-2xl font-extrabold">لوحة تحكم TLC</h1>
+      <p class="text-sm text-slate-500 mt-1">سجّل الدخول للمتابعة</p>
+    </div>
+    <form id="loginForm" class="space-y-4">
+      <div>
+        <label class="block text-sm font-bold mb-1">البريد الإلكتروني</label>
+        <input id="loginEmail" type="email" dir="ltr" class="field text-left" required placeholder="admin@example.com"/>
+      </div>
+      <div>
+        <label class="block text-sm font-bold mb-1">كلمة المرور</label>
+        <input id="loginPassword" type="password" dir="ltr" class="field text-left" required placeholder="••••••••"/>
+      </div>
+      <p id="loginError" class="hidden text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-2"></p>
+      <button type="submit" class="btn btn-gold w-full justify-center py-3">دخول</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============ DASHBOARD ============ -->
+<div id="dashView" class="hidden">
+  <!-- Top bar -->
+  <header class="bg-white border-b border-[#e3e8f2] sticky top-0 z-20">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="material-icons-outlined text-[#c9a227]">dashboard</span>
+        <span class="font-extrabold">لوحة تحكم TLC</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span id="userEmail" class="text-xs text-slate-500 hidden sm:inline"></span>
+        <button id="logoutBtn" class="btn btn-ghost px-3 py-2 text-sm"><span class="material-icons-outlined text-base">logout</span>خروج</button>
+      </div>
+    </div>
+    <!-- Tabs -->
+    <div class="max-w-6xl mx-auto px-4 pb-2 flex gap-2">
+      <button data-tab="reg" class="tab btn px-4 py-2 text-sm tab-active">المسجّلون</button>
+      <button data-tab="courses" class="tab btn btn-ghost px-4 py-2 text-sm">الكورسات</button>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-6">
+
+    <!-- ===== REGISTRATIONS ===== -->
+    <section id="regSection">
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <h2 class="text-lg font-extrabold">المسجّلون <span id="regCount" class="text-sm font-normal text-slate-500"></span></h2>
+        <div class="flex items-center gap-2">
+          <input id="regSearch" class="field w-48" placeholder="بحث بالاسم/الإيميل/الهاتف"/>
+          <button id="refreshReg" class="btn btn-ghost px-3 py-2 text-sm"><span class="material-icons-outlined text-base">refresh</span></button>
+          <button id="exportBtn" class="btn btn-navy px-4 py-2 text-sm"><span class="material-icons-outlined text-base">download</span>تصدير Excel</button>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl border border-[#e3e8f2] overflow-x-auto shadow-sm">
+        <table class="w-full text-sm whitespace-nowrap">
+          <thead class="bg-[#f1f4fb] text-slate-600 text-right">
+            <tr>
+              <th class="px-3 py-3 font-bold">التاريخ</th>
+              <th class="px-3 py-3 font-bold">الاسم</th>
+              <th class="px-3 py-3 font-bold">البريد</th>
+              <th class="px-3 py-3 font-bold">الهاتف</th>
+              <th class="px-3 py-3 font-bold">الدولة</th>
+              <th class="px-3 py-3 font-bold">المدينة</th>
+              <th class="px-3 py-3 font-bold">الكورس</th>
+              <th class="px-3 py-3 font-bold">النشرة</th>
+              <th class="px-3 py-3 font-bold"></th>
+            </tr>
+          </thead>
+          <tbody id="regTbody"></tbody>
+        </table>
+        <div id="regEmpty" class="hidden text-center text-slate-400 py-10">لا يوجد مسجّلون بعد.</div>
+      </div>
+    </section>
+
+    <!-- ===== COURSES ===== -->
+    <section id="coursesSection" class="hidden">
+      <div class="flex items-center justify-between gap-3 mb-4">
+        <h2 class="text-lg font-extrabold">إدارة الكورسات</h2>
+        <button id="addCourseBtn" class="btn btn-gold px-4 py-2 text-sm"><span class="material-icons-outlined text-base">add</span>كورس جديد</button>
+      </div>
+      <p class="text-xs text-slate-500 mb-3">رقم الترتيب الأصغر يظهر أولاً في الصفحة الرئيسية. أزِل علامة "ظاهر" لإخفاء الكورس دون حذفه.</p>
+      <div id="coursesList" class="space-y-4"></div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // ---------- Supabase ----------
+  const SUPA_URL = 'https://xuggbedyeapxaytzixps.supabase.co';
+  const SUPA_KEY = 'sb_publishable_-9HtCsowbvRe9_Ro9JMKKQ_bAulNrnh';
+  const sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => (s == null ? '' : String(s)).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  let REGS = [];
+
+  // ---------- Auth ----------
+  async function init() {
+    const { data } = await sb.auth.getSession();
+    if (data.session) showDash(data.session);
+  }
+  $('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const err = $('loginError'); err.classList.add('hidden');
+    const email = $('loginEmail').value.trim();
+    const password = $('loginPassword').value;
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
+    if (error) { err.textContent = 'تعذّر الدخول: ' + error.message; err.classList.remove('hidden'); return; }
+    showDash(data.session);
+  });
+  $('logoutBtn').addEventListener('click', async () => {
+    await sb.auth.signOut();
+    $('dashView').classList.add('hidden');
+    $('loginView').classList.remove('hidden');
+  });
+
+  function showDash(session) {
+    $('loginView').classList.add('hidden');
+    $('dashView').classList.remove('hidden');
+    $('userEmail').textContent = session.user.email;
+    loadRegistrations();
+    loadCourses();
+  }
+
+  // ---------- Tabs ----------
+  document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => { x.classList.remove('tab-active'); x.classList.add('btn-ghost'); });
+    t.classList.add('tab-active'); t.classList.remove('btn-ghost');
+    const tab = t.dataset.tab;
+    $('regSection').classList.toggle('hidden', tab !== 'reg');
+    $('coursesSection').classList.toggle('hidden', tab !== 'courses');
+  }));
+
+  // ---------- Registrations ----------
+  async function loadRegistrations() {
+    const { data, error } = await sb.from('registrations').select('*').order('created_at', { ascending: false });
+    if (error) { alert('خطأ في جلب المسجّلين: ' + error.message); return; }
+    REGS = data || [];
+    renderRegs();
+  }
+  function renderRegs() {
+    const q = $('regSearch').value.trim().toLowerCase();
+    const rows = REGS.filter(r => !q || [r.full_name, r.email, r.phone].some(v => (v||'').toLowerCase().includes(q)));
+    $('regCount').textContent = '(' + rows.length + ')';
+    $('regEmpty').classList.toggle('hidden', rows.length > 0);
+    $('regTbody').innerHTML = rows.map(r => `
+      <tr class="border-t border-[#eef1f8] hover:bg-[#f8faff]">
+        <td class="px-3 py-2 text-slate-500">${esc(new Date(r.created_at).toLocaleString('ar-EG'))}</td>
+        <td class="px-3 py-2 font-semibold">${esc(r.full_name)}</td>
+        <td class="px-3 py-2" dir="ltr">${esc(r.email)}</td>
+        <td class="px-3 py-2" dir="ltr">${esc(r.phone)}</td>
+        <td class="px-3 py-2">${esc(r.country)}</td>
+        <td class="px-3 py-2">${esc(r.city)}</td>
+        <td class="px-3 py-2">${esc(r.course_title)}</td>
+        <td class="px-3 py-2">${r.newsletter_opt ? '✔' : '—'}</td>
+        <td class="px-3 py-2"><button class="btn btn-danger px-2 py-1 text-xs" onclick="deleteReg('${r.id}')"><span class="material-icons-outlined text-sm">delete</span></button></td>
+      </tr>`).join('');
+  }
+  $('regSearch').addEventListener('input', renderRegs);
+  $('refreshReg').addEventListener('click', loadRegistrations);
+
+  window.deleteReg = async function(id) {
+    if (!confirm('حذف هذا التسجيل نهائياً؟')) return;
+    const { error } = await sb.from('registrations').delete().eq('id', id);
+    if (error) { alert('تعذّر الحذف: ' + error.message); return; }
+    REGS = REGS.filter(r => r.id !== id);
+    renderRegs();
+  };
+
+  $('exportBtn').addEventListener('click', () => {
+    if (!REGS.length) { alert('لا يوجد بيانات للتصدير.'); return; }
+    const data = REGS.map(r => ({
+      'التاريخ': new Date(r.created_at).toLocaleString('ar-EG'),
+      'الاسم': r.full_name,
+      'البريد': r.email,
+      'الهاتف': r.phone,
+      'الدولة': r.country,
+      'المدينة': r.city,
+      'الكورس': r.course_title,
+      'النشرة': r.newsletter_opt ? 'نعم' : 'لا',
+      'المصدر': r.source
+    }));
+    const ws = XLSX.utils.json_to_sheet(data);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'المسجلون');
+    const d = new Date().toISOString().slice(0,10);
+    XLSX.writeFile(wb, 'tlc-registrations-' + d + '.xlsx');
+  });
+
+  // ---------- Courses ----------
+  async function loadCourses() {
+    const { data, error } = await sb.from('courses').select('*').order('sort_order', { ascending: true });
+    if (error) { alert('خطأ في جلب الكورسات: ' + error.message); return; }
+    renderCourses(data || []);
+  }
+  function courseCard(c) {
+    const isNew = !c.id;
+    return `
+    <div class="bg-white rounded-xl border border-[#e3e8f2] shadow-sm p-4" data-id="${c.id || ''}">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-bold mb-1">عنوان الكورس</label>
+          <input class="field c-title" value="${esc(c.title)}"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold mb-1">المستوى (الشارة)</label>
+          <input class="field c-level" value="${esc(c.level)}" placeholder="مبتدئ / عملي / شامل"/>
+        </div>
+        <div class="md:col-span-2">
+          <label class="block text-xs font-bold mb-1">الوصف</label>
+          <textarea class="field c-desc" rows="2">${esc(c.description)}</textarea>
+        </div>
+        <div>
+          <label class="block text-xs font-bold mb-1">رابط الصورة</label>
+          <input class="field c-image" dir="ltr" value="${esc(c.image_url)}" placeholder="assets/tlc3.jpeg"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold mb-1">رابط صفحة الكورس</label>
+          <input class="field c-page" dir="ltr" value="${esc(c.page_url)}" placeholder="course-start.html"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold mb-1">الترتيب</label>
+          <input type="number" class="field c-order" value="${c.sort_order ?? 0}"/>
+        </div>
+        <div class="flex items-end gap-4">
+          <label class="flex items-center gap-2 text-sm font-semibold"><input type="checkbox" class="c-visible w-4 h-4" ${c.is_visible !== false ? 'checked' : ''}/> ظاهر بالرئيسية</label>
+          <label class="flex items-center gap-2 text-sm font-semibold"><input type="checkbox" class="c-featured w-4 h-4" ${c.is_featured ? 'checked' : ''}/> مميّز (كبير)</label>
+        </div>
+      </div>
+      <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#eef1f8]">
+        <div class="text-xs text-slate-400">${isNew ? 'كورس جديد' : 'slug: ' + esc(c.slug)}</div>
+        <div class="flex gap-2">
+          ${isNew
+            ? `<input class="field c-slug w-40" dir="ltr" placeholder="slug (إنجليزي)"/>
+               <button class="btn btn-gold px-4 py-2 text-sm" onclick="createCourse(this)">إضافة</button>`
+            : `<button class="btn btn-danger px-3 py-2 text-sm" onclick="deleteCourse('${c.id}', this)"><span class="material-icons-outlined text-base">delete</span></button>
+               <button class="btn btn-navy px-4 py-2 text-sm" onclick="saveCourse('${c.id}', this)">حفظ</button>`}
+        </div>
+      </div>
+    </div>`;
+  }
+  function renderCourses(list) {
+    $('coursesList').innerHTML = list.map(courseCard).join('');
+  }
+  function readCard(el) {
+    const card = el.closest('[data-id]');
+    return {
+      card,
+      payload: {
+        title: card.querySelector('.c-title').value.trim(),
+        level: card.querySelector('.c-level').value.trim(),
+        description: card.querySelector('.c-desc').value.trim(),
+        image_url: card.querySelector('.c-image').value.trim(),
+        page_url: card.querySelector('.c-page').value.trim(),
+        sort_order: parseInt(card.querySelector('.c-order').value, 10) || 0,
+        is_visible: card.querySelector('.c-visible').checked,
+        is_featured: card.querySelector('.c-featured').checked
+      }
+    };
+  }
+  window.saveCourse = async function(id, btn) {
+    const { payload } = readCard(btn);
+    btn.disabled = true; const t = btn.textContent; btn.textContent = 'جارٍ الحفظ…';
+    const { error } = await sb.from('courses').update(payload).eq('id', id);
+    btn.disabled = false; btn.textContent = t;
+    if (error) { alert('تعذّر الحفظ: ' + error.message); return; }
+    btn.textContent = 'تم ✓'; setTimeout(() => btn.textContent = 'حفظ', 1500);
+  };
+  window.createCourse = async function(btn) {
+    const { card, payload } = readCard(btn);
+    const slug = card.querySelector('.c-slug').value.trim();
+    if (!slug) { alert('أدخل slug (إنجليزي بدون مسافات).'); return; }
+    if (!payload.title) { alert('أدخل عنوان الكورس.'); return; }
+    payload.slug = slug;
+    const { error } = await sb.from('courses').insert([payload]);
+    if (error) { alert('تعذّرت الإضافة: ' + error.message); return; }
+    loadCourses();
+  };
+  window.deleteCourse = async function(id, btn) {
+    if (!confirm('حذف هذا الكورس نهائياً؟')) return;
+    const { error } = await sb.from('courses').delete().eq('id', id);
+    if (error) { alert('تعذّر الحذف: ' + error.message); return; }
+    btn.closest('[data-id]').remove();
+  };
+  $('addCourseBtn').addEventListener('click', () => {
+    $('coursesList').insertAdjacentHTML('afterbegin', courseCard({ title:'', level:'', description:'', image_url:'', page_url:'', sort_order:0, is_visible:true, is_featured:false }));
+  });
+
+  init();
+</script>
+</body>
+</html>
