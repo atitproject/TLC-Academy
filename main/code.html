@@ -528,14 +528,15 @@
 </header>
 <main>
 <!-- 2. HERO SECTION (full-width image background) -->
-<section class="relative overflow-hidden border-b border-outline-variant/30 bg-primary-container">
-<!-- Full-width background image -->
-<img alt="أكاديمية TLC — التعلّم والتجارة من الصين" class="absolute inset-0 w-full h-full object-cover" src="assets/TLC%20header.jpeg"/>
+<section class="relative border-b border-outline-variant/30 bg-primary-container">
+<!-- Full-width image shown completely (no cropping) -->
+<img alt="أكاديمية TLC — التعلّم والتجارة من الصين" class="block w-full h-auto" src="assets/TLC%20header.jpeg"/>
 <!-- Readability overlay -->
 <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-r from-primary-container/55 via-primary-container/65 to-primary-container/85"></div>
 <!-- Content -->
-<div class="relative z-10 max-w-7xl mx-auto px-6 py-16 md:py-24">
-<div class="max-w-3xl mx-auto flex flex-col items-center text-center space-y-5">
+<div class="absolute inset-0 z-10 flex items-center">
+<div class="w-full max-w-7xl mx-auto px-6">
+<div class="max-w-3xl mx-auto flex flex-col items-center text-center space-y-3 md:space-y-5">
 <h1 class="anim-fade-up delay-1 text-white font-display-hero-mobile md:font-display-hero text-display-hero-mobile md:text-display-hero tracking-tight leading-tight drop-shadow-lg">تعلّم كيف تبدأ وتشتري من الصين</h1>
 <p class="anim-fade-up delay-2 text-white/90 font-body-lg text-body-lg max-w-xl mx-auto leading-relaxed drop-shadow-md">كورسات عملية بالعربية تساعدك على اختيار المنتجات، والوصول إلى الموردين، وفهم خطوات الشراء والاستيراد.</p>
 <div class="anim-fade-up delay-3 pt-2">
@@ -543,6 +544,7 @@
 <span>استكشف الكورسات</span>
 <span class="material-symbols-outlined text-xl">arrow_back</span>
 </a>
+</div>
 </div>
 </div>
 </div>
