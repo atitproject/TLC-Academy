@@ -561,8 +561,8 @@
 </div>
 <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">اختر الكورس المناسب لخطوتك القادمة</h2>
 </div>
-<!-- 2-Column Responsive Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- 2-Column Responsive Grid (filled dynamically from Supabase; static cards below are the fallback) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="coursesGrid">
 <div class="md:col-span-2 bg-surface rounded-2xl border-2 border-secondary/40 overflow-hidden shadow-md hover:shadow-xl hover:border-secondary/70 transition-all flex flex-col md:flex-row">
 <div class="relative md:w-2/5 aspect-video md:aspect-auto bg-surface-container">
 <a href="course-comprehensive.html" aria-label="الكورس الشامل للتجارة مع الصين" class="block absolute inset-0"><img alt="الكورس الشامل للتجارة مع الصين" class="w-full h-full object-cover absolute inset-0" src="assets/tlc4.png"/></a>
@@ -1022,6 +1022,60 @@
       document.getElementById('courseEnrollForm').classList.remove('hidden');
       document.getElementById('enrollSuccessBox').classList.add('hidden');
     }
+
+    // ---------- Dynamic courses (from Supabase, with static fallback) ----------
+    function tlcEsc(s) {
+      return (s == null ? '' : String(s)).replace(/[&<>"]/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+      });
+    }
+    function tlcCourseCard(c) {
+      var img = tlcEsc(c.image_url || '');
+      var page = tlcEsc(c.page_url || '#');
+      var title = tlcEsc(c.title || '');
+      var level = tlcEsc(c.level || '');
+      var desc = tlcEsc(c.description || '');
+      var slug = tlcEsc(c.slug || '');
+      var badge = '<div class="absolute top-3 right-3 flex gap-2"><span class="free-badge"><span class="material-symbols-outlined">redeem</span>مجاني</span>'
+        + '<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-primary-container font-label-sm text-[11px] border border-outline-variant/30">' + level + '</span></div>';
+      var btn = '<button class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-secondary text-white text-label-md font-label-md hover:bg-opacity-90 transition-all" data-enroll-title="' + title + '" data-enroll-slug="' + slug + '"><span>احصل على الكورس مجاناً</span><span class="material-symbols-outlined text-sm">arrow_back</span></button>';
+      if (c.is_featured) {
+        return '<div class="md:col-span-2 bg-surface rounded-2xl border-2 border-secondary/40 overflow-hidden shadow-md hover:shadow-xl hover:border-secondary/70 transition-all flex flex-col md:flex-row">'
+          + '<div class="relative md:w-2/5 aspect-video md:aspect-auto bg-surface-container">'
+          + '<a href="' + page + '" aria-label="' + title + '" class="block absolute inset-0"><img alt="' + title + '" class="w-full h-full object-cover absolute inset-0" src="' + img + '"/></a>'
+          + badge + '</div>'
+          + '<div class="md:w-3/5 p-6 md:p-8 flex flex-col justify-between text-right"><div>'
+          + '<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-fixed/30 text-secondary text-[11px] font-bold mb-3"><span class="material-symbols-outlined text-sm">workspace_premium</span> الأكثر شمولاً</div>'
+          + '<h3 class="font-headline-md text-headline-md text-on-surface mb-2 font-bold"><a href="' + page + '" class="hover:text-secondary transition-colors">' + title + '</a></h3>'
+          + '<p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">' + desc + '</p></div>'
+          + '<div class="flex items-center justify-between pt-2 border-t border-outline-variant/20">' + btn + '</div>'
+          + '</div></div>';
+      }
+      var btnSmall = btn.replace('px-5 py-2.5', 'px-4 py-2');
+      return '<div class="bg-surface rounded-xl border border-outline-variant/40 overflow-hidden shadow-sm hover:shadow-lg hover:border-secondary/40 transition-all flex flex-col justify-between"><div>'
+        + '<div class="relative aspect-video w-full bg-surface-container">'
+        + '<a href="' + page + '" aria-label="' + title + '" class="block w-full h-full"><img alt="' + title + '" class="w-full h-full object-cover" src="' + img + '"/></a>'
+        + badge + '</div>'
+        + '<div class="p-6"><h3 class="font-headline-sm text-headline-sm text-on-surface mb-2 font-bold"><a href="' + page + '" class="hover:text-secondary transition-colors">' + title + '</a></h3>'
+        + '<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 leading-relaxed">' + desc + '</p></div></div>'
+        + '<div class="px-6 pb-6 pt-2 border-t border-outline-variant/20 flex items-center justify-between">' + btnSmall + '</div>'
+        + '</div>';
+    }
+    async function tlcLoadCourses() {
+      var grid = document.getElementById('coursesGrid');
+      if (!grid || !window.TLC || !window.TLC.fetchCourses) return;
+      try {
+        var courses = await window.TLC.fetchCourses();
+        if (!Array.isArray(courses) || !courses.length) return; // keep static fallback
+        grid.innerHTML = courses.map(tlcCourseCard).join('');
+        grid.querySelectorAll('[data-enroll-title]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            openEnrollmentModal(b.getAttribute('data-enroll-title'), b.getAttribute('data-enroll-slug'));
+          });
+        });
+      } catch (e) { /* keep static fallback */ }
+    }
+    document.addEventListener('DOMContentLoaded', tlcLoadCourses);
 
     function handleContactSubmit(e) {
       e.preventDefault();
