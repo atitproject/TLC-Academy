@@ -32,8 +32,10 @@
   };
 
   // جلب الكورسات الظاهرة مرتّبة حسب sort_order
+  // (نحدّد الأعمدة صراحةً حتى لا يصل رابط الـPDF إلى الموقع العام)
   window.TLC.fetchCourses = async function () {
-    var res = await fetch(SUPABASE_URL + '/rest/v1/courses?select=*&order=sort_order.asc', {
+    var cols = 'slug,title,level,description,image_url,page_url,is_featured,is_visible,sort_order';
+    var res = await fetch(SUPABASE_URL + '/rest/v1/courses?select=' + cols + '&order=sort_order.asc', {
       headers: headers()
     });
     if (!res.ok) throw new Error('HTTP ' + res.status);

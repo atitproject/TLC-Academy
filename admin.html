@@ -169,6 +169,17 @@
                 <span class="c-upstatus text-xs text-slate-500"></span>
               </div>
             </div>
+            <div>
+              <label class="lbl">ملف الكورس (PDF) — يظهر هنا فقط، ويُرسَل للمسجّل تلقائياً</label>
+              <div class="flex items-center gap-2 flex-wrap">
+                <input type="hidden" class="c-pdf"/>
+                <input type="file" accept="application/pdf,.pdf" class="c-pdffile hidden"/>
+                <button type="button" class="btn btn-ghost px-3 py-2 text-sm" onclick="pickPdf(this)"><span class="material-icons-outlined text-base">picture_as_pdf</span>رفع ملف PDF</button>
+                <a class="c-pdflink btn btn-ghost px-3 py-2 text-sm hidden" target="_blank" rel="noopener"><span class="material-icons-outlined text-base">open_in_new</span>عرض الملف</a>
+                <button type="button" class="c-pdfremove btn btn-danger px-3 py-2 text-sm hidden" onclick="removePdf(this)">إزالة</button>
+                <span class="c-pdfstatus text-xs text-slate-500"></span>
+              </div>
+            </div>
             <div class="grid grid-cols-2 gap-3">
               <div>
                 <label class="lbl">الترتيب (الأصغر أولاً)</label>
@@ -370,6 +381,7 @@
               ${c.level ? 'المستوى: ' + esc(c.level) + ' · ' : ''}ترتيب: ${c.sort_order ?? 0}
               ${c.is_visible === false ? ' · <span class="text-amber-600 font-bold">مخفي</span>' : ''}
               ${c.is_featured ? ' · <span class="text-[#c9a227] font-bold">مميّز</span>' : ''}
+              ${c.pdf_url ? ' · <span class="text-[#1f9254] font-bold">PDF ✓</span>' : ''}
             </div>
           </div>
         </div>
@@ -398,6 +410,9 @@
     const prev = f.querySelector('.c-preview');
     prev.src = f.querySelector('.c-image').value; prev.style.visibility = prev.src ? 'visible' : 'hidden';
     f.querySelector('.c-upstatus').textContent = '';
+    f.querySelector('.c-pdf').value = isNew ? '' : (c.pdf_url || '');
+    updatePdfUI(f);
+    f.querySelector('.c-pdfstatus').textContent = '';
     $('coursesListView').classList.add('hidden');
     $('courseEditView').classList.remove('hidden');
     window.scrollTo(0, 0);
@@ -421,6 +436,7 @@
       level: f.querySelector('.c-level').value.trim(),
       description: f.querySelector('.c-desc').value.trim(),
       image_url: f.querySelector('.c-image').value.trim(),
+      pdf_url: f.querySelector('.c-pdf').value.trim() || null,
       sort_order: parseInt(f.querySelector('.c-order').value, 10) || 0,
       is_visible: f.querySelector('.c-visible').checked,
       is_featured: f.querySelector('.c-featured').checked
@@ -470,6 +486,42 @@
     prev.src = data.publicUrl; prev.style.visibility = 'visible';
     status.textContent = 'تم الرفع ✓ (اضغط حفظ)';
   }
+
+  // ---------- PDF upload (bucket: course-pdfs) ----------
+  function updatePdfUI(form) {
+    const url = form.querySelector('.c-pdf').value;
+    const link = form.querySelector('.c-pdflink');
+    const rm = form.querySelector('.c-pdfremove');
+    if (url) { link.href = url; link.classList.remove('hidden'); rm.classList.remove('hidden'); }
+    else { link.classList.add('hidden'); rm.classList.add('hidden'); }
+  }
+  window.pickPdf = function(btn) {
+    const form = btn.closest('#courseForm');
+    const file = form.querySelector('.c-pdffile');
+    file.onchange = () => uploadPdf(form, file.files[0]);
+    file.click();
+  };
+  async function uploadPdf(form, f) {
+    if (!f) return;
+    const status = form.querySelector('.c-pdfstatus');
+    const isPdf = f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf');
+    if (!isPdf) { status.textContent = 'يجب أن يكون الملف PDF'; return; }
+    if (f.size > 20 * 1024 * 1024) { status.textContent = 'الحجم أكبر من 20MB'; return; }
+    status.textContent = 'جارٍ الرفع…';
+    const path = 'course-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.pdf';
+    const { error } = await sb.storage.from('course-pdfs').upload(path, f, { cacheControl: '3600', upsert: false, contentType: 'application/pdf' });
+    if (error) { status.textContent = 'تعذّر الرفع'; alert('خطأ في رفع الـPDF: ' + error.message); return; }
+    const { data } = sb.storage.from('course-pdfs').getPublicUrl(path);
+    form.querySelector('.c-pdf').value = data.publicUrl;
+    updatePdfUI(form);
+    status.textContent = 'تم الرفع ✓ (اضغط حفظ)';
+  }
+  window.removePdf = function(btn) {
+    const form = btn.closest('#courseForm');
+    form.querySelector('.c-pdf').value = '';
+    updatePdfUI(form);
+    form.querySelector('.c-pdfstatus').textContent = 'سيُزال عند الحفظ';
+  };
 
   init();
 </script>
