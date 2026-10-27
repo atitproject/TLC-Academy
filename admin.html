@@ -170,16 +170,15 @@
               </div>
             </div>
             <div>
-              <label class="lbl">ملف الكورس (PDF) — يظهر هنا فقط، ويُرسَل للمسجّل تلقائياً</label>
-              <input type="url" dir="ltr" class="field c-pdf mb-2 text-left" placeholder="ألصق رابط PDF من استضافتك، أو ارفع ملفاً أدناه" oninput="updatePdfUI(this.closest('#courseForm'))"/>
+              <label class="lbl">ملف الكورس (PDF)</label>
               <div class="flex items-center gap-2 flex-wrap">
+                <input type="hidden" class="c-pdf"/>
                 <input type="file" accept="application/pdf,.pdf" class="c-pdffile hidden"/>
-                <button type="button" class="btn btn-ghost px-3 py-2 text-sm" onclick="pickPdf(this)"><span class="material-icons-outlined text-base">upload</span>رفع ملف إلى Supabase</button>
+                <button type="button" class="btn btn-ghost px-3 py-2 text-sm" onclick="pickPdf(this)"><span class="material-icons-outlined text-base">picture_as_pdf</span>رفع ملف PDF</button>
                 <a class="c-pdflink btn btn-ghost px-3 py-2 text-sm hidden" target="_blank" rel="noopener"><span class="material-icons-outlined text-base">open_in_new</span>عرض الملف</a>
-                <button type="button" class="c-pdfremove btn btn-danger px-3 py-2 text-sm hidden" onclick="removePdf(this)">مسح الرابط</button>
+                <button type="button" class="c-pdfremove btn btn-danger px-3 py-2 text-sm hidden" onclick="removePdf(this)">إزالة</button>
                 <span class="c-pdfstatus text-xs text-slate-500"></span>
               </div>
-              <p class="text-[11px] text-slate-400 mt-1">الملفات لا تُخزَّن في قاعدة البيانات، بل كرابط فقط. يمكنك رفعه إلى تخزين Supabase أو استضافتك الخاصة.</p>
             </div>
             <div class="grid grid-cols-2 gap-3">
               <div>
